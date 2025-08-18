@@ -1307,3 +1307,60 @@ resource "github_repository_file" "mysql_database_devcontainer" {
 
   depends_on = [github_repository.templates]
 }
+
+# SQL Server Database Skeleton Files
+resource "github_repository_file" "sqlserver_database_devcontainer" {
+  for_each = {
+    for key, value in var.template_repositories : key => value
+    if key == "backstage-template-sqlserver-database"
+  }
+
+  repository          = github_repository.templates[each.key].name
+  branch              = "main"
+  file                = "skeleton/.devcontainer/devcontainer.json"
+  content             = file("${path.module}/templates/skeletons/sqlserver-database/.devcontainer/devcontainer.json.tpl")
+  commit_message      = "Add SQL Server database devcontainer configuration"
+  commit_author       = "Terraform"
+  commit_email        = "terraform@${var.github_organization}.com"
+  overwrite_on_create = true
+
+  depends_on = [github_repository.templates]
+}
+
+# SQLite Database Skeleton Files
+resource "github_repository_file" "sqlite_database_devcontainer" {
+  for_each = {
+    for key, value in var.template_repositories : key => value
+    if key == "backstage-template-sqlite-database"
+  }
+
+  repository          = github_repository.templates[each.key].name
+  branch              = "main"
+  file                = "skeleton/.devcontainer/devcontainer.json"
+  content             = file("${path.module}/templates/skeletons/sqlite-database/.devcontainer/devcontainer.json.tpl")
+  commit_message      = "Add SQLite database devcontainer configuration"
+  commit_author       = "Terraform"
+  commit_email        = "terraform@${var.github_organization}.com"
+  overwrite_on_create = true
+
+  depends_on = [github_repository.templates]
+}
+
+# MariaDB Database Skeleton Files
+resource "github_repository_file" "mariadb_database_devcontainer" {
+  for_each = {
+    for key, value in var.template_repositories : key => value
+    if key == "backstage-template-mariadb-database"
+  }
+
+  repository          = github_repository.templates[each.key].name
+  branch              = "main"
+  file                = "skeleton/.devcontainer/devcontainer.json"
+  content             = file("${path.module}/templates/skeletons/mariadb-database/.devcontainer/devcontainer.json.tpl")
+  commit_message      = "Add MariaDB database devcontainer configuration"
+  commit_author       = "Terraform"
+  commit_email        = "terraform@${var.github_organization}.com"
+  overwrite_on_create = true
+
+  depends_on = [github_repository.templates]
+}
