@@ -976,3 +976,118 @@ resource "github_repository_file" "skeleton_catalog_info" {
 
   depends_on = [github_repository.templates]
 }
+
+# =============================================================================
+# NEW SERVICE TEMPLATE SKELETON FILES
+# =============================================================================
+
+# Go Service Skeleton Files
+resource "github_repository_file" "go_service_devcontainer" {
+  for_each = {
+    for key, value in var.template_repositories : key => value
+    if key == "backstage-template-go-service"
+  }
+
+  repository          = github_repository.templates[each.key].name
+  branch              = "main"
+  file                = "skeleton/.devcontainer/devcontainer.json"
+  content             = file("${path.module}/templates/skeletons/go-service/.devcontainer/devcontainer.json.tpl")
+  commit_message      = "Add Go service devcontainer configuration"
+  commit_author       = "Terraform"
+  commit_email        = "terraform@${var.github_organization}.com"
+  overwrite_on_create = true
+
+  depends_on = [github_repository.templates]
+}
+
+resource "github_repository_file" "go_service_mod" {
+  for_each = {
+    for key, value in var.template_repositories : key => value
+    if key == "backstage-template-go-service"
+  }
+
+  repository          = github_repository.templates[each.key].name
+  branch              = "main"
+  file                = "skeleton/go.mod"
+  content             = file("${path.module}/templates/skeletons/go-service/go.mod.tpl")
+  commit_message      = "Add Go service go.mod file"
+  commit_author       = "Terraform"
+  commit_email        = "terraform@${var.github_organization}.com"
+  overwrite_on_create = true
+
+  depends_on = [github_repository.templates]
+}
+
+resource "github_repository_file" "go_service_main" {
+  for_each = {
+    for key, value in var.template_repositories : key => value
+    if key == "backstage-template-go-service"
+  }
+
+  repository          = github_repository.templates[each.key].name
+  branch              = "main"
+  file                = "skeleton/cmd/server/main.go"
+  content             = file("${path.module}/templates/skeletons/go-service/cmd/server/main.go.tpl")
+  commit_message      = "Add Go service main file"
+  commit_author       = "Terraform"
+  commit_email        = "terraform@${var.github_organization}.com"
+  overwrite_on_create = true
+
+  depends_on = [github_repository.templates]
+}
+
+# Java Service Skeleton Files
+resource "github_repository_file" "java_service_devcontainer" {
+  for_each = {
+    for key, value in var.template_repositories : key => value
+    if key == "backstage-template-java-service"
+  }
+
+  repository          = github_repository.templates[each.key].name
+  branch              = "main"
+  file                = "skeleton/.devcontainer/devcontainer.json"
+  content             = file("${path.module}/templates/skeletons/java-service/.devcontainer/devcontainer.json.tpl")
+  commit_message      = "Add Java service devcontainer configuration"
+  commit_author       = "Terraform"
+  commit_email        = "terraform@${var.github_organization}.com"
+  overwrite_on_create = true
+
+  depends_on = [github_repository.templates]
+}
+
+resource "github_repository_file" "java_service_pom" {
+  for_each = {
+    for key, value in var.template_repositories : key => value
+    if key == "backstage-template-java-service"
+  }
+
+  repository          = github_repository.templates[each.key].name
+  branch              = "main"
+  file                = "skeleton/pom.xml"
+  content             = file("${path.module}/templates/skeletons/java-service/pom.xml.tpl")
+  commit_message      = "Add Java service pom.xml file"
+  commit_author       = "Terraform"
+  commit_email        = "terraform@${var.github_organization}.com"
+  overwrite_on_create = true
+
+  depends_on = [github_repository.templates]
+}
+
+# PostgreSQL Database Skeleton Files
+resource "github_repository_file" "postgres_database_devcontainer" {
+  for_each = {
+    for key, value in var.template_repositories : key => value
+    if key == "backstage-template-postgres-database"
+  }
+
+  repository          = github_repository.templates[each.key].name
+  branch              = "main"
+  file                = "skeleton/.devcontainer/devcontainer.json"
+  content             = file("${path.module}/templates/skeletons/postgres-database/.devcontainer/devcontainer.json.tpl")
+  commit_message      = "Add PostgreSQL database devcontainer configuration"
+  commit_author       = "Terraform"
+  commit_email        = "terraform@${var.github_organization}.com"
+  overwrite_on_create = true
+
+  depends_on = [github_repository.templates]
+}

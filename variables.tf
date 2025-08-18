@@ -138,6 +138,61 @@ variable "template_repositories" {
       topics      = ["backstage", "template", "environment", "config"]
       type        = "resource"
     }
+    "backstage-template-go-service" = {
+      description = "Backstage template for Go services"
+      topics      = ["backstage", "template", "go", "golang", "service"]
+      type        = "service"
+    }
+    "backstage-template-java-service" = {
+      description = "Backstage template for Java Spring Boot services"
+      topics      = ["backstage", "template", "java", "spring-boot", "service"]
+      type        = "service"
+    }
+    "backstage-template-rust-service" = {
+      description = "Backstage template for Rust services"
+      topics      = ["backstage", "template", "rust", "actix", "axum", "service"]
+      type        = "service"
+    }
+    "backstage-template-php-service" = {
+      description = "Backstage template for PHP Laravel services"
+      topics      = ["backstage", "template", "php", "laravel", "service"]
+      type        = "service"
+    }
+    "backstage-template-postgres-database" = {
+      description = "Backstage template for PostgreSQL database setup"
+      topics      = ["backstage", "template", "postgres", "postgresql", "database"]
+      type        = "resource"
+    }
+    "backstage-template-mysql-database" = {
+      description = "Backstage template for MySQL database setup"
+      topics      = ["backstage", "template", "mysql", "database"]
+      type        = "resource"
+    }
+    "backstage-template-sqlserver-database" = {
+      description = "Backstage template for SQL Server database setup"
+      topics      = ["backstage", "template", "sqlserver", "mssql", "database"]
+      type        = "resource"
+    }
+    "backstage-template-mongodb-database" = {
+      description = "Backstage template for MongoDB database setup"
+      topics      = ["backstage", "template", "mongodb", "nosql", "database"]
+      type        = "resource"
+    }
+    "backstage-template-oracle-database" = {
+      description = "Backstage template for Oracle database setup"
+      topics      = ["backstage", "template", "oracle", "oracledb", "database"]
+      type        = "resource"
+    }
+    "backstage-template-sqlite-database" = {
+      description = "Backstage template for SQLite database setup"
+      topics      = ["backstage", "template", "sqlite", "database"]
+      type        = "resource"
+    }
+    "backstage-template-mariadb-database" = {
+      description = "Backstage template for MariaDB database setup"
+      topics      = ["backstage", "template", "mariadb", "database"]
+      type        = "resource"
+    }
   }
 }
 
