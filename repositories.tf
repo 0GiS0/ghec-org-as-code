@@ -759,6 +759,111 @@ resource "github_repository_file" "dependabot_basic" {
   depends_on = [github_repository.templates]
 }
 
+# Dependabot configuration for Go template
+resource "github_repository_file" "dependabot_go" {
+  for_each = {
+    for key, value in var.template_repositories : key => value
+    if key == "backstage-template-go-service"
+  }
+
+  repository = github_repository.templates[each.key].name
+  branch     = "main"
+  file       = ".github/dependabot.yml"
+  content = templatefile("${path.module}/templates/dependabot/go.yml.tpl", {
+    template_approvers = "@${var.github_organization}/template-approvers"
+  })
+  commit_message      = "Add Dependabot configuration for Go dependencies"
+  commit_author       = "Terraform"
+  commit_email        = "terraform@${var.github_organization}.com"
+  overwrite_on_create = true
+
+  depends_on = [github_repository.templates]
+}
+
+# Dependabot configuration for Java template
+resource "github_repository_file" "dependabot_maven" {
+  for_each = {
+    for key, value in var.template_repositories : key => value
+    if key == "backstage-template-java-service"
+  }
+
+  repository = github_repository.templates[each.key].name
+  branch     = "main"
+  file       = ".github/dependabot.yml"
+  content = templatefile("${path.module}/templates/dependabot/maven.yml.tpl", {
+    template_approvers = "@${var.github_organization}/template-approvers"
+  })
+  commit_message      = "Add Dependabot configuration for Maven dependencies"
+  commit_author       = "Terraform"
+  commit_email        = "terraform@${var.github_organization}.com"
+  overwrite_on_create = true
+
+  depends_on = [github_repository.templates]
+}
+
+# Dependabot configuration for Rust template
+resource "github_repository_file" "dependabot_cargo" {
+  for_each = {
+    for key, value in var.template_repositories : key => value
+    if key == "backstage-template-rust-service"
+  }
+
+  repository = github_repository.templates[each.key].name
+  branch     = "main"
+  file       = ".github/dependabot.yml"
+  content = templatefile("${path.module}/templates/dependabot/cargo.yml.tpl", {
+    template_approvers = "@${var.github_organization}/template-approvers"
+  })
+  commit_message      = "Add Dependabot configuration for Cargo dependencies"
+  commit_author       = "Terraform"
+  commit_email        = "terraform@${var.github_organization}.com"
+  overwrite_on_create = true
+
+  depends_on = [github_repository.templates]
+}
+
+# Dependabot configuration for PHP template
+resource "github_repository_file" "dependabot_composer" {
+  for_each = {
+    for key, value in var.template_repositories : key => value
+    if key == "backstage-template-php-service"
+  }
+
+  repository = github_repository.templates[each.key].name
+  branch     = "main"
+  file       = ".github/dependabot.yml"
+  content = templatefile("${path.module}/templates/dependabot/composer.yml.tpl", {
+    template_approvers = "@${var.github_organization}/template-approvers"
+  })
+  commit_message      = "Add Dependabot configuration for Composer dependencies"
+  commit_author       = "Terraform"
+  commit_email        = "terraform@${var.github_organization}.com"
+  overwrite_on_create = true
+
+  depends_on = [github_repository.templates]
+}
+
+# Dependabot configuration for database templates (basic GitHub Actions only)
+resource "github_repository_file" "dependabot_database" {
+  for_each = {
+    for key, value in var.template_repositories : key => value
+    if startswith(key, "backstage-template-") && endswith(key, "-database")
+  }
+
+  repository = github_repository.templates[each.key].name
+  branch     = "main"
+  file       = ".github/dependabot.yml"
+  content = templatefile("${path.module}/templates/dependabot/basic.yml.tpl", {
+    template_approvers = "@${var.github_organization}/template-approvers"
+  })
+  commit_message      = "Add Dependabot configuration for database template dependencies"
+  commit_author       = "Terraform"
+  commit_email        = "terraform@${var.github_organization}.com"
+  overwrite_on_create = true
+
+  depends_on = [github_repository.templates]
+}
+
 # =============================================================================
 # TECHDOCS CONFIGURATION FILES FOR TEMPLATE REPOSITORIES
 # =============================================================================
@@ -1085,6 +1190,117 @@ resource "github_repository_file" "postgres_database_devcontainer" {
   file                = "skeleton/.devcontainer/devcontainer.json"
   content             = file("${path.module}/templates/skeletons/postgres-database/.devcontainer/devcontainer.json.tpl")
   commit_message      = "Add PostgreSQL database devcontainer configuration"
+  commit_author       = "Terraform"
+  commit_email        = "terraform@${var.github_organization}.com"
+  overwrite_on_create = true
+
+  depends_on = [github_repository.templates]
+}
+
+# Rust Service Skeleton Files
+resource "github_repository_file" "rust_service_devcontainer" {
+  for_each = {
+    for key, value in var.template_repositories : key => value
+    if key == "backstage-template-rust-service"
+  }
+
+  repository          = github_repository.templates[each.key].name
+  branch              = "main"
+  file                = "skeleton/.devcontainer/devcontainer.json"
+  content             = file("${path.module}/templates/skeletons/rust-service/.devcontainer/devcontainer.json.tpl")
+  commit_message      = "Add Rust service devcontainer configuration"
+  commit_author       = "Terraform"
+  commit_email        = "terraform@${var.github_organization}.com"
+  overwrite_on_create = true
+
+  depends_on = [github_repository.templates]
+}
+
+resource "github_repository_file" "rust_service_cargo" {
+  for_each = {
+    for key, value in var.template_repositories : key => value
+    if key == "backstage-template-rust-service"
+  }
+
+  repository          = github_repository.templates[each.key].name
+  branch              = "main"
+  file                = "skeleton/Cargo.toml"
+  content             = file("${path.module}/templates/skeletons/rust-service/Cargo.toml.tpl")
+  commit_message      = "Add Rust service Cargo.toml file"
+  commit_author       = "Terraform"
+  commit_email        = "terraform@${var.github_organization}.com"
+  overwrite_on_create = true
+
+  depends_on = [github_repository.templates]
+}
+
+resource "github_repository_file" "rust_service_main" {
+  for_each = {
+    for key, value in var.template_repositories : key => value
+    if key == "backstage-template-rust-service"
+  }
+
+  repository          = github_repository.templates[each.key].name
+  branch              = "main"
+  file                = "skeleton/src/main.rs"
+  content             = file("${path.module}/templates/skeletons/rust-service/src/main.rs.tpl")
+  commit_message      = "Add Rust service main file"
+  commit_author       = "Terraform"
+  commit_email        = "terraform@${var.github_organization}.com"
+  overwrite_on_create = true
+
+  depends_on = [github_repository.templates]
+}
+
+# PHP Service Skeleton Files
+resource "github_repository_file" "php_service_devcontainer" {
+  for_each = {
+    for key, value in var.template_repositories : key => value
+    if key == "backstage-template-php-service"
+  }
+
+  repository          = github_repository.templates[each.key].name
+  branch              = "main"
+  file                = "skeleton/.devcontainer/devcontainer.json"
+  content             = file("${path.module}/templates/skeletons/php-service/.devcontainer/devcontainer.json.tpl")
+  commit_message      = "Add PHP service devcontainer configuration"
+  commit_author       = "Terraform"
+  commit_email        = "terraform@${var.github_organization}.com"
+  overwrite_on_create = true
+
+  depends_on = [github_repository.templates]
+}
+
+resource "github_repository_file" "php_service_composer" {
+  for_each = {
+    for key, value in var.template_repositories : key => value
+    if key == "backstage-template-php-service"
+  }
+
+  repository          = github_repository.templates[each.key].name
+  branch              = "main"
+  file                = "skeleton/composer.json"
+  content             = file("${path.module}/templates/skeletons/php-service/composer.json.tpl")
+  commit_message      = "Add PHP service composer.json file"
+  commit_author       = "Terraform"
+  commit_email        = "terraform@${var.github_organization}.com"
+  overwrite_on_create = true
+
+  depends_on = [github_repository.templates]
+}
+
+# MySQL Database Skeleton Files
+resource "github_repository_file" "mysql_database_devcontainer" {
+  for_each = {
+    for key, value in var.template_repositories : key => value
+    if key == "backstage-template-mysql-database"
+  }
+
+  repository          = github_repository.templates[each.key].name
+  branch              = "main"
+  file                = "skeleton/.devcontainer/devcontainer.json"
+  content             = file("${path.module}/templates/skeletons/mysql-database/.devcontainer/devcontainer.json.tpl")
+  commit_message      = "Add MySQL database devcontainer configuration"
   commit_author       = "Terraform"
   commit_email        = "terraform@${var.github_organization}.com"
   overwrite_on_create = true
