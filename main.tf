@@ -1,17 +1,17 @@
-# Main configuration file for GHEC Organization as Code
-# This file serves as the entry point and includes data sources and locals
+// Main configuration file for GHEC Organization as Code
+// This file serves as the entry point and includes data sources and locals
 
-# Data source to get current organization information
+// Data source to get current organization information
 data "github_organization" "current" {
   name = var.github_organization
 }
 
-# Local values for reusable configurations
+// Local values for reusable configurations
 locals {
-  # Common tags for all resources
+  // Common tags for all resources
   common_topics = ["ghec", "terraform", "iac"]
 
-  # Team names
+  // Team names
   team_names = {
     parent             = var.parent_team_name
     platform           = "platform-team"
@@ -21,7 +21,7 @@ locals {
     developers         = "cosmic-devs"
   }
 
-  # Repository permissions for teams
+  // Repository permissions for teams
   repository_permissions = {
     platform_team      = "admin"
     template_approvers = "maintain"
@@ -29,7 +29,7 @@ locals {
     read_only          = "pull"
   }
 
-  # Template type mapping for catalog-info.yaml
+  // Template type mapping for catalog-info.yaml
   template_type_mapping = {
     "backstage-template-system"             = "system"
     "backstage-template-domain"             = "domain"
@@ -54,13 +54,13 @@ locals {
     "backstage-template-mariadb-database"   = "resource"
   }
 
-  # Helper function to convert repository name to template name
+  // Helper function to convert repository name to template name
   template_name_mapping = {
     for key, value in var.template_repositories :
     key => replace(key, "backstage-template-", "")
   }
 
-  # Helper function to create template titles
+  // Helper function to create template titles
   template_title_mapping = {
     "backstage-template-system"             = "🧩 System"
     "backstage-template-domain"             = "🏷️ Domain"

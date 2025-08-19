@@ -23,6 +23,7 @@ metadata:
 spec:
 %{ if template_type == "system" ~}
   owner: $${{ values.owner }}
+  domain: $${{ values.domain }}
 %{ else ~}
 %{ if template_type == "domain" ~}
   owner: $${{ values.owner }}

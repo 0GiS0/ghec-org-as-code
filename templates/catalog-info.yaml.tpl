@@ -57,6 +57,9 @@ spec:
       required:
         - name
         - description
+%{ if template_type == "system" ~}
+        - domain
+%{ endif ~}
       properties:
         name:
           type: string
@@ -86,6 +89,16 @@ spec:
           type: string
           description: The group that owns the system
           ui:field: MyGroupsPicker
+%{ if template_type == "system" ~}
+        domain:
+          title: Domain
+          type: string
+          description: The domain this system belongs to
+          ui:field: EntityPicker
+          ui:options:
+            catalogFilter:
+              kind: Domain
+%{ endif ~}
 %{ endif ~}
     - title: Choose a destination
       required:
@@ -120,12 +133,14 @@ spec:
           repoUrl: $${{ parameters.repoUrl }}
 %{ if template_type != "system" && template_type != "domain" ~}
           system: $${{ parameters.system }}
-%{ endif }
+%{ endif ~}
+%{ if template_type == "system" ~}
+          domain: $${{ parameters.domain }}
+%{ endif ~}
     - id: publish
       name: Publish
       action: publish:github
       input:
-        allowedHosts: ["github.com"]
         description: $${{ parameters.description || (parameters.name + ' component') }}
         repoUrl: $${{ parameters.repoUrl }}
         gitCommitMessage: Create scaffold from template
