@@ -1,6 +1,6 @@
-# ${parameters.name}
+# $${parameters.name}
 
-${parameters.description}
+${{parameters.description}}
 
 ## 🚀 Quick Start
 
@@ -12,17 +12,17 @@ ${parameters.description}
 
 1. **Restore dependencies:**
    ```bash
-   dotnet restore src/${parameters.name}.csproj
+   dotnet restore src/$${parameters.name}.csproj
    ```
 
 2. **Build the project:**
    ```bash
-   dotnet build src/${parameters.name}.csproj
+   dotnet build src/$${parameters.name}.csproj
    ```
 
 3. **Start development server:**
    ```bash
-   dotnet run --project src/${parameters.name}.csproj
+   dotnet run --project src/$${parameters.name}.csproj
    ```
 
 4. **Run tests:**
@@ -49,8 +49,8 @@ This project includes a dev container configuration. Open in VS Code and use "De
 ### Production Deployment
 
 ```bash
-dotnet publish src/${parameters.name}.csproj -c Release -o ./publish
-dotnet ./publish/${parameters.name}.dll
+dotnet publish src/$${parameters.name}.csproj -c Release -o ./publish
+dotnet ./publish/$${parameters.name}.dll
 ```
 
 ## 📝 Architecture

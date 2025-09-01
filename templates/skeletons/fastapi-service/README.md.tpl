@@ -1,6 +1,6 @@
-# ${parameters.name}
+# $${parameters.name}
 
-${parameters.description}
+${{parameters.description}}
 
 ## 🚀 Quick Start
 
