@@ -8,7 +8,7 @@ This project was created using the Backstage template system and follows our org
 
 $${parameters.description}
 
-**Repository:** [$${parameters.destination.owner}}/$${parameters.name}]($${parameters.repoUrl})
+**Repository:** [$${parameters.destination.owner}/$${parameters.name}]($${parameters.repoUrl})
 **Owner:** $${parameters.owner}
 **System:** $${parameters.system}
 
@@ -29,7 +29,7 @@ $${parameters.description}
 | **Description** | $${parameters.description} |
 | **Owner** | $${parameters.owner} |
 | **System** | $${parameters.system} |
-| **Repository** | [$${parameters.destination.owner}}/$${parameters.name}]($${parameters.repoUrl}) |
+| **Repository** | [$${parameters.destination.owner}/$${parameters.name}]($${parameters.repoUrl}) |
 | **Created** | {{ now() | strftime('%Y-%m-%d') }} |
 
 ## Support
