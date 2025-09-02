@@ -444,6 +444,151 @@ resource "github_repository_file" "catalog_info" {
 # SKELETON FILES FOR TEMPLATE REPOSITORIES
 # =============================================================================
 
+# AGENTS.md files for all skeleton directories
+resource "github_repository_file" "node_service_agents" {
+  for_each = {
+    for key, value in var.template_repositories : key => value
+    if key == "backstage-template-node-service"
+  }
+
+  repository          = github_repository.templates[each.key].name
+  branch              = "main"
+  file                = "skeleton/AGENTS.md"
+  content             = file("${path.module}/templates/skeletons/node-service/AGENTS.md.tpl")
+  commit_message      = "Add AGENTS.md documentation for Node.js service skeleton"
+  commit_author       = "Terraform"
+  commit_email        = "terraform@${var.github_organization}.com"
+  overwrite_on_create = true
+
+  depends_on = [github_repository.templates]
+}
+
+resource "github_repository_file" "fastapi_service_agents" {
+  for_each = {
+    for key, value in var.template_repositories : key => value
+    if key == "backstage-template-fastapi-service"
+  }
+
+  repository          = github_repository.templates[each.key].name
+  branch              = "main"
+  file                = "skeleton/AGENTS.md"
+  content             = file("${path.module}/templates/skeletons/fastapi-service/AGENTS.md.tpl")
+  commit_message      = "Add AGENTS.md documentation for FastAPI service skeleton"
+  commit_author       = "Terraform"
+  commit_email        = "terraform@${var.github_organization}.com"
+  overwrite_on_create = true
+
+  depends_on = [github_repository.templates]
+}
+
+resource "github_repository_file" "ai_assistant_agents" {
+  for_each = {
+    for key, value in var.template_repositories : key => value
+    if key == "backstage-template-ai-assistant"
+  }
+
+  repository          = github_repository.templates[each.key].name
+  branch              = "main"
+  file                = "skeleton/AGENTS.md"
+  content             = file("${path.module}/templates/skeletons/ai-assistant/AGENTS.md.tpl")
+  commit_message      = "Add AGENTS.md documentation for AI assistant skeleton"
+  commit_author       = "Terraform"
+  commit_email        = "terraform@${var.github_organization}.com"
+  overwrite_on_create = true
+
+  depends_on = [github_repository.templates]
+}
+
+resource "github_repository_file" "astro_frontend_agents" {
+  for_each = {
+    for key, value in var.template_repositories : key => value
+    if key == "backstage-template-astro-frontend"
+  }
+
+  repository          = github_repository.templates[each.key].name
+  branch              = "main"
+  file                = "skeleton/AGENTS.md"
+  content             = file("${path.module}/templates/skeletons/astro-frontend/AGENTS.md.tpl")
+  commit_message      = "Add AGENTS.md documentation for Astro frontend skeleton"
+  commit_author       = "Terraform"
+  commit_email        = "terraform@${var.github_organization}.com"
+  overwrite_on_create = true
+
+  depends_on = [github_repository.templates]
+}
+
+resource "github_repository_file" "dotnet_service_agents" {
+  for_each = {
+    for key, value in var.template_repositories : key => value
+    if key == "backstage-template-dotnet-service"
+  }
+
+  repository          = github_repository.templates[each.key].name
+  branch              = "main"
+  file                = "skeleton/AGENTS.md"
+  content             = file("${path.module}/templates/skeletons/dotnet-service/AGENTS.md.tpl")
+  commit_message      = "Add AGENTS.md documentation for .NET service skeleton"
+  commit_author       = "Terraform"
+  commit_email        = "terraform@${var.github_organization}.com"
+  overwrite_on_create = true
+
+  depends_on = [github_repository.templates]
+}
+
+resource "github_repository_file" "gateway_agents" {
+  for_each = {
+    for key, value in var.template_repositories : key => value
+    if key == "backstage-template-gateway"
+  }
+
+  repository          = github_repository.templates[each.key].name
+  branch              = "main"
+  file                = "skeleton/AGENTS.md"
+  content             = file("${path.module}/templates/skeletons/gateway/AGENTS.md.tpl")
+  commit_message      = "Add AGENTS.md documentation for gateway skeleton"
+  commit_author       = "Terraform"
+  commit_email        = "terraform@${var.github_organization}.com"
+  overwrite_on_create = true
+
+  depends_on = [github_repository.templates]
+}
+
+resource "github_repository_file" "helm_base_agents" {
+  for_each = {
+    for key, value in var.template_repositories : key => value
+    if key == "backstage-template-helm-base"
+  }
+
+  repository          = github_repository.templates[each.key].name
+  branch              = "main"
+  file                = "skeleton/AGENTS.md"
+  content             = file("${path.module}/templates/skeletons/helm-base/AGENTS.md.tpl")
+  commit_message      = "Add AGENTS.md documentation for Helm chart skeleton"
+  commit_author       = "Terraform"
+  commit_email        = "terraform@${var.github_organization}.com"
+  overwrite_on_create = true
+
+  depends_on = [github_repository.templates]
+}
+
+resource "github_repository_file" "env_live_agents" {
+  for_each = {
+    for key, value in var.template_repositories : key => value
+    if key == "backstage-template-env-live"
+  }
+
+  repository          = github_repository.templates[each.key].name
+  branch              = "main"
+  file                = "skeleton/AGENTS.md"
+  content             = file("${path.module}/templates/skeletons/env-live/AGENTS.md.tpl")
+  commit_message      = "Add AGENTS.md documentation for environment live skeleton"
+  commit_author       = "Terraform"
+  commit_email        = "terraform@${var.github_organization}.com"
+  overwrite_on_create = true
+
+  depends_on = [github_repository.templates]
+}
+
 # Node.js Service Skeleton Files
 resource "github_repository_file" "node_service_package" {
   for_each = {
