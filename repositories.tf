@@ -451,10 +451,14 @@ resource "github_repository_file" "node_service_package" {
     if key == "backstage-template-node-service"
   }
 
-  repository          = github_repository.templates[each.key].name
-  branch              = "main"
-  file                = "skeleton/package.json"
-  content             = file("${path.module}/templates/skeletons/node-service/package.json.tpl")
+  repository = github_repository.templates[each.key].name
+  branch     = "main"
+  file       = "skeleton/package.json"
+  content = templatefile("${path.module}/templates/skeletons/node-service/package.json.tpl", {
+    values = {
+      name = "backstage_node_service_template"
+    }
+  })
   commit_message      = "Add Node.js service skeleton package.json"
   commit_author       = "Terraform"
   commit_email        = "terraform@${var.github_organization}.com"
@@ -872,10 +876,14 @@ resource "github_repository_file" "astro_frontend_package" {
     if key == "backstage-template-astro-frontend"
   }
 
-  repository          = github_repository.templates[each.key].name
-  branch              = "main"
-  file                = "skeleton/package.json"
-  content             = file("${path.module}/templates/skeletons/astro-frontend/package.json.tpl")
+  repository = github_repository.templates[each.key].name
+  branch     = "main"
+  file       = "skeleton/package.json"
+  content = templatefile("${path.module}/templates/skeletons/astro-frontend/package.json.tpl", {
+    values = {
+      name = "backstage_astro_frontend_template"
+    }
+  })
   commit_message      = "Add Astro frontend skeleton package.json"
   commit_author       = "Terraform"
   commit_email        = "terraform@${var.github_organization}.com"

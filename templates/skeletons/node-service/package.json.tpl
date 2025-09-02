@@ -1,7 +1,7 @@
 {
-  "name": "backstage-node-service-template",
+  "name": "${replace(values.name, "-", "_")}",
   "version": "1.0.0",
-  "description": "${{values.description}}",
+  "description": "$${{values.description}}",
   "main": "src/index.js",
   "scripts": {
     "start": "node src/index.js",
@@ -28,8 +28,8 @@
   },
   "repository": {
     "type": "git",
-    "url": "${{values.repoUrl}}"
+    "url": "$${{values.repoUrl}}"
   },
-  "author": "${{values.owner}}",
+  "author": "$${{values.owner}}",
   "license": "MIT"
 }

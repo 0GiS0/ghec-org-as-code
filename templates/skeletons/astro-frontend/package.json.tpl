@@ -1,5 +1,5 @@
 {
-  "name": "backstage-astro-frontend-template",
+  "name": "${replace(values.name, "-", "_")}",
   "type": "module",
   "version": "0.0.1",
   "scripts": {
