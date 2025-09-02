@@ -1,15 +1,16 @@
 {
-  "name": "${{values.name | replace("-", "_")}}",
+  "name": "backstage-node-service-template",
   "version": "1.0.0",
-  "description": "${{values.description}}",
-  "main": "src/index.js",
+  "description": "Backstage template for Node.js services",
+  "main": "skeleton/src/index.js",
+  "private": true,
   "scripts": {
-    "start": "node src/index.js",
-    "dev": "nodemon src/index.js",
+    "start": "node skeleton/src/index.js",
+    "dev": "nodemon skeleton/src/index.js",
     "test": "jest",
     "test:watch": "jest --watch",
-    "lint": "eslint src/**/*.js",
-    "lint:fix": "eslint src/**/*.js --fix"
+    "lint": "eslint skeleton/src/**/*.js",
+    "lint:fix": "eslint skeleton/src/**/*.js --fix"
   },
   "dependencies": {
     "express": "^5.1.0",
@@ -28,8 +29,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "${{values.repoUrl}}"
+    "url": "https://github.com/${organization}/backstage-template-node-service"
   },
-  "author": "${{values.owner}}",
   "license": "MIT"
 }
