@@ -28,6 +28,8 @@ spec:
         - name
         - description
         - system
+        - serviceTier
+        - teamOwner
       properties:
         name:
           type: string
@@ -61,6 +63,27 @@ spec:
           ui:options:
             catalogFilter:
               kind: System
+        serviceTier:
+          title: Service Tier
+          type: string
+          description: Service tier classification for operational support
+          default: tier-3
+          enum:
+            - tier-1
+            - tier-2
+            - tier-3
+            - experimental
+          enumNames:
+            - "Tier 1 (Critical)"
+            - "Tier 2 (Important)"
+            - "Tier 3 (Standard)"
+            - "Experimental"
+        teamOwner:
+          title: Team Owner
+          type: string
+          description: Team responsible for maintaining this repository
+          default: platform-team
+          ui:field: MyGroupsPicker
 %{ else ~}
     - title: Complete the form to create a new ${template_title}
       required:
@@ -69,6 +92,8 @@ spec:
 %{ if template_type == "system" ~}
         - domain
 %{ endif ~}
+        - serviceTier
+        - teamOwner
       properties:
         name:
           type: string
@@ -120,6 +145,27 @@ spec:
           ui:options:
             catalogFilter:
               kind: Domain
+        serviceTier:
+          title: Service Tier
+          type: string
+          description: Service tier classification for operational support
+          default: tier-2
+          enum:
+            - tier-1
+            - tier-2
+            - tier-3
+            - experimental
+          enumNames:
+            - "Tier 1 (Critical)"
+            - "Tier 2 (Important)"
+            - "Tier 3 (Standard)"
+            - "Experimental"
+        teamOwner:
+          title: Team Owner
+          type: string
+          description: Team responsible for maintaining this repository
+          default: platform-team
+          ui:field: MyGroupsPicker
 %{ endif ~}
 %{ endif ~}
     - title: Choose a destination
@@ -153,6 +199,8 @@ spec:
           description: $${{ parameters.description }}
           destination: $${{ parameters.repoUrl | parseRepoUrl }}
           repoUrl: $${{ parameters.repoUrl }}
+          serviceTier: $${{ parameters.serviceTier }}
+          teamOwner: $${{ parameters.teamOwner }}
 %{ if template_type != "system" && template_type != "domain" ~}
           system: $${{ parameters.system }}
 %{ endif ~}
@@ -160,14 +208,41 @@ spec:
           domain: $${{ parameters.domain }}
 %{ endif ~}
     - id: publish
-      name: Publish
-      action: publish:github
+      name: Create Repository
+      action: github:repo:create
       input:
         description: $${{ parameters.description }}
         repoUrl: $${{ parameters.repoUrl }}
+        defaultBranch: main
         gitCommitMessage: Create scaffold from template
         topics: ["backstage-include", "${organization}"]
-        defaultBranch: main
+        access: private
+    
+    - id: push
+      name: Push to Repository  
+      action: github:repo:push
+      input:
+        repoUrl: $${{ steps['publish'].output.repoContentsUrl }}
+        gitCommitMessage: Create scaffold from template
+        gitAuthorName: Backstage Scaffolder
+        gitAuthorEmail: backstage@${organization}.com
+
+    - id: set-custom-properties
+      name: Set Custom Properties
+      action: http:backstage:request
+      input:
+        method: PATCH
+        url: $${{ steps['publish'].output.remoteUrl | replace('https://github.com/', 'https://api.github.com/repos/') }}/properties/values
+        headers:
+          Authorization: token $${{ secrets.USER_OAUTH_TOKEN }}
+          Accept: application/vnd.github+json
+          X-GitHub-Api-Version: 2022-11-28
+        body:
+          properties:
+            - property_name: service-tier
+              value: $${{ parameters.serviceTier }}
+            - property_name: team-owner  
+              value: $${{ parameters.teamOwner }}
     - id: register
       name: Register
       action: catalog:register

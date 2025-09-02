@@ -6,6 +6,20 @@ data "github_organization" "current" {
   name = var.github_organization
 }
 
+// Organization security settings
+resource "github_organization_settings" "org_settings" {
+  # Required fields
+  billing_email = var.github_organization_billing_email
+
+  # Security settings for new repositories
+  advanced_security_enabled_for_new_repositories               = var.advanced_security_enabled_for_new_repositories
+  dependabot_alerts_enabled_for_new_repositories               = var.dependabot_alerts_enabled_for_new_repositories
+  dependabot_security_updates_enabled_for_new_repositories     = var.dependabot_security_updates_enabled_for_new_repositories
+  dependency_graph_enabled_for_new_repositories                = var.dependency_graph_enabled_for_new_repositories
+  secret_scanning_enabled_for_new_repositories                 = var.secret_scanning_enabled_for_new_repositories
+  secret_scanning_push_protection_enabled_for_new_repositories = var.secret_scanning_push_protection_enabled_for_new_repositories
+}
+
 // Local values for reusable configurations
 locals {
   // Common tags for all resources

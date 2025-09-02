@@ -102,3 +102,29 @@ output "backstage_repository" {
     visibility  = github_repository.backstage.visibility
   }
 }
+
+# Organization security settings
+output "organization_security_settings" {
+  description = "GitHub Advanced Security settings for new repositories"
+  value = {
+    advanced_security_enabled               = var.advanced_security_enabled_for_new_repositories
+    dependabot_alerts_enabled               = var.dependabot_alerts_enabled_for_new_repositories
+    dependabot_security_updates_enabled     = var.dependabot_security_updates_enabled_for_new_repositories
+    dependency_graph_enabled                = var.dependency_graph_enabled_for_new_repositories
+    secret_scanning_enabled                 = var.secret_scanning_enabled_for_new_repositories
+    secret_scanning_push_protection_enabled = var.secret_scanning_push_protection_enabled_for_new_repositories
+  }
+
+# Custom Properties information
+output "organization_custom_properties" {
+  description = "Organization custom properties configuration"
+  value = var.enable_custom_properties ? {
+    enabled    = var.enable_custom_properties
+    properties = var.organization_custom_properties
+  } : null
+}
+
+output "template_repositories_custom_properties" {
+  description = "Custom properties applied to template repositories"
+  value       = var.enable_custom_properties ? var.template_repository_custom_properties : null
+}

@@ -219,3 +219,125 @@ variable "codespaces_selected_usernames" {
   type        = list(string)
   default     = []
 }
+
+# Organization Security Settings Variables
+variable "advanced_security_enabled_for_new_repositories" {
+  description = "Whether or not GitHub Advanced Security is enabled for new repositories by default"
+} 
+ 
+# Custom Properties Configuration
+variable "enable_custom_properties" {
+  description = "Enable managing organization-wide custom properties via GitHub REST API (requires appropriate token permissions)."
+  type        = bool
+  default     = true
+}
+
+variable "dependabot_alerts_enabled_for_new_repositories" {
+  description = "Whether or not Dependabot alerts are enabled for new repositories by default"
+  type        = bool
+  default     = true
+}
+
+variable "dependabot_security_updates_enabled_for_new_repositories" {
+  description = "Whether or not Dependabot security updates are enabled for new repositories by default"
+  type        = bool
+  default     = true
+}
+
+variable "dependency_graph_enabled_for_new_repositories" {
+  description = "Whether or not dependency graph is enabled for new repositories by default"
+  type        = bool
+  default     = true
+}
+
+variable "secret_scanning_enabled_for_new_repositories" {
+  description = "Whether or not secret scanning is enabled for new repositories by default"
+  type        = bool
+  default     = true
+}
+
+variable "secret_scanning_push_protection_enabled_for_new_repositories" {
+  description = "Whether or not secret scanning push protection is enabled for new repositories by default"
+  type        = bool
+  default     = true
+}
+
+# Organization billing email (required for organization settings)
+variable "github_organization_billing_email" {
+  description = "Billing email address for the GitHub organization"
+  type        = string
+  default     = ""
+}
+variable "organization_custom_properties" {
+  description = "Map of custom properties to create at organization level"
+  type = map(object({
+    description    = string
+    property_type  = string # string, single_select, multi_select, true_false
+    required       = bool
+    default_value  = optional(string)
+    allowed_values = optional(list(string))
+  }))
+  default = {
+    "service-tier" = {
+      description    = "Service tier classification for operational support"
+      property_type  = "single_select"
+      required       = true
+      allowed_values = ["tier-1", "tier-2", "tier-3", "experimental"]
+    }
+    "team-owner" = {
+      description   = "Team responsible for maintaining this repository"
+      property_type = "string"
+      required      = true
+    }
+  }
+}
+
+variable "template_repository_custom_properties" {
+  description = "Default custom property values for template repositories"
+  type = map(object({
+    service_tier = string
+    team_owner   = string
+  }))
+  default = {
+    "backstage-template-system" = {
+      service_tier = "tier-2"
+      team_owner   = "platform-team"
+    }
+    "backstage-template-domain" = {
+      service_tier = "tier-2"
+      team_owner   = "platform-team"
+    }
+    "backstage-template-node-service" = {
+      service_tier = "tier-3"
+      team_owner   = "platform-team"
+    }
+    "backstage-template-fastapi-service" = {
+      service_tier = "tier-3"
+      team_owner   = "platform-team"
+    }
+    "backstage-template-dotnet-service" = {
+      service_tier = "tier-3"
+      team_owner   = "platform-team"
+    }
+    "backstage-template-gateway" = {
+      service_tier = "tier-2"
+      team_owner   = "platform-team"
+    }
+    "backstage-template-ai-assistant" = {
+      service_tier = "tier-3"
+      team_owner   = "platform-team"
+    }
+    "backstage-template-astro-frontend" = {
+      service_tier = "tier-3"
+      team_owner   = "platform-team"
+    }
+    "backstage-template-helm-base" = {
+      service_tier = "tier-2"
+      team_owner   = "platform-team"
+    }
+    "backstage-template-env-live" = {
+      service_tier = "tier-2"
+      team_owner   = "platform-team"
+    }
+  }
+}
