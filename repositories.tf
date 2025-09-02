@@ -445,17 +445,18 @@ resource "github_repository_file" "catalog_info" {
 # =============================================================================
 
 # Node.js Service Skeleton Files
-resource "github_repository_file" "node_service_package" {
+# Node.js Service Skeleton Files - Using processor for single source of truth
+resource "github_repository_file" "node_service_package_skeleton" {
   for_each = {
     for key, value in var.template_repositories : key => value
     if key == "backstage-template-node-service"
   }
 
-  repository          = github_repository.templates[each.key].name
-  branch              = "main"
-  file                = "skeleton/package.json"
-  content             = file("${path.module}/templates/skeletons/node-service/package.json.tpl")
-  commit_message      = "Add Node.js service skeleton package.json"
+  repository = github_repository.templates[each.key].name
+  branch     = "main"
+  file       = "skeleton/package.json"
+  content = file("${path.module}/templates/sources/node-service-package.json")
+  commit_message      = "Add Node.js service skeleton package.json with Backstage template syntax"
   commit_author       = "Terraform"
   commit_email        = "terraform@${var.github_organization}.com"
   overwrite_on_create = true
@@ -463,8 +464,8 @@ resource "github_repository_file" "node_service_package" {
   depends_on = [github_repository.templates]
 }
 
-# Root-level package.json for Dependabot compatibility - Node.js Service
-resource "github_repository_file" "node_service_dependabot_package" {
+# Root-level package.json for Dependabot compatibility - Using templatefile with placeholder replacement
+resource "github_repository_file" "node_service_package_dependabot" {
   for_each = {
     for key, value in var.template_repositories : key => value
     if key == "backstage-template-node-service"
@@ -473,10 +474,23 @@ resource "github_repository_file" "node_service_dependabot_package" {
   repository = github_repository.templates[each.key].name
   branch     = "main"
   file       = "package.json"
-  content = templatefile("${path.module}/templates/dependabot/node-service-package.json", {
-    organization = var.github_organization
-  })
-  commit_message      = "Add root package.json for Dependabot compatibility"
+  
+  # Use templatefile to replace Backstage syntax with Dependabot-compatible placeholders
+  content = replace(
+    replace(
+      replace(
+        replace(
+          file("${path.module}/templates/sources/node-service-package.json"),
+          "${{values.name | replace(\"-\", \"_\")}}", "backstage-node-service-template"
+        ),
+        "${{values.description}}", "Backstage template for Node.js services - Dependabot managed"
+      ),
+      "${{values.owner}}", "Platform Team"
+    ),
+    "${{values.repoUrl}}", "https://github.com/${var.github_organization}/backstage-template-node-service"
+  )
+  
+  commit_message      = "Add root package.json for Dependabot compatibility (auto-generated)"
   commit_author       = "Terraform"
   commit_email        = "terraform@${var.github_organization}.com"
   overwrite_on_create = true
@@ -887,17 +901,18 @@ resource "github_repository_file" "dotnet_service_api_tests" {
 }
 
 # Astro Frontend Skeleton Files
-resource "github_repository_file" "astro_frontend_package" {
+# Astro Frontend Skeleton Files - Using processor for single source of truth
+resource "github_repository_file" "astro_frontend_package_skeleton" {
   for_each = {
     for key, value in var.template_repositories : key => value
     if key == "backstage-template-astro-frontend"
   }
 
-  repository          = github_repository.templates[each.key].name
-  branch              = "main"
-  file                = "skeleton/package.json"
-  content             = file("${path.module}/templates/skeletons/astro-frontend/package.json.tpl")
-  commit_message      = "Add Astro frontend skeleton package.json"
+  repository = github_repository.templates[each.key].name
+  branch     = "main"
+  file       = "skeleton/package.json"
+  content = file("${path.module}/templates/sources/astro-frontend-package.json")
+  commit_message      = "Add Astro frontend skeleton package.json with Backstage template syntax"
   commit_author       = "Terraform"
   commit_email        = "terraform@${var.github_organization}.com"
   overwrite_on_create = true
@@ -905,8 +920,8 @@ resource "github_repository_file" "astro_frontend_package" {
   depends_on = [github_repository.templates]
 }
 
-# Root-level package.json for Dependabot compatibility - Astro Frontend
-resource "github_repository_file" "astro_frontend_dependabot_package" {
+# Root-level package.json for Dependabot compatibility - Using templatefile with placeholder replacement
+resource "github_repository_file" "astro_frontend_package_dependabot" {
   for_each = {
     for key, value in var.template_repositories : key => value
     if key == "backstage-template-astro-frontend"
@@ -915,10 +930,14 @@ resource "github_repository_file" "astro_frontend_dependabot_package" {
   repository = github_repository.templates[each.key].name
   branch     = "main"
   file       = "package.json"
-  content = templatefile("${path.module}/templates/dependabot/astro-frontend-package.json", {
-    organization = var.github_organization
-  })
-  commit_message      = "Add root package.json for Dependabot compatibility"
+  
+  # Use templatefile to replace Backstage syntax with Dependabot-compatible placeholders
+  content = replace(
+    file("${path.module}/templates/sources/astro-frontend-package.json"),
+    "${{values.name | replace(\"-\", \"_\")}}", "backstage-astro-frontend-template"
+  )
+  
+  commit_message      = "Add root package.json for Dependabot compatibility (auto-generated)"
   commit_author       = "Terraform"
   commit_email        = "terraform@${var.github_organization}.com"
   overwrite_on_create = true
