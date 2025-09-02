@@ -128,10 +128,12 @@ Para archivos en `skeletons/` que se copian tal cual:
 ```json
 // En package.json.tpl (copiado con file())
 {
-  "name": "${{values.name}}",              // Backstage placeholder (una $)
-  "description": "${{values.description}}" // Backstage placeholder (una $)
+  "name": "backstage-node-service-template", // Nombre fijo válido para Dependabot
+  "description": "${{values.description}}"    // Backstage placeholder (una $)
 }
 ```
+
+**Nota**: Para campos críticos como `name` en `package.json`, se usa un valor fijo válido en lugar de placeholders para garantizar que herramientas como Dependabot puedan parsear el archivo correctamente en el repositorio template.
 
 #### Formato correcto de placeholders
 
