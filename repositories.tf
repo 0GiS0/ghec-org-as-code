@@ -444,6 +444,166 @@ resource "github_repository_file" "catalog_info" {
 # SKELETON FILES FOR TEMPLATE REPOSITORIES
 # =============================================================================
 
+# =============================================================================
+# CI WORKFLOW FILES FOR TEMPLATE REPOSITORIES
+# =============================================================================
+
+# Node.js Service CI Workflow
+resource "github_repository_file" "node_service_ci_workflow" {
+  for_each = {
+    for key, value in var.template_repositories : key => value
+    if key == "backstage-template-node-service"
+  }
+
+  repository          = github_repository.templates[each.key].name
+  branch              = "main"
+  file                = "skeleton/.github/workflows/ci.yml"
+  content             = file("${path.module}/templates/skeletons/node-service/.github/workflows/ci.yml")
+  commit_message      = "Add Node.js CI workflow for generated projects"
+  commit_author       = "Terraform"
+  commit_email        = "terraform@${var.github_organization}.com"
+  overwrite_on_create = true
+
+  depends_on = [github_repository.templates]
+}
+
+# FastAPI Service CI Workflow
+resource "github_repository_file" "fastapi_service_ci_workflow" {
+  for_each = {
+    for key, value in var.template_repositories : key => value
+    if key == "backstage-template-fastapi-service"
+  }
+
+  repository          = github_repository.templates[each.key].name
+  branch              = "main"
+  file                = "skeleton/.github/workflows/ci.yml"
+  content             = file("${path.module}/templates/skeletons/fastapi-service/.github/workflows/ci.yml")
+  commit_message      = "Add FastAPI CI workflow for generated projects"
+  commit_author       = "Terraform"
+  commit_email        = "terraform@${var.github_organization}.com"
+  overwrite_on_create = true
+
+  depends_on = [github_repository.templates]
+}
+
+# .NET Service CI Workflow
+resource "github_repository_file" "dotnet_service_ci_workflow" {
+  for_each = {
+    for key, value in var.template_repositories : key => value
+    if key == "backstage-template-dotnet-service"
+  }
+
+  repository          = github_repository.templates[each.key].name
+  branch              = "main"
+  file                = "skeleton/.github/workflows/ci.yml"
+  content             = file("${path.module}/templates/skeletons/dotnet-service/.github/workflows/ci.yml")
+  commit_message      = "Add .NET CI workflow for generated projects"
+  commit_author       = "Terraform"
+  commit_email        = "terraform@${var.github_organization}.com"
+  overwrite_on_create = true
+
+  depends_on = [github_repository.templates]
+}
+
+# Astro Frontend CI Workflow
+resource "github_repository_file" "astro_frontend_ci_workflow" {
+  for_each = {
+    for key, value in var.template_repositories : key => value
+    if key == "backstage-template-astro-frontend"
+  }
+
+  repository          = github_repository.templates[each.key].name
+  branch              = "main"
+  file                = "skeleton/.github/workflows/ci.yml"
+  content             = file("${path.module}/templates/skeletons/astro-frontend/.github/workflows/ci.yml")
+  commit_message      = "Add Astro frontend CI workflow for generated projects"
+  commit_author       = "Terraform"
+  commit_email        = "terraform@${var.github_organization}.com"
+  overwrite_on_create = true
+
+  depends_on = [github_repository.templates]
+}
+
+# Gateway CI Workflow
+resource "github_repository_file" "gateway_ci_workflow" {
+  for_each = {
+    for key, value in var.template_repositories : key => value
+    if key == "backstage-template-gateway"
+  }
+
+  repository          = github_repository.templates[each.key].name
+  branch              = "main"
+  file                = "skeleton/.github/workflows/ci.yml"
+  content             = file("${path.module}/templates/skeletons/gateway/.github/workflows/ci.yml")
+  commit_message      = "Add Gateway CI workflow for generated projects"
+  commit_author       = "Terraform"
+  commit_email        = "terraform@${var.github_organization}.com"
+  overwrite_on_create = true
+
+  depends_on = [github_repository.templates]
+}
+
+# AI Assistant CI Workflow
+resource "github_repository_file" "ai_assistant_ci_workflow" {
+  for_each = {
+    for key, value in var.template_repositories : key => value
+    if key == "backstage-template-ai-assistant"
+  }
+
+  repository          = github_repository.templates[each.key].name
+  branch              = "main"
+  file                = "skeleton/.github/workflows/ci.yml"
+  content             = file("${path.module}/templates/skeletons/ai-assistant/.github/workflows/ci.yml")
+  commit_message      = "Add AI Assistant CI workflow for generated projects"
+  commit_author       = "Terraform"
+  commit_email        = "terraform@${var.github_organization}.com"
+  overwrite_on_create = true
+
+  depends_on = [github_repository.templates]
+}
+
+# Helm Base CI Workflow
+resource "github_repository_file" "helm_base_ci_workflow" {
+  for_each = {
+    for key, value in var.template_repositories : key => value
+    if key == "backstage-template-helm-base"
+  }
+
+  repository          = github_repository.templates[each.key].name
+  branch              = "main"
+  file                = "skeleton/.github/workflows/ci.yml"
+  content             = file("${path.module}/templates/skeletons/helm-base/.github/workflows/ci.yml")
+  commit_message      = "Add Helm Base CI workflow for generated projects"
+  commit_author       = "Terraform"
+  commit_email        = "terraform@${var.github_organization}.com"
+  overwrite_on_create = true
+
+  depends_on = [github_repository.templates]
+}
+
+# Environment Live CI Workflow
+resource "github_repository_file" "env_live_ci_workflow" {
+  for_each = {
+    for key, value in var.template_repositories : key => value
+    if key == "backstage-template-env-live"
+  }
+
+  repository          = github_repository.templates[each.key].name
+  branch              = "main"
+  file                = "skeleton/.github/workflows/ci.yml"
+  content             = file("${path.module}/templates/skeletons/env-live/.github/workflows/ci.yml")
+  commit_message      = "Add Environment Live CI workflow for generated projects"
+  commit_author       = "Terraform"
+  commit_email        = "terraform@${var.github_organization}.com"
+  overwrite_on_create = true
+
+  depends_on = [github_repository.templates]
+}
+
+# =============================================================================
+# OTHER SKELETON FILES FOR TEMPLATE REPOSITORIES
+# =============================================================================
+
 # Node.js Service Skeleton Files
 resource "github_repository_file" "node_service_package" {
   for_each = {
