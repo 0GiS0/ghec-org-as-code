@@ -1,93 +1,93 @@
 # AGENTS.md
 
-## Descripción del proyecto
+## Project Description
 
 ${{values.description}}
 
-Este proyecto es un servicio .NET basado en ASP.NET Core que proporciona una API REST moderna con configuración enterprise-ready y patrones de arquitectura limpia.
+This project is a .NET service based on ASP.NET Core that provides a modern REST API with enterprise-ready configuration and clean architecture patterns.
 
-## Comandos de configuración
+## Setup Commands
 
-- Restaurar dependencias: `dotnet restore`
-- Construir proyecto: `dotnet build`
-- Iniciar servidor de desarrollo: `dotnet run`
-- Ejecutar tests: `dotnet test`
-- Formatear código: `dotnet format`
-- Publicar para producción: `dotnet publish -c Release`
+- Restore dependencies: `dotnet restore`
+- Build project: `dotnet build`
+- Start development server: `dotnet run`
+- Run tests: `dotnet test`
+- Format code: `dotnet format`
+- Publish for production: `dotnet publish -c Release`
 
-## Estructura del proyecto
+## Project Structure
 
-- `src/Program.cs` - Punto de entrada de la aplicación
-- `src/Controllers/` - Controladores de API
-- `src/Models/` - Modelos de datos y DTOs
-- `src/Services/` - Lógica de negocio
-- `tests/` - Tests unitarios y de integración
-- `src/appsettings.json` - Configuración de la aplicación
-- `.devcontainer/` - Configuración de contenedor de desarrollo
+- `src/Program.cs` - Application entry point
+- `src/Controllers/` - API controllers
+- `src/Models/` - Data models and DTOs
+- `src/Services/` - Business logic
+- `tests/` - Unit and integration tests
+- `src/appsettings.json` - Application configuration
+- `.devcontainer/` - Development container configuration
 
-## Estilo de código
+## Code Style
 
-- Usar C# 11+ con nullable reference types
-- Seguir convenciones de C# y .NET
-- Usar PascalCase para métodos y propiedades públicas
-- Implementar async/await para operaciones I/O
-- Usar dependency injection para servicios
-- Incluir XML documentation para APIs públicas
+- Use C# 11+ with nullable reference types
+- Follow C# and .NET conventions
+- Use PascalCase for public methods and properties
+- Implement async/await for I/O operations
+- Use dependency injection for services
+- Include XML documentation for public APIs
 
-## Integraciones mediante Scripts
+## Script Integrations
 
-### Comandos dotnet disponibles
+### Available dotnet Commands
 
-- `dotnet run` - Ejecutar aplicación en desarrollo
-- `dotnet watch run` - Desarrollo con hot reload
-- `dotnet test --watch` - Tests en modo watch
-- `dotnet format` - Formatear código automáticamente
-- `dotnet add package` - Agregar dependencias NuGet
+- `dotnet run` - Run application in development
+- `dotnet watch run` - Development with hot reload
+- `dotnet test --watch` - Tests in watch mode
+- `dotnet format` - Format code automatically
+- `dotnet add package` - Add NuGet dependencies
 
-### Integraciones enterprise
+### Enterprise Integrations
 
-Este servicio puede integrarse con:
-- Entity Framework Core para bases de datos
+This service can integrate with:
+- Entity Framework Core for databases
 - Azure services (Service Bus, Key Vault, etc.)
 - Identity providers (Azure AD, Auth0)
 - Monitoring (Application Insights, Serilog)
 
-## Instrucciones de testing
+## Testing Instructions
 
-### Testing unitario
-- Ejecutar `dotnet test` para todos los tests
-- Usar xUnit como framework de testing
-- Implementar tests con MSTest o NUnit alternativamente
-- Tests están en directorio `tests/`
+### Unit Testing
+- Run `dotnet test` for all tests
+- Uses xUnit as testing framework
+- Implement tests with MSTest or NUnit alternatively
+- Tests are in `tests/` directory
 
-### Testing de integración
-- Usar TestServer para tests de API
-- Mockear dependencias externas con Moq
-- Verificar respuestas HTTP y serialización JSON
-- Testear middleware y filters
+### Integration Testing
+- Use TestServer for API tests
+- Mock external dependencies with Moq
+- Verify HTTP responses and JSON serialization
+- Test middleware and filters
 
-### Testing de endpoints
+### Endpoint Testing
 ```bash
-# Test básico de health check
+# Basic health check test
 curl http://localhost:5000/health
 
-# Test de endpoint de API
+# API endpoint test
 curl http://localhost:5000/api/values
 
-# Test de Swagger documentation
+# Swagger documentation test
 curl http://localhost:5000/swagger
 ```
 
-## Configuración de desarrollo
+## Development Configuration
 
-1. Instalar .NET 8 SDK o superior
-2. Clonar el repositorio
-3. Ejecutar `dotnet restore` para restaurar dependencias
-4. Configurar `appsettings.Development.json` si es necesario
-5. Ejecutar `dotnet run` para iniciar servidor
-6. La aplicación estará disponible en `https://localhost:5001`
+1. Install .NET 8 SDK or higher
+2. Clone the repository
+3. Run `dotnet restore` to restore dependencies
+4. Configure `appsettings.Development.json` if necessary
+5. Run `dotnet run` to start server
+6. The application will be available at `https://localhost:5001`
 
-### Configuración de appsettings
+### Appsettings Configuration
 
 ```json
 {
@@ -103,63 +103,63 @@ curl http://localhost:5000/swagger
 }
 ```
 
-## Consideraciones de seguridad
+## Security Considerations
 
-- Usar HTTPS en producción
-- Implementar authentication y authorization
-- Validar modelos con Data Annotations
-- Usar CORS con configuración restrictiva
-- Proteger endpoints sensibles con [Authorize]
-- Mantener dependencias NuGet actualizadas
+- Use HTTPS in production
+- Implement authentication and authorization
+- Validate models with Data Annotations
+- Use CORS with restrictive configuration
+- Protect sensitive endpoints with [Authorize]
+- Keep NuGet dependencies updated
 
-## Solución de problemas
+## Troubleshooting
 
-### Problemas comunes
+### Common Issues
 
-**Error de certificado HTTPS:**
-- Ejecutar `dotnet dev-certs https --trust`
-- Verificar configuración de certificados
+**HTTPS certificate error:**
+- Run `dotnet dev-certs https --trust`
+- Verify certificate configuration
 
-**Errores de dependencias:**
-- Ejecutar `dotnet clean` y `dotnet restore`
-- Verificar versión de .NET SDK
+**Dependency errors:**
+- Run `dotnet clean` and `dotnet restore`
+- Check .NET SDK version
 
-**Tests fallando:**
-- Verificar que TestHost esté configurado
-- Revisar mocks y setup de tests
+**Failing tests:**
+- Verify TestHost is configured
+- Review mocks and test setup
 
-## Instrucciones de PR
+## PR Instructions
 
-- Ejecutar `dotnet format` antes de hacer commit
-- Asegurar que `dotnet build` y `dotnet test` pasen
-- Incluir tests para nuevas funcionalidades
-- Actualizar XML documentation para APIs
-- Verificar configuración de Swagger/OpenAPI
+- Run `dotnet format` before committing
+- Ensure `dotnet build` and `dotnet test` pass
+- Include tests for new functionality
+- Update XML documentation for APIs
+- Verify Swagger/OpenAPI configuration
 
-## Gestión de estado
+## State Management
 
 ### Dependency Injection
-- Registrar servicios en `Program.cs`
-- Usar lifetimes apropiados (Singleton, Scoped, Transient)
-- Implementar interfaces para testabilidad
+- Register services in `Program.cs`
+- Use appropriate lifetimes (Singleton, Scoped, Transient)
+- Implement interfaces for testability
 
-### Configuración
-- Usar IOptions pattern para configuración fuerte
-- Implementar validation de configuración
-- Usar diferentes configuraciones por entorno
+### Configuration
+- Use IOptions pattern for strongly-typed configuration
+- Implement configuration validation
+- Use different configurations per environment
 
-## Plantillas y workflows
+## Templates and Workflows
 
-### Workflows de CI/CD
+### CI/CD Workflows
 
-El proyecto incluye workflows para:
+The project includes workflows for:
 
-- Build y test en múltiples versiones de .NET
-- Code quality analysis con SonarQube
+- Build and test on multiple .NET versions
+- Code quality analysis with SonarQube
 - Security scanning
-- Deployment a Azure App Service
+- Deployment to Azure App Service
 
-### Patterns de código
+### Code Patterns
 
 ```csharp
 // Controller pattern
@@ -183,7 +183,7 @@ public class ValuesController : ControllerBase
 }
 ```
 
-### Middleware personalizado
+### Custom Middleware
 
 ```csharp
 public class ExceptionMiddleware

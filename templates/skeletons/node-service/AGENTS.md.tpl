@@ -1,143 +1,143 @@
 # AGENTS.md
 
-## Descripción del proyecto
+## Project Description
 
 ${{values.description}}
 
-Este proyecto es un servicio Node.js basado en Express.js que proporciona una API REST con endpoints básicos y configuración de desarrollo lista para usar.
+This project is a Node.js service based on Express.js that provides a REST API with basic endpoints and ready-to-use development configuration.
 
-## Comandos de configuración
+## Setup Commands
 
-- Instalar dependencias: `npm install`
-- Iniciar servidor de desarrollo: `npm run dev`
-- Ejecutar tests: `npm test`
-- Verificar calidad de código: `npm run lint`
-- Construir para producción: `npm run build`
-- Iniciar servidor de producción: `npm start`
+- Install dependencies: `npm install`
+- Start development server: `npm run dev`
+- Run tests: `npm test`
+- Check code quality: `npm run lint`
+- Build for production: `npm run build`
+- Start production server: `npm start`
 
-## Estructura del proyecto
+## Project Structure
 
-- `src/index.js` - Archivo principal de la aplicación
-- `src/routes/` - Definiciones de rutas de la API
-- `src/controllers/` - Controladores de la aplicación
-- `src/models/` - Modelos de datos
-- `tests/` - Tests unitarios y de integración
-- `package.json` - Configuración del proyecto y dependencias
-- `.env.example` - Variables de entorno de ejemplo
-- `.devcontainer/` - Configuración de contenedor de desarrollo
+- `src/index.js` - Main application file
+- `src/routes/` - API route definitions
+- `src/controllers/` - Application controllers
+- `src/models/` - Data models
+- `tests/` - Unit and integration tests
+- `package.json` - Project configuration and dependencies
+- `.env.example` - Example environment variables
+- `.devcontainer/` - Development container configuration
 
-## Estilo de código
+## Code Style
 
-- Usar JavaScript ES6+ con sintaxis moderna
-- Seguir las reglas de ESLint configuradas
-- Usar nombres descriptivos para variables y funciones
-- Incluir comentarios JSDoc para funciones públicas
-- Mantener archivos pequeños y enfocados en una responsabilidad
+- Use JavaScript ES6+ with modern syntax
+- Follow configured ESLint rules
+- Use descriptive names for variables and functions
+- Include JSDoc comments for public functions
+- Keep files small and focused on single responsibility
 
-## Integraciones mediante Scripts
+## Script Integrations
 
-### Scripts npm disponibles
+### Available npm Scripts
 
-- `npm run dev` - Servidor de desarrollo con hot reload
-- `npm test` - Ejecutar suite de tests
-- `npm run test:watch` - Tests en modo watch
-- `npm run lint` - Verificar código con ESLint
-- `npm run lint:fix` - Corregir automáticamente problemas de lint
+- `npm run dev` - Development server with hot reload
+- `npm test` - Run test suite
+- `npm run test:watch` - Tests in watch mode
+- `npm run lint` - Check code with ESLint
+- `npm run lint:fix` - Automatically fix lint issues
 
-### Integraciones con API externa
+### External API Integrations
 
-Este servicio puede integrarse con APIs externas. Configurar variables de entorno apropiadas en `.env`.
+This service can integrate with external APIs. Configure appropriate environment variables in `.env`.
 
-## Instrucciones de testing
+## Testing Instructions
 
-### Testing unitario
-- Ejecutar `npm test` para correr todos los tests
-- Usar `npm run test:watch` durante desarrollo
-- Los tests están en el directorio `tests/`
-- Usar Jest como framework de testing
+### Unit Testing
+- Run `npm test` to run all tests
+- Use `npm run test:watch` during development
+- Tests are in the `tests/` directory
+- Uses Jest as testing framework
 
-### Testing de integración
-- Usar Supertest para tests de API
-- Mockear dependencias externas cuando sea necesario
-- Verificar respuestas HTTP y estructura de datos
+### Integration Testing
+- Use Supertest for API tests
+- Mock external dependencies when necessary
+- Verify HTTP responses and data structure
 
-### Testing de endpoints
+### Endpoint Testing
 ```bash
-# Test básico de health check
+# Basic health check test
 curl http://localhost:3000/health
 
-# Test de endpoint de API
+# API endpoint test
 curl http://localhost:3000/api/hello
 ```
 
-## Configuración de desarrollo
+## Development Configuration
 
-1. Clonar el repositorio
-2. Ejecutar `npm install` para instalar dependencias
-3. Copiar `.env.example` a `.env` y configurar variables
-4. Ejecutar `npm run dev` para iniciar servidor de desarrollo
-5. La aplicación estará disponible en `http://localhost:3000`
+1. Clone the repository
+2. Run `npm install` to install dependencies
+3. Copy `.env.example` to `.env` and configure variables
+4. Run `npm run dev` to start development server
+5. The application will be available at `http://localhost:3000`
 
-### Variables de entorno requeridas
+### Required Environment Variables
 
 ```env
 PORT=3000
 NODE_ENV=development
 ```
 
-## Consideraciones de seguridad
+## Security Considerations
 
-- Usar Helmet para headers de seguridad
-- Configurar CORS apropiadamente
-- Validar todas las entradas de usuario
-- No exponer información sensible en logs
-- Usar variables de entorno para secretos
-- Mantener dependencias actualizadas
+- Use Helmet for security headers
+- Configure CORS appropriately
+- Validate all user inputs
+- Don't expose sensitive information in logs
+- Use environment variables for secrets
+- Keep dependencies updated
 
-## Solución de problemas
+## Troubleshooting
 
-### Problemas comunes
+### Common Issues
 
-**Error de puerto ocupado:**
-- Cambiar la variable `PORT` en `.env`
-- Verificar que no hay otros procesos usando el puerto
+**Port already in use error:**
+- Change the `PORT` variable in `.env`
+- Verify no other processes are using the port
 
-**Errores de dependencias:**
-- Ejecutar `npm ci` para instalación limpia
-- Verificar versión de Node.js (requiere 18+)
+**Dependency errors:**
+- Run `npm ci` for clean installation
+- Check Node.js version (requires 18+)
 
-**Tests fallando:**
-- Verificar que las dependencias de desarrollo estén instaladas
-- Revisar configuración de Jest en `package.json`
+**Failing tests:**
+- Verify development dependencies are installed
+- Review Jest configuration in `package.json`
 
-## Instrucciones de PR
+## PR Instructions
 
-- Ejecutar `npm run lint` antes de hacer commit
-- Asegurar que todos los tests pasen con `npm test`
-- Incluir tests para nuevas funcionalidades
-- Actualizar documentación si es necesario
-- Seguir convenciones de commit semántico
+- Run `npm run lint` before committing
+- Ensure all tests pass with `npm test`
+- Include tests for new functionality
+- Update documentation if necessary
+- Follow semantic commit conventions
 
-## Gestión de estado
+## State Management
 
-Este servicio es stateless por defecto. Para gestión de estado:
+This service is stateless by default. For state management:
 
-- Usar bases de datos para persistencia
-- Implementar cache con Redis si es necesario
-- Considerar patrones de arquitectura para estado complejo
+- Use databases for persistence
+- Implement cache with Redis if necessary
+- Consider architecture patterns for complex state
 
-## Plantillas y workflows
+## Templates and Workflows
 
-### Workflows de CI/CD
+### CI/CD Workflows
 
-El proyecto incluye workflows de GitHub Actions para:
+The project includes GitHub Actions workflows for:
 
-- Ejecutar tests en PRs
-- Verificar calidad de código
-- Construir y deployar la aplicación
+- Running tests on PRs
+- Checking code quality
+- Building and deploying the application
 
-### Plantillas de código
+### Code Templates
 
-- Seguir estructura de controladores en `src/controllers/`
-- Usar middleware de Express para funcionalidad común
-- Implementar manejo de errores consistente
+- Follow controller structure in `src/controllers/`
+- Use Express middleware for common functionality
+- Implement consistent error handling

@@ -1,99 +1,99 @@
 # AGENTS.md
 
-## Descripción del proyecto
+## Project Description
 
 ${{values.description}}
 
-Este proyecto es un template para gestión de configuración de entornos live usando infraestructura como código, incluyendo configuraciones para desarrollo, staging y producción.
+This project is a template for managing live environment configuration using infrastructure as code, including configurations for development, staging, and production.
 
-## Comandos de configuración
+## Setup Commands
 
-- Validar configuración: `python validate_config.py`
-- Aplicar configuración dev: `./scripts/deploy-dev.sh`
-- Aplicar configuración staging: `./scripts/deploy-staging.sh`
-- Aplicar configuración prod: `./scripts/deploy-prod.sh`
-- Verificar diferencias: `./scripts/diff-envs.sh`
+- Validate configuration: `python validate_config.py`
+- Apply dev configuration: `./scripts/deploy-dev.sh`
+- Apply staging configuration: `./scripts/deploy-staging.sh`
+- Apply prod configuration: `./scripts/deploy-prod.sh`
+- Check differences: `./scripts/diff-envs.sh`
 
-## Estructura del proyecto
+## Project Structure
 
-- `environments/` - Configuraciones por entorno
-- `environments/dev/` - Configuración de desarrollo
-- `environments/staging/` - Configuración de staging  
-- `environments/prod/` - Configuración de producción
-- `validate_config.py` - Script de validación
-- `scripts/` - Scripts de deployment y utilidades
-- `.devcontainer/` - Configuración de contenedor de desarrollo
+- `environments/` - Configuration per environment
+- `environments/dev/` - Development configuration
+- `environments/staging/` - Staging configuration  
+- `environments/prod/` - Production configuration
+- `validate_config.py` - Validation script
+- `scripts/` - Deployment and utility scripts
+- `.devcontainer/` - Development container configuration
 
-## Estilo de código
+## Code Style
 
-- Usar YAML para configuraciones
-- Mantener consistencia entre entornos
-- Documentar diferencias específicas por entorno
-- Usar variables de entorno para valores sensibles
-- Seguir principios de infrastructure as code
-- Versionar todos los cambios de configuración
+- Use YAML for configurations
+- Maintain consistency between environments
+- Document environment-specific differences
+- Use environment variables for sensitive values
+- Follow infrastructure as code principles
+- Version all configuration changes
 
-## Integraciones mediante Scripts
+## Script Integrations
 
-### Scripts de deployment disponibles
+### Available Deployment Scripts
 
-- `./scripts/deploy-dev.sh` - Deploy a desarrollo
-- `./scripts/deploy-staging.sh` - Deploy a staging
-- `./scripts/deploy-prod.sh` - Deploy a producción
-- `./scripts/rollback.sh` - Rollback a versión anterior
-- `./scripts/diff-envs.sh` - Comparar configuraciones
+- `./scripts/deploy-dev.sh` - Deploy to development
+- `./scripts/deploy-staging.sh` - Deploy to staging
+- `./scripts/deploy-prod.sh` - Deploy to production
+- `./scripts/rollback.sh` - Rollback to previous version
+- `./scripts/diff-envs.sh` - Compare configurations
 
-### Integraciones con herramientas
+### Tool Integrations
 
-Este proyecto puede integrarse con:
-- Terraform para infraestructura
-- Ansible para configuración
-- Kubernetes para orchestración
+This project can integrate with:
+- Terraform for infrastructure
+- Ansible for configuration
+- Kubernetes for orchestration
 - GitOps tools (ArgoCD, Flux)
 
-## Instrucciones de testing
+## Testing Instructions
 
-### Testing de configuración
+### Configuration Testing
 ```bash
-# Validar sintaxis YAML
+# Validate YAML syntax
 python validate_config.py
 
-# Test de diferencias entre entornos
+# Test differences between environments
 ./scripts/diff-envs.sh dev staging
 
-# Dry run de deployment
+# Dry run deployment
 ./scripts/deploy-dev.sh --dry-run
 ```
 
-### Testing de deployment
+### Deployment Testing
 ```bash
-# Test en entorno de desarrollo
+# Test in development environment
 ./scripts/deploy-dev.sh
 
-# Verificar deployment
+# Verify deployment
 ./scripts/health-check.sh dev
 
-# Test de rollback
+# Test rollback
 ./scripts/rollback.sh dev previous-version
 ```
 
-### Testing de configuración por entorno
+### Environment-specific Configuration Testing
 ```bash
-# Validar configuración específica
+# Validate specific configuration
 python validate_config.py --env dev
 python validate_config.py --env staging  
 python validate_config.py --env prod
 ```
 
-## Configuración de desarrollo
+## Development Configuration
 
-1. Clonar el repositorio
-2. Instalar Python 3.11+ y dependencias
-3. Configurar variables de entorno necesarias
-4. Validar configuración: `python validate_config.py`
-5. Probar deployment en dev: `./scripts/deploy-dev.sh`
+1. Clone the repository
+2. Install Python 3.11+ and dependencies
+3. Configure necessary environment variables
+4. Validate configuration: `python validate_config.py`
+5. Test deployment in dev: `./scripts/deploy-dev.sh`
 
-### Variables de entorno por ambiente
+### Environment Variables per Environment
 
 ```bash
 # Development
@@ -112,70 +112,70 @@ export API_URL=https://api.example.com
 export DATABASE_URL=postgresql://prod-db
 ```
 
-## Consideraciones de seguridad
+## Security Considerations
 
-- Usar secrets management para credenciales
-- Implementar least privilege access
-- Auditar cambios de configuración
-- Usar encryption para datos sensibles
-- Mantener logs de deployments
-- Implementar approval workflows para prod
+- Use secrets management for credentials
+- Implement least privilege access
+- Audit configuration changes
+- Use encryption for sensitive data
+- Maintain deployment logs
+- Implement approval workflows for prod
 
-## Solución de problemas
+## Troubleshooting
 
-### Problemas comunes
+### Common Issues
 
-**Error de validación YAML:**
-- Verificar sintaxis con `python validate_config.py`
-- Comprobar indentación y estructura
-- Validar referencias a variables
+**YAML validation error:**
+- Verify syntax with `python validate_config.py`
+- Check indentation and structure
+- Validate variable references
 
 **Deployment failure:**
-- Revisar logs en `./logs/deploy-{env}.log`
-- Verificar conectividad a servicios
-- Comprobar permisos y credenciales
+- Review logs in `./logs/deploy-{env}.log`
+- Verify service connectivity
+- Check permissions and credentials
 
-**Diferencias de configuración:**
-- Usar `./scripts/diff-envs.sh` para comparar
-- Revisar documentación de cambios
-- Verificar que cambios sean intencionales
+**Configuration differences:**
+- Use `./scripts/diff-envs.sh` to compare
+- Review change documentation
+- Verify changes are intentional
 
-## Instrucciones de PR
+## PR Instructions
 
-- Validar configuración con `python validate_config.py`
-- Documentar cambios por entorno
-- Probar en desarrollo antes de staging/prod
-- Incluir rollback plan para cambios críticos
-- Revisar impacto en todos los entornos
+- Validate configuration with `python validate_config.py`
+- Document changes per environment
+- Test in development before staging/prod
+- Include rollback plan for critical changes
+- Review impact on all environments
 
-## Gestión de estado
+## State Management
 
-### Versionado de configuración
-- Usar git tags para releases
-- Mantener changelog de cambios
-- Documentar breaking changes
+### Configuration Versioning
+- Use git tags for releases
+- Maintain changelog of changes
+- Document breaking changes
 
-### Backup y rollback
+### Backup and Rollback
 ```bash
-# Backup antes de deployment
+# Backup before deployment
 ./scripts/backup-config.sh prod
 
-# Rollback si es necesario
+# Rollback if necessary
 ./scripts/rollback.sh prod backup-20231201
 ```
 
-## Plantillas y workflows
+## Templates and Workflows
 
-### Workflows de CI/CD
+### CI/CD Workflows
 
-El proyecto incluye workflows para:
+The project includes workflows for:
 
-- Validación automática de configuración
-- Deployment automático a dev en merge
-- Approval gates para staging y prod
-- Rollback automático en caso de fallo
+- Automatic configuration validation
+- Automatic deployment to dev on merge
+- Approval gates for staging and prod
+- Automatic rollback on failure
 
-### Estructura de configuración
+### Configuration Structure
 
 ```yaml
 # environments/dev/config.yaml
@@ -201,7 +201,7 @@ resources:
     memory: 1Gi
 ```
 
-### Validation script
+### Validation Script
 
 ```python
 # validate_config.py

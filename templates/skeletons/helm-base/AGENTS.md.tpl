@@ -1,102 +1,102 @@
 # AGENTS.md
 
-## Descripción del proyecto
+## Project Description
 
 ${{values.description}}
 
-Este proyecto es un Helm Chart base que proporciona templates y configuraciones estándar para deployments de Kubernetes, incluyendo best practices para production.
+This project is a base Helm Chart that provides standard templates and configurations for Kubernetes deployments, including production best practices.
 
-## Comandos de configuración
+## Setup Commands
 
-- Validar chart: `helm lint .`
-- Instalar chart: `helm install my-release .`
-- Actualizar release: `helm upgrade my-release .`
-- Ver templates: `helm template my-release .`
-- Empaquetar chart: `helm package .`
-- Desinstalar: `helm uninstall my-release`
+- Validate chart: `helm lint .`
+- Install chart: `helm install my-release .`
+- Upgrade release: `helm upgrade my-release .`
+- View templates: `helm template my-release .`
+- Package chart: `helm package .`
+- Uninstall: `helm uninstall my-release`
 
-## Estructura del proyecto
+## Project Structure
 
-- `Chart.yaml` - Metadata del chart
-- `values.yaml` - Valores por defecto
-- `templates/` - Templates de Kubernetes
-- `templates/deployment.yaml` - Template de Deployment
-- `templates/service.yaml` - Template de Service
-- `templates/ingress.yaml` - Template de Ingress
+- `Chart.yaml` - Chart metadata
+- `values.yaml` - Default values
+- `templates/` - Kubernetes templates
+- `templates/deployment.yaml` - Deployment template
+- `templates/service.yaml` - Service template
+- `templates/ingress.yaml` - Ingress template
 - `templates/_helpers.tpl` - Helper templates
-- `README.md` - Documentación del chart
+- `README.md` - Chart documentation
 
-## Estilo de código
+## Code Style
 
-- Usar YAML válido con indentación de 2 espacios
-- Seguir convenciones de naming de Kubernetes
-- Usar templates helpers para lógica reutilizable
-- Documentar todos los values en comments
-- Mantener templates simples y legibles
-- Usar conditional logic apropiadamente
+- Use valid YAML with 2-space indentation
+- Follow Kubernetes naming conventions
+- Use template helpers for reusable logic
+- Document all values in comments
+- Keep templates simple and readable
+- Use conditional logic appropriately
 
-## Integraciones mediante Scripts
+## Script Integrations
 
-### Comandos Helm disponibles
+### Available Helm Commands
 
-- `helm template .` - Renderizar templates localmente
-- `helm lint .` - Validar sintaxis y best practices
-- `helm dependency update` - Actualizar dependencias
-- `helm test my-release` - Ejecutar tests del chart
+- `helm template .` - Render templates locally
+- `helm lint .` - Validate syntax and best practices
+- `helm dependency update` - Update dependencies
+- `helm test my-release` - Execute chart tests
 
-### Integraciones con Kubernetes
+### Kubernetes Integrations
 
-Este chart puede integrarse con:
+This chart can integrate with:
 - Ingress controllers (nginx, traefik)
 - Service mesh (Istio, Linkerd)
 - Monitoring (Prometheus, Grafana)
 - Secrets management (External Secrets Operator)
 
-## Instrucciones de testing
+## Testing Instructions
 
-### Testing de templates
+### Template Testing
 ```bash
-# Validar sintaxis del chart
+# Validate chart syntax
 helm lint .
 
-# Renderizar templates para revisión
+# Render templates for review
 helm template test-release . --debug
 
-# Test con diferentes valores
+# Test with different values
 helm template test-release . -f values-prod.yaml
 ```
 
-### Testing de deployment
+### Deployment Testing
 ```bash
 # Dry run install
 helm install test-release . --dry-run --debug
 
-# Install en namespace de test
+# Install in test namespace
 kubectl create namespace test
 helm install test-release . -n test
 
-# Verificar recursos creados
+# Verify created resources
 kubectl get all -n test
 ```
 
-### Testing de configuración
+### Configuration Testing
 ```bash
-# Test con diferentes configurations
+# Test with different configurations
 helm template test . --set image.tag=v2.0.0
 helm template test . --set replicaCount=3
 helm template test . --set ingress.enabled=true
 ```
 
-## Configuración de desarrollo
+## Development Configuration
 
-1. Instalar Helm 3.x
-2. Tener acceso a cluster de Kubernetes
-3. Clonar el repositorio
-4. Modificar `values.yaml` según necesidades
-5. Validar con `helm lint .`
-6. Probar con `helm template .`
+1. Install Helm 3.x
+2. Have access to Kubernetes cluster
+3. Clone the repository
+4. Modify `values.yaml` as needed
+5. Validate with `helm lint .`
+6. Test with `helm template .`
 
-### Estructura de values.yaml
+### Values.yaml Structure
 
 ```yaml
 # Default values for the chart
@@ -124,50 +124,50 @@ tolerations: []
 affinity: {}
 ```
 
-## Consideraciones de seguridad
+## Security Considerations
 
-- Usar security contexts apropiados
-- Implementar resource limits y requests
-- Usar service accounts específicos
-- Configurar network policies si es necesario
-- Usar secrets para datos sensibles
-- Habilitar pod security standards
+- Use appropriate security contexts
+- Implement resource limits and requests
+- Use specific service accounts
+- Configure network policies if necessary
+- Use secrets for sensitive data
+- Enable pod security standards
 
-## Solución de problemas
+## Troubleshooting
 
-### Problemas comunes
+### Common Issues
 
-**Error de sintaxis YAML:**
-- Usar `helm lint .` para validar
-- Verificar indentación (2 espacios)
-- Comprobar quotes en valores de string
+**YAML syntax error:**
+- Use `helm lint .` to validate
+- Check indentation (2 spaces)
+- Verify quotes in string values
 
 **Template rendering errors:**
-- Revisar logic de templates con `helm template --debug`
-- Verificar que required values estén definidos
-- Comprobar sintaxis de Go templates
+- Review template logic with `helm template --debug`
+- Verify required values are defined
+- Check Go template syntax
 
 **Deployment failures:**
-- Verificar resources limits y requests
-- Comprobar image pull secrets
-- Revisar network policies
+- Verify resource limits and requests
+- Check image pull secrets
+- Review network policies
 
-## Instrucciones de PR
+## PR Instructions
 
-- Ejecutar `helm lint .` antes de commit
-- Probar templates con diferentes configuraciones
-- Documentar cambios en values.yaml
-- Incluir tests para nuevos templates
-- Verificar backward compatibility
+- Run `helm lint .` before committing
+- Test templates with different configurations
+- Document changes in values.yaml
+- Include tests for new templates
+- Verify backward compatibility
 
-## Gestión de estado
+## State Management
 
-### Releases de Helm
-- Usar semantic versioning en Chart.yaml
-- Mantener changelog de cambios
-- Backup de releases importantes
+### Helm Releases
+- Use semantic versioning in Chart.yaml
+- Maintain changelog of changes
+- Backup important releases
 
-### Configuración por entorno
+### Environment Configuration
 ```yaml
 # values-dev.yaml
 environment: development
@@ -178,18 +178,18 @@ environment: production
 replicaCount: 3
 ```
 
-## Plantillas y workflows
+## Templates and Workflows
 
-### Workflows de CI/CD
+### CI/CD Workflows
 
-El proyecto incluye workflows para:
+The project includes workflows for:
 
-- Validación de chart con helm lint
-- Tests de rendering de templates
-- Packaging y publishing a chart repository
-- Deployment automático a staging
+- Chart validation with helm lint
+- Template rendering tests
+- Packaging and publishing to chart repository
+- Automatic deployment to staging
 
-### Template helpers
+### Template Helpers
 
 ```yaml
 {{/*
@@ -212,7 +212,7 @@ Create a default fully qualified app name.
 {{- end }}
 ```
 
-### Conditional templates
+### Conditional Templates
 
 ```yaml
 {{- if .Values.ingress.enabled -}}
@@ -232,10 +232,10 @@ spec:
 {{- end }}
 ```
 
-### Best practices
+### Best Practices
 
-- Usar include en lugar de template
-- Implementar proper labeling
-- Usar consistent naming conventions
-- Documentar custom values
-- Implementar proper resource management
+- Use include instead of template
+- Implement proper labeling
+- Use consistent naming conventions
+- Document custom values
+- Implement proper resource management

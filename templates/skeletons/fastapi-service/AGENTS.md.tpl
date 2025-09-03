@@ -1,93 +1,93 @@
 # AGENTS.md
 
-## Descripción del proyecto
+## Project Description
 
 ${{values.description}}
 
-Este proyecto es un servicio FastAPI que proporciona una API REST moderna con documentación automática, validación de datos y configuración de desarrollo lista para usar.
+This project is a FastAPI service that provides a modern REST API with automatic documentation, data validation, and ready-to-use development configuration.
 
-## Comandos de configuración
+## Setup Commands
 
-- Instalar dependencias: `pip install -r requirements.txt -r requirements-dev.txt`
-- Iniciar servidor de desarrollo: `uvicorn app.main:app --reload --host 0.0.0.0 --port 8000`
-- Ejecutar tests: `pytest`
-- Formatear código: `black . && isort .`
-- Verificar calidad de código: `flake8 .`
-- Ejecutar tests con cobertura: `pytest --cov=app`
+- Install dependencies: `pip install -r requirements.txt -r requirements-dev.txt`
+- Start development server: `uvicorn app.main:app --reload --host 0.0.0.0 --port 8000`
+- Run tests: `pytest`
+- Format code: `black . && isort .`
+- Check code quality: `flake8 .`
+- Run tests with coverage: `pytest --cov=app`
 
-## Estructura del proyecto
+## Project Structure
 
-- `app/main.py` - Archivo principal de la aplicación FastAPI
-- `app/routers/` - Definiciones de rutas de la API
-- `app/models/` - Modelos de datos Pydantic
-- `tests/` - Tests unitarios y de integración
-- `requirements.txt` - Dependencias de producción
-- `requirements-dev.txt` - Dependencias de desarrollo
-- `.env.example` - Variables de entorno de ejemplo
-- `.devcontainer/` - Configuración de contenedor de desarrollo
+- `app/main.py` - Main FastAPI application file
+- `app/routers/` - API route definitions
+- `app/models/` - Pydantic data models
+- `tests/` - Unit and integration tests
+- `requirements.txt` - Production dependencies
+- `requirements-dev.txt` - Development dependencies
+- `.env.example` - Example environment variables
+- `.devcontainer/` - Development container configuration
 
-## Estilo de código
+## Code Style
 
-- Usar Python 3.11+ con type hints
-- Seguir PEP 8 con Black como formateador
-- Usar isort para organizar imports
-- Incluir docstrings para funciones y clases públicas
-- Mantener archivos enfocados en una responsabilidad
-- Usar Pydantic para validación de datos
+- Use Python 3.11+ with type hints
+- Follow PEP 8 with Black as formatter
+- Use isort to organize imports
+- Include docstrings for public functions and classes
+- Keep files focused on single responsibility
+- Use Pydantic for data validation
 
-## Integraciones mediante Scripts
+## Script Integrations
 
-### Comandos de desarrollo
+### Development Commands
 
-- `uvicorn app.main:app --reload` - Servidor de desarrollo con hot reload
-- `pytest` - Ejecutar suite de tests
-- `pytest --watch` - Tests en modo watch
-- `black .` - Formatear código automáticamente
-- `flake8 .` - Verificar código con linter
+- `uvicorn app.main:app --reload` - Development server with hot reload
+- `pytest` - Run test suite
+- `pytest --watch` - Tests in watch mode
+- `black .` - Format code automatically
+- `flake8 .` - Check code with linter
 
-### Integraciones con API externa
+### External API Integrations
 
-Este servicio puede integrarse con APIs externas usando:
-- `httpx` para requests HTTP asíncronos
-- Variables de entorno para configuración
-- Modelos Pydantic para validación de respuestas
+This service can integrate with external APIs using:
+- `httpx` for asynchronous HTTP requests
+- Environment variables for configuration
+- Pydantic models for response validation
 
-## Instrucciones de testing
+## Testing Instructions
 
-### Testing unitario
-- Ejecutar `pytest` para correr todos los tests
-- Usar `pytest -v` para output detallado
-- Los tests están en el directorio `tests/`
-- Usar pytest como framework de testing
+### Unit Testing
+- Run `pytest` to run all tests
+- Use `pytest -v` for detailed output
+- Tests are in the `tests/` directory
+- Uses pytest as testing framework
 
-### Testing de integración
-- Usar TestClient de FastAPI para tests de API
-- Mockear dependencias externas con pytest-mock
-- Verificar respuestas HTTP y validación de esquemas
+### Integration Testing
+- Use FastAPI's TestClient for API tests
+- Mock external dependencies with pytest-mock
+- Verify HTTP responses and schema validation
 
-### Testing de endpoints
+### Endpoint Testing
 ```bash
-# Test básico de health check
+# Basic health check test
 curl http://localhost:8000/health
 
-# Test de documentación automática
+# Automatic documentation test
 curl http://localhost:8000/docs
 
-# Test de endpoint de API
+# API endpoint test
 curl http://localhost:8000/api/hello
 ```
 
-## Configuración de desarrollo
+## Development Configuration
 
-1. Clonar el repositorio
-2. Crear entorno virtual: `python -m venv venv`
-3. Activar entorno: `source venv/bin/activate` (Linux/Mac) o `venv\Scripts\activate` (Windows)
-4. Instalar dependencias: `pip install -r requirements.txt -r requirements-dev.txt`
-5. Copiar `.env.example` a `.env` y configurar variables
-6. Ejecutar `uvicorn app.main:app --reload` para iniciar servidor
-7. La aplicación estará disponible en `http://localhost:8000`
+1. Clone the repository
+2. Create virtual environment: `python -m venv venv`
+3. Activate environment: `source venv/bin/activate` (Linux/Mac) or `venv\Scripts\activate` (Windows)
+4. Install dependencies: `pip install -r requirements.txt -r requirements-dev.txt`
+5. Copy `.env.example` to `.env` and configure variables
+6. Run `uvicorn app.main:app --reload` to start server
+7. The application will be available at `http://localhost:8000`
 
-### Variables de entorno requeridas
+### Required Environment Variables
 
 ```env
 PORT=8000
@@ -95,63 +95,63 @@ HOST=0.0.0.0
 ENVIRONMENT=development
 ```
 
-## Consideraciones de seguridad
+## Security Considerations
 
-- Usar CORS middleware con configuración restrictiva
-- Validar todas las entradas con Pydantic
-- No exponer información sensible en logs o respuestas
-- Usar variables de entorno para secretos
-- Implementar autenticación y autorización cuando sea necesario
-- Mantener dependencias actualizadas
+- Use CORS middleware with restrictive configuration
+- Validate all inputs with Pydantic
+- Don't expose sensitive information in logs or responses
+- Use environment variables for secrets
+- Implement authentication and authorization when necessary
+- Keep dependencies updated
 
-## Solución de problemas
+## Troubleshooting
 
-### Problemas comunes
+### Common Issues
 
-**Error de puerto ocupado:**
-- Cambiar la variable `PORT` en `.env`
-- Verificar que no hay otros procesos usando el puerto
+**Port already in use error:**
+- Change the `PORT` variable in `.env`
+- Verify no other processes are using the port
 
-**Errores de dependencias:**
-- Recrear entorno virtual
-- Verificar versión de Python (requiere 3.11+)
-- Usar `pip install --upgrade pip`
+**Dependency errors:**
+- Recreate virtual environment
+- Check Python version (requires 3.11+)
+- Use `pip install --upgrade pip`
 
-**Tests fallando:**
-- Verificar que las dependencias de desarrollo estén instaladas
-- Revisar configuración de pytest en `pyproject.toml`
+**Failing tests:**
+- Verify development dependencies are installed
+- Review pytest configuration in `pyproject.toml`
 
-## Instrucciones de PR
+## PR Instructions
 
-- Ejecutar `black .` y `isort .` antes de hacer commit
-- Verificar calidad con `flake8 .`
-- Asegurar que todos los tests pasen con `pytest`
-- Incluir tests para nuevas funcionalidades
-- Actualizar documentación API si es necesario
-- Seguir convenciones de commit semántico
+- Run `black .` and `isort .` before committing
+- Check quality with `flake8 .`
+- Ensure all tests pass with `pytest`
+- Include tests for new functionality
+- Update API documentation if necessary
+- Follow semantic commit conventions
 
-## Gestión de estado
+## State Management
 
-Este servicio es stateless por defecto. Para gestión de estado:
+This service is stateless by default. For state management:
 
-- Usar bases de datos con SQLAlchemy o similar
-- Implementar cache con Redis
-- Usar dependency injection de FastAPI para gestión de recursos
+- Use databases with SQLAlchemy or similar
+- Implement cache with Redis
+- Use FastAPI's dependency injection for resource management
 
-## Plantillas y workflows
+## Templates and Workflows
 
-### Workflows de CI/CD
+### CI/CD Workflows
 
-El proyecto incluye workflows de GitHub Actions para:
+The project includes GitHub Actions workflows for:
 
-- Ejecutar tests y linting en PRs
-- Verificar cobertura de código
-- Construir y deployar la aplicación
-- Escaneo de seguridad
+- Running tests and linting on PRs
+- Checking code coverage
+- Building and deploying the application
+- Security scanning
 
-### Plantillas de código
+### Code Templates
 
-- Seguir estructura de routers en `app/routers/`
-- Usar modelos Pydantic para request/response
-- Implementar middleware para funcionalidad común
-- Usar dependency injection para configuración
+- Follow router structure in `app/routers/`
+- Use Pydantic models for request/response
+- Implement middleware for common functionality
+- Use dependency injection for configuration

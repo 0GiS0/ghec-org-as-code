@@ -1,157 +1,157 @@
 # AGENTS.md
 
-## Descripción del proyecto
+## Project Description
 
 ${{values.description}}
 
-Este proyecto es una aplicación frontend moderna construida con Astro, optimizada para rendimiento y enfocada en contenido con capacidades de server-side rendering.
+This project is a modern frontend application built with Astro, optimized for performance and content-focused with server-side rendering capabilities.
 
-## Comandos de configuración
+## Setup Commands
 
-- Instalar dependencias: `npm install`
-- Iniciar servidor de desarrollo: `npm run dev`
-- Construir para producción: `npm run build`
-- Vista previa de producción: `npm run preview`
-- Verificar tipos: `npm run check`
-- Formatear código: `npm run format`
+- Install dependencies: `npm install`
+- Start development server: `npm run dev`
+- Build for production: `npm run build`
+- Production preview: `npm run preview`
+- Check types: `npm run check`
+- Format code: `npm run format`
 
-## Estructura del proyecto
+## Project Structure
 
-- `src/pages/` - Páginas de la aplicación (routing basado en archivos)
-- `src/components/` - Componentes reutilizables
-- `src/layouts/` - Layouts de página
-- `src/styles/` - Estilos globales y CSS
-- `src/content/` - Contenido de la aplicación (markdown, etc.)
-- `public/` - Archivos estáticos
-- `astro.config.mjs` - Configuración de Astro
+- `src/pages/` - Application pages (file-based routing)
+- `src/components/` - Reusable components
+- `src/layouts/` - Page layouts
+- `src/styles/` - Global styles and CSS
+- `src/content/` - Application content (markdown, etc.)
+- `public/` - Static files
+- `astro.config.mjs` - Astro configuration
 
-## Estilo de código
+## Code Style
 
-- Usar TypeScript para type safety
-- Seguir convenciones de Astro para componentes
-- Usar CSS modules o styled-components según preferencia
-- Mantener componentes pequeños y reutilizables
-- Seguir principios de web semántico
-- Optimizar para performance y SEO
+- Use TypeScript for type safety
+- Follow Astro conventions for components
+- Use CSS modules or styled-components as preferred
+- Keep components small and reusable
+- Follow semantic web principles
+- Optimize for performance and SEO
 
-## Integraciones mediante Scripts
+## Script Integrations
 
-### Scripts npm disponibles
+### Available npm Scripts
 
-- `npm run dev` - Servidor de desarrollo con hot reload
-- `npm run build` - Construir para producción
-- `npm run preview` - Vista previa de build de producción
-- `npm run check` - Verificar tipos de TypeScript
-- `npm run format` - Formatear código con Prettier
+- `npm run dev` - Development server with hot reload
+- `npm run build` - Build for production
+- `npm run preview` - Preview production build
+- `npm run check` - Check TypeScript types
+- `npm run format` - Format code with Prettier
 
-### Integraciones de frontend
+### Frontend Integrations
 
-Este proyecto puede integrarse con:
-- APIs REST y GraphQL
+This project can integrate with:
+- REST and GraphQL APIs
 - Headless CMS (Strapi, Contentful)
-- Servicios de autenticación
-- Analytics y monitoreo
+- Authentication services
+- Analytics and monitoring
 
-## Instrucciones de testing
+## Testing Instructions
 
-### Testing de componentes
-- Usar Vitest para tests unitarios
-- Implementar tests de componentes con Testing Library
-- Verificar accesibilidad con jest-axe
-- Testear rendering y comportamiento
+### Component Testing
+- Use Vitest for unit tests
+- Implement component tests with Testing Library
+- Verify accessibility with jest-axe
+- Test rendering and behavior
 
-### Testing de integración
+### Integration Testing
 ```bash
-# Test de desarrollo local
+# Local development test
 npm run dev
-# Navegar a http://localhost:4321
+# Navigate to http://localhost:4321
 
-# Test de build de producción
+# Production build test
 npm run build
 npm run preview
 ```
 
-### Testing de performance
-- Usar Lighthouse para auditorías de performance
-- Verificar métricas Core Web Vitals
-- Testear en diferentes dispositivos y conexiones
+### Performance Testing
+- Use Lighthouse for performance audits
+- Verify Core Web Vitals metrics
+- Test on different devices and connections
 
-## Configuración de desarrollo
+## Development Configuration
 
-1. Clonar el repositorio
-2. Instalar Node.js 18+ y npm/yarn
-3. Ejecutar `npm install` para instalar dependencias
-4. Configurar variables de entorno si es necesario
-5. Ejecutar `npm run dev` para iniciar servidor de desarrollo
-6. La aplicación estará disponible en `http://localhost:4321`
+1. Clone the repository
+2. Install Node.js 18+ and npm/yarn
+3. Run `npm install` to install dependencies
+4. Configure environment variables if necessary
+5. Run `npm run dev` to start development server
+6. The application will be available at `http://localhost:4321`
 
-### Variables de entorno opcionales
+### Optional Environment Variables
 
 ```env
 PUBLIC_API_URL=https://api.example.com
 PUBLIC_SITE_URL=https://mysite.com
 ```
 
-## Consideraciones de seguridad
+## Security Considerations
 
-- Validar datos de formularios en client y server
-- Usar HTTPS en producción
-- Implementar CSP headers apropiados
-- Validar inputs de usuario
-- Proteger rutas sensibles
-- Usar variables de entorno para secrets públicos
+- Validate form data on client and server
+- Use HTTPS in production
+- Implement appropriate CSP headers
+- Validate user inputs
+- Protect sensitive routes
+- Use environment variables for public secrets
 
-## Solución de problemas
+## Troubleshooting
 
-### Problemas comunes
+### Common Issues
 
-**Error de build:**
-- Verificar sintaxis de componentes Astro
-- Revisar imports y exports
-- Validar configuración en astro.config.mjs
+**Build error:**
+- Verify Astro component syntax
+- Review imports and exports
+- Validate configuration in astro.config.mjs
 
-**Problemas de tipos TypeScript:**
-- Ejecutar `npm run check` para diagnóstico
-- Verificar configuración en tsconfig.json
-- Instalar types para dependencias
+**TypeScript type issues:**
+- Run `npm run check` for diagnostics
+- Verify configuration in tsconfig.json
+- Install types for dependencies
 
 **Performance issues:**
-- Usar Astro DevTools para debugging
-- Verificar lazy loading de componentes
-- Optimizar imágenes y assets
+- Use Astro DevTools for debugging
+- Verify component lazy loading
+- Optimize images and assets
 
-## Instrucciones de PR
+## PR Instructions
 
-- Ejecutar `npm run check` para verificar tipos
-- Asegurar que `npm run build` funcione correctamente
-- Incluir tests para nuevos componentes
-- Verificar accesibilidad y SEO
-- Actualizar documentación de componentes
+- Run `npm run check` to verify types
+- Ensure `npm run build` works correctly
+- Include tests for new components
+- Verify accessibility and SEO
+- Update component documentation
 
-## Gestión de estado
+## State Management
 
-### Estado de cliente
-- Usar stores de Astro para estado global
-- Implementar estado local en componentes cuando sea necesario
-- Considerar Zustand o similar para estado complejo
+### Client State
+- Use Astro stores for global state
+- Implement local state in components when necessary
+- Consider Zustand or similar for complex state
 
-### Estado del servidor
-- Usar Astro endpoints para APIs
-- Implementar SSG/SSR según necesidades
-- Cache apropiado para contenido estático
+### Server State
+- Use Astro endpoints for APIs
+- Implement SSG/SSR based on needs
+- Appropriate caching for static content
 
-## Plantillas y workflows
+## Templates and Workflows
 
-### Workflows de CI/CD
+### CI/CD Workflows
 
-El proyecto incluye workflows para:
+The project includes workflows for:
 
-- Build y test automático en PRs
-- Deploy a hosting estático (Netlify, Vercel)
-- Auditorías de performance
-- Tests de accesibilidad
+- Automatic build and test on PRs
+- Deploy to static hosting (Netlify, Vercel)
+- Performance audits
+- Accessibility tests
 
-### Estructura de componentes
+### Component Structure
 
 ```astro
 ---
@@ -178,29 +178,29 @@ const { title, description } = Astro.props;
 </style>
 ```
 
-### Integración con frameworks
+### Framework Integration
 
 ```typescript
-// React components (opcional)
+// React components (optional)
 import React from 'react';
 
-// Vue components (opcional)
+// Vue components (optional)
 import Vue from 'vue';
 
-// Svelte components (opcional)
+// Svelte components (optional)
 import Svelte from 'svelte';
 ```
 
-### SEO y meta tags
+### SEO and Meta Tags
 
 ```astro
 ---
 import Layout from '../layouts/Layout.astro';
 ---
 
-<Layout title="Mi Página" description="Descripción de la página">
+<Layout title="My Page" description="Page description">
   <main>
-    <!-- Contenido de la página -->
+    <!-- Page content -->
   </main>
 </Layout>
 ```

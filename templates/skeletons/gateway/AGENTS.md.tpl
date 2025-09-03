@@ -1,100 +1,100 @@
 # AGENTS.md
 
-## Descripción del proyecto
+## Project Description
 
 ${{values.description}}
 
-Este proyecto es un API Gateway basado en Kong que proporciona un punto de entrada centralizado para microservicios, incluyendo autenticación, rate limiting, y routing de tráfico.
+This project is a Kong-based API Gateway that provides a centralized entry point for microservices, including authentication, rate limiting, and traffic routing.
 
-## Comandos de configuración
+## Setup Commands
 
-- Iniciar gateway: `docker-compose up -d`
-- Verificar configuración: `kong config parse`
-- Recargar configuración: `kong reload`
-- Ver logs: `docker-compose logs -f kong`
-- Detener gateway: `docker-compose down`
+- Start gateway: `docker-compose up -d`
+- Verify configuration: `kong config parse`
+- Reload configuration: `kong reload`
+- View logs: `docker-compose logs -f kong`
+- Stop gateway: `docker-compose down`
 
-## Estructura del proyecto
+## Project Structure
 
-- `docker-compose.yml` - Configuración de contenedores Kong y Postgres
-- `config/kong.yml` - Configuración declarativa de Kong
-- `README.md` - Documentación del proyecto
-- `.devcontainer/` - Configuración de contenedor de desarrollo
-- `.github/workflows/` - Pipelines de CI/CD
+- `docker-compose.yml` - Kong and Postgres container configuration
+- `config/kong.yml` - Kong declarative configuration
+- `README.md` - Project documentation
+- `.devcontainer/` - Development container configuration
+- `.github/workflows/` - CI/CD pipelines
 
-## Estilo de código
+## Code Style
 
-- Usar configuración declarativa YAML para Kong
-- Mantener configuración versionada en git
-- Documentar todos los services y routes
-- Usar nombres descriptivos para services y routes
-- Agrupar configuración por dominio/servicio
-- Incluir comentarios en configuración compleja
+- Use declarative YAML configuration for Kong
+- Keep configuration versioned in git
+- Document all services and routes
+- Use descriptive names for services and routes
+- Group configuration by domain/service
+- Include comments for complex configuration
 
-## Integraciones mediante Scripts
+## Script Integrations
 
-### Comandos Docker disponibles
+### Available Docker Commands
 
-- `docker-compose up -d` - Iniciar stack completo
-- `docker-compose logs kong` - Ver logs del gateway
-- `docker-compose exec kong kong health` - Check de salud
-- `docker-compose restart kong` - Reiniciar Kong
+- `docker-compose up -d` - Start complete stack
+- `docker-compose logs kong` - View gateway logs
+- `docker-compose exec kong kong health` - Health check
+- `docker-compose restart kong` - Restart Kong
 
-### Integraciones con servicios
+### Service Integrations
 
-Este gateway puede integrar:
-- Microservicios REST y GraphQL
-- Servicios de autenticación (JWT, OAuth2)
-- Bases de datos para rate limiting
-- Sistemas de monitoreo y logs
+This gateway can integrate:
+- REST and GraphQL microservices
+- Authentication services (JWT, OAuth2)
+- Databases for rate limiting
+- Monitoring and logging systems
 
-## Instrucciones de testing
+## Testing Instructions
 
-### Testing de configuración
+### Configuration Testing
 ```bash
-# Validar configuración de Kong
+# Validate Kong configuration
 kong config parse config/kong.yml
 
-# Test de conectividad
+# Connectivity test
 curl http://localhost:8000/health
 
-# Test de admin API
+# Admin API test
 curl http://localhost:8001/services
 ```
 
-### Testing de rutas
+### Route Testing
 ```bash
-# Test de routing básico
+# Basic routing test
 curl -H "Host: api.example.com" http://localhost:8000/health
 
-# Test de rate limiting
+# Rate limiting test
 for i in {1..10}; do curl http://localhost:8000/api/test; done
 
-# Test de CORS
+# CORS test
 curl -H "Origin: http://localhost:3000" \
      -H "Access-Control-Request-Method: POST" \
      -X OPTIONS http://localhost:8000/api/data
 ```
 
-### Testing de plugins
+### Plugin Testing
 ```bash
-# Test de autenticación JWT
+# JWT authentication test
 curl -H "Authorization: Bearer <token>" http://localhost:8000/api/secure
 
-# Test de transformación de headers
+# Header transformation test
 curl -v http://localhost:8000/api/transform
 ```
 
-## Configuración de desarrollo
+## Development Configuration
 
-1. Instalar Docker y Docker Compose
-2. Clonar el repositorio
-3. Configurar variables de entorno si es necesario
-4. Ejecutar `docker-compose up -d` para iniciar Kong
-5. Verificar que Kong esté funcionando: `curl http://localhost:8001`
-6. El gateway estará disponible en `http://localhost:8000`
+1. Install Docker and Docker Compose
+2. Clone the repository
+3. Configure environment variables if necessary
+4. Run `docker-compose up -d` to start Kong
+5. Verify Kong is running: `curl http://localhost:8001`
+6. The gateway will be available at `http://localhost:8000`
 
-### Variables de entorno
+### Environment Variables
 
 ```env
 KONG_DATABASE=postgres
@@ -105,69 +105,69 @@ KONG_PG_PASSWORD=kong
 KONG_ADMIN_LISTEN=0.0.0.0:8001
 ```
 
-## Consideraciones de seguridad
+## Security Considerations
 
-- Proteger Kong Admin API con autenticación
-- Usar HTTPS en producción con certificados válidos
-- Implementar rate limiting apropiado
-- Validar y sanitizar headers de requests
-- Usar WAF para protección adicional
-- Monitorear logs de seguridad
+- Protect Kong Admin API with authentication
+- Use HTTPS in production with valid certificates
+- Implement appropriate rate limiting
+- Validate and sanitize request headers
+- Use WAF for additional protection
+- Monitor security logs
 
-## Solución de problemas
+## Troubleshooting
 
-### Problemas comunes
+### Common Issues
 
-**Kong no inicia:**
-- Verificar que Postgres esté corriendo
-- Revisar logs: `docker-compose logs kong`
-- Validar configuración: `kong config parse`
+**Kong doesn't start:**
+- Verify Postgres is running
+- Check logs: `docker-compose logs kong`
+- Validate configuration: `kong config parse`
 
-**Error de routing:**
-- Verificar configuración de services y routes
-- Comprobar conectividad a servicios backend
-- Revisar headers Host si es necesario
+**Routing error:**
+- Verify services and routes configuration
+- Check connectivity to backend services
+- Review Host headers if necessary
 
-**Rate limiting no funciona:**
-- Verificar configuración de plugin
-- Comprobar storage backend (Redis/Postgres)
-- Revisar logs de Kong
+**Rate limiting not working:**
+- Verify plugin configuration
+- Check storage backend (Redis/Postgres)
+- Review Kong logs
 
-## Instrucciones de PR
+## PR Instructions
 
-- Validar configuración con `kong config parse`
-- Probar rutas y plugins modificados
-- Documentar cambios en README
-- Incluir tests para nuevas rutas
-- Verificar que no se rompan rutas existentes
+- Validate configuration with `kong config parse`
+- Test modified routes and plugins
+- Document changes in README
+- Include tests for new routes
+- Verify existing routes aren't broken
 
-## Gestión de estado
+## State Management
 
-### Configuración declarativa
-- Toda la configuración en `config/kong.yml`
-- Version control de configuración
-- Backup de configuración antes de cambios
+### Declarative Configuration
+- All configuration in `config/kong.yml`
+- Version control configuration
+- Backup configuration before changes
 
-### Bases de datos
-- Postgres para storage persistente
-- Redis para rate limiting y caching
-- Backup regular de configuración
+### Databases
+- Postgres for persistent storage
+- Redis for rate limiting and caching
+- Regular configuration backups
 
-## Plantillas y workflows
+## Templates and Workflows
 
-### Workflows de CI/CD
+### CI/CD Workflows
 
-El proyecto incluye workflows para:
+The project includes workflows for:
 
-- Validación de configuración Kong
-- Tests de conectividad y routing
-- Deployment automático a staging
-- Rollback en caso de errores
+- Kong configuration validation
+- Connectivity and routing tests
+- Automatic deployment to staging
+- Rollback in case of errors
 
-### Configuración de services
+### Service Configuration
 
 ```yaml
-# Ejemplo de service y route
+# Service and route example
 services:
   - name: my-service
     url: http://backend:8000
@@ -181,10 +181,10 @@ services:
         strip_path: false
 ```
 
-### Configuración de plugins
+### Plugin Configuration
 
 ```yaml
-# Ejemplo de plugins globales
+# Global plugins example
 plugins:
   - name: cors
     config:
@@ -205,7 +205,7 @@ plugins:
       policy: local
 ```
 
-### Health checks
+### Health Checks
 
 ```yaml
 # Health check configuration
