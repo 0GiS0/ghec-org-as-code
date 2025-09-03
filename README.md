@@ -318,3 +318,4 @@ resource "null_resource" "org_custom_properties" {
 ## 🎉 Listo
 
 Al aplicar, se crearán equipos bajo el parent `canary-trips`, repositorios plantilla y protecciones de rama con checks requeridos.
+## 📁 Estructura Refactorizada\n\nLa estructura modular mejorada:\n\n```\nmodules/\n├── repositories/           # Gestión de repositorios (115 líneas)\n├── teams/                  # Gestión de equipos (135 líneas)  \n├── repository-permissions/ # Permisos y protecciones (156 líneas)\n└── repository-files/       # Gestión de archivos (pendiente plantillas)\n\nArchivos principales:\n├── main.tf                 # Orquestación de módulos (136 líneas)\n├── variables.tf            # Variables centralizadas (377 líneas)\n├── outputs.tf              # Salidas de módulos (108 líneas)\n└── custom_properties.tf    # Propiedades personalizadas (174 líneas)\n```\n\n**Resultado**: Archivo más grande reducido de **1852 líneas** a **377 líneas** (79% de reducción)
