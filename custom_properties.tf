@@ -83,13 +83,13 @@ resource "github_repository_custom_property" "template_properties" {
     }
   } : {}
 
-  repository     = github_repository.templates[each.value.repository].name
+  repository     = module.repositories.template_repositories[each.value.repository].name
   property_name  = each.value.property_name
   property_type  = each.value.property_type
   property_value = each.value.property_value
 
   depends_on = [
-    github_repository.templates,
+    module.repositories.template_repositories,
     null_resource.wait_org_custom_properties
   ]
 }
@@ -105,13 +105,13 @@ resource "github_repository_custom_property" "template_team_owner" {
     }
   } : {}
 
-  repository     = github_repository.templates[each.value.repository].name
+  repository     = module.repositories.template_repositories[each.value.repository].name
   property_name  = each.value.property_name
   property_type  = each.value.property_type
   property_value = each.value.property_value
 
   depends_on = [
-    github_repository.templates,
+    module.repositories.template_repositories,
     null_resource.wait_org_custom_properties
   ]
 }
@@ -120,13 +120,13 @@ resource "github_repository_custom_property" "template_team_owner" {
 resource "github_repository_custom_property" "backstage_service_tier" {
   count = (var.enable_custom_properties && !var.custom_properties_non_fatal_404) ? 1 : 0
 
-  repository     = github_repository.backstage.name
+  repository     = module.repositories.backstage_repository.name
   property_name  = "service-tier"
   property_type  = "single_select"
   property_value = ["tier-1"]
 
   depends_on = [
-    github_repository.backstage,
+    module.repositories.backstage_repository,
     null_resource.wait_org_custom_properties
   ]
 }
@@ -134,13 +134,13 @@ resource "github_repository_custom_property" "backstage_service_tier" {
 resource "github_repository_custom_property" "backstage_team_owner" {
   count = (var.enable_custom_properties && !var.custom_properties_non_fatal_404) ? 1 : 0
 
-  repository     = github_repository.backstage.name
+  repository     = module.repositories.backstage_repository.name
   property_name  = "team-owner"
   property_type  = "string"
   property_value = ["platform-team"]
 
   depends_on = [
-    github_repository.backstage,
+    module.repositories.backstage_repository,
     null_resource.wait_org_custom_properties
   ]
 }
@@ -148,13 +148,13 @@ resource "github_repository_custom_property" "backstage_team_owner" {
 resource "github_repository_custom_property" "reusable_workflows_service_tier" {
   count = (var.enable_custom_properties && !var.custom_properties_non_fatal_404) ? 1 : 0
 
-  repository     = github_repository.reusable_workflows.name
+  repository     = module.repositories.reusable_workflows_repository.name
   property_name  = "service-tier"
   property_type  = "single_select"
   property_value = ["tier-1"]
 
   depends_on = [
-    github_repository.reusable_workflows,
+    module.repositories.reusable_workflows_repository,
     null_resource.wait_org_custom_properties
   ]
 }
@@ -162,13 +162,13 @@ resource "github_repository_custom_property" "reusable_workflows_service_tier" {
 resource "github_repository_custom_property" "reusable_workflows_team_owner" {
   count = (var.enable_custom_properties && !var.custom_properties_non_fatal_404) ? 1 : 0
 
-  repository     = github_repository.reusable_workflows.name
+  repository     = module.repositories.reusable_workflows_repository.name
   property_name  = "team-owner"
   property_type  = "string"
   property_value = ["platform-team"]
 
   depends_on = [
-    github_repository.reusable_workflows,
+    module.repositories.reusable_workflows_repository,
     null_resource.wait_org_custom_properties
   ]
 }

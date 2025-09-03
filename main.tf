@@ -1,5 +1,5 @@
 // Main configuration file for GHEC Organization as Code
-// This file serves as the entry point and includes data sources and locals
+// This file serves as the entry point and orchestrates all modules
 
 // Data source to get current organization information
 data "github_organization" "current" {
@@ -76,4 +76,61 @@ locals {
     "backstage-template-helm-base"       = "⚓ Helm Chart"
     "backstage-template-env-live"        = "🌍 Environment Configuration"
   }
+}
+
+// Teams Module
+module "teams" {
+  source = "./modules/teams"
+
+  parent_team_name               = var.parent_team_name
+  team_names                     = local.team_names
+  platform_team_members          = var.platform_team_members
+  platform_team_maintainers      = var.platform_team_maintainers
+  template_approvers_members     = var.template_approvers_members
+  template_approvers_maintainers = var.template_approvers_maintainers
+  security_team_members          = var.security_team_members
+  security_team_maintainers      = var.security_team_maintainers
+  read_only_team_members         = var.read_only_team_members
+  read_only_team_maintainers     = var.read_only_team_maintainers
+  developers_team_members        = var.developers_team_members
+  developers_team_maintainers    = var.developers_team_maintainers
+}
+
+// Repositories Module
+module "repositories" {
+  source = "./modules/repositories"
+
+  template_repositories         = var.template_repositories
+  backstage_repository          = var.backstage_repository
+  reusable_workflows_repository = var.reusable_workflows_repository
+  common_topics                 = local.common_topics
+}
+
+// Repository Files Module
+// Repository Files Module - COMMENTED OUT due to missing template files
+// TODO: Complete template files before enabling this module
+/*
+module "repository_files" {
+  source = "./modules/repository-files"
+
+  template_repositories            = var.template_repositories
+  repository_names                 = module.repositories.template_repository_names_map
+  github_organization              = var.github_organization
+  template_repositories_dependency = module.repositories.template_repositories
+
+  depends_on = [module.repositories]
+}
+*/
+
+// Repository Permissions Module
+module "repository_permissions" {
+  source = "./modules/repository-permissions"
+
+  template_repositories              = var.template_repositories
+  repository_names                   = module.repositories.template_repository_names_map
+  backstage_repository_name          = module.repositories.backstage_repository.name
+  reusable_workflows_repository_name = module.repositories.reusable_workflows_repository.name
+  team_ids                           = module.teams.team_ids
+
+  depends_on = [module.repositories, module.teams]
 }

@@ -66,8 +66,20 @@ variable "security_team_members" {
   default     = []
 }
 
+variable "security_team_maintainers" {
+  description = "List of security team maintainers (GitHub usernames)"
+  type        = list(string)
+  default     = []
+}
+
 variable "read_only_team_members" {
   description = "List of read-only team members (GitHub usernames)"
+  type        = list(string)
+  default     = []
+}
+
+variable "read_only_team_maintainers" {
+  description = "List of read-only team maintainers (GitHub usernames)"
   type        = list(string)
   default     = []
 }
@@ -75,6 +87,12 @@ variable "read_only_team_members" {
 # Developers Team Variables
 variable "developers_team_maintainers" {
   description = "List of developers team maintainers (GitHub usernames)"
+  type        = list(string)
+  default     = []
+}
+
+variable "developers_team_members" {
+  description = "List of developers team members (GitHub usernames)"
   type        = list(string)
   default     = []
 }
