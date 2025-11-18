@@ -2,10 +2,6 @@
 
 ¡Hola developer 👋🏻! En este repo encontrarás el código que utilicé para montar la organización de GitHub, dentro de un GitHub Enterprise Cloud (EMU) con la configuración y el contenido necesario para mis, donde hable de cómo hacer desarrolladores más felices y más productivos gracias a Platform Engineering.
 
-<p align="center">
-  <img width="720" height="405" alt="Desarrolladores más felices y productivos con Platform Engineering" src="https://github.com/user-attachments/assets/0c40e173-164b-4833-8ccd-7a3fe1bc2b03" />
-</p>
-
 ## 📋 Componentes del Proyecto
 
 | 🎯 Componente | 📝 Propósito | 📁 Archivos Clave |
