@@ -50,7 +50,7 @@ spec:
         domain:
           title: 🏗️ Domain
           type: string
-          description: The domain this system belongs to (optional)
+          description: The domain this system belongs to
           ui:field: EntityPicker
           ui:options:
             catalogFilter:
@@ -79,9 +79,9 @@ spec:
           name: $${{ parameters.name }}
           owner: $${{ parameters.owner }}
           description: $${{ parameters.description }}
+          domain: $${{ parameters.domain | parseEntityRef | pick('name') }}
           destination: $${{ parameters.repoUrl | parseRepoUrl }}
           repoUrl: $${{ parameters.repoUrl }}
-          domain: $${{ parameters.domain }}
 
     - id: publish
       name: 🚀 Publish to GitHub

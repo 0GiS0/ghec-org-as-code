@@ -11,4 +11,3 @@ metadata:
     - architecture
 spec:
   owner: ${{values.owner}}
-  domain: ${{values.domain}}
