@@ -1,4 +1,3 @@
----
 # GHEC Org as Code – Copilot Agent Instructions
 
 This repo manages GitHub Enterprise Cloud (GHEC) org teams, template repos, branch protections, and Codespaces access via Terraform. AI agents should use these instructions for all automation and coding tasks.

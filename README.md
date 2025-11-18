@@ -35,20 +35,25 @@ Para poder usar este código necesitas:
 
 Para autenticación, este repo usa exclusivamente la GitHub App (sin PAT ni GITHUB_TOKEN). Asegúrate de otorgar como mínimo:
 
+- Repositorio:
+   - Workflows: Read and write (para poder añadir workflows/templates de CI)
+   - Administration: Read and write
+   - Contents: Read and write
+   - Custom properties: Read and write (para gestionar propiedades personalizadas de repositorios)
+   - Metadata: Read
+   - Actions: Read and write (si gestionas workflows/templates de CI)
+
+
 - Organización:
    - Administration: Read and write
    - Members: Read and write
    - Codespaces: Read and write (necesario para gestionar el acceso de Codespaces de la organización)
    - Codespaces secrets: Read and write (recomendado si más adelante se gestionan secretos de Codespaces)
    - Custom properties: Read and write (para gestionar propiedades personalizadas de repositorios)
-- Repositorio:
-   - Administration: Read and write
-   - Contents: Read and write
-   - Custom properties: Read and write (para gestionar propiedades personalizadas de repositorios)
-   - Metadata: Read
-- Actions: Read and write (si gestionas workflows/templates de CI)
-- Workflows: Read and write (para poder añadir workflows/templates de CI)
-- Acceso a repositorios: All repositories
+
+
+
+Cuando se instala hay que dar `Acceso a repositorios: All repositories`.
 
 Sugeridos (opcionales): Pull requests: Read, Checks: Read.
 
@@ -90,7 +95,7 @@ code .env  # Editar con tus credenciales
 
 # 2. Cargar variables e inicializar (con Terraform Cloud)
 source scripts/load-env.sh
-terraform init 
+terraform init
 
 # 3. Planificar y aplicar
 terraform plan
