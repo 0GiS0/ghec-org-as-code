@@ -3,14 +3,14 @@
 [![Template CI/CD](https://github.com/${github_organization}/${repository_name}/actions/workflows/ci-template.yml/badge.svg)](https://github.com/${github_organization}/${repository_name}/actions/workflows/ci-template.yml)
 
 
-This template allows you to create to new .NET microservice with ASP.NET Core, C#, and development best practices.
+This template allows you to create a new .NET microservice with ASP.NET Core, C#, and development best practices.
 
 ## What does this template include?
 
 ### Technologies and frameworks
-- **.NET 8** with **ASP.NET Core** for web APIs
+- **.NET 9** with **ASP.NET Core** for web APIs
 - **C#** with nullable reference types enabled
-- **Entitand Framework Core** for datto access
+- **Entity Framework Core** for data access
 - **Swagger/OpenAPI** for API documentation
 - **xUnit** for testing
 - **Serilog** for structured logging
@@ -18,9 +18,9 @@ This template allows you to create to new .NET microservice with ASP.NET Core, C
 ### Project structure
 - `src/` - Application source code
   - `Controllers/` - API controllers
-  - `Models/` - Datto models and DTOs
+  - `Models/` - Data models and DTOs
   - `Services/` - Business logic
-  - `Infrastructure/` - Datto access and external services
+  - `Infrastructure/` - Data access and external services
 - `tests/` - Automated tests
 - `.devcontainer/` - Configuration for container development
 
@@ -28,7 +28,7 @@ This template allows you to create to new .NET microservice with ASP.NET Core, C
 - **REST API** with CRUD endpoints for trips/excursions
 - **Health checks** integrated with ASP.NET Core
 - **Structured logging** with Serilog
-- **Modthe validation** with Datto Annotations
+- **Model validation** with Data Annotations
 - **Error handling** with custom middleware
 - **CORS** configured for development
 - **Rate limiting** with ASP.NET Core
@@ -39,7 +39,7 @@ This template allows you to create to new .NET microservice with ASP.NET Core, C
 - **Docker** multi-stage build
 - **DevContainer** for consistent development
 - **Dependabot** for NuGet updates
-- **CodeQL** for securitand analysis
+- **CodeQL** for security analysis
 - **MkDocs** for technical documentation
 
 ## Usage
@@ -53,7 +53,7 @@ This template allows you to create to new .NET microservice with ASP.NET Core, C
    - Responsible team
 
 3. The template will create:
-   - Repositorand with complete .NET structure
+   - Repository with complete .NET structure
    - Branch protection configuration
    - Configured CI/CD pipelines
    - Initial documentation
@@ -93,11 +93,11 @@ my-service/
 
 - **Clean Architecture** principles
 - **SOLID** principles
-- **Dependencand Injection** native to .NET
+- **Dependency Injection** native to .NET
 - **Configuration** pattern with appsettings.json
 - **Health checks** for Kubernetes readiness/liveness
 - **Graceful shutdown** handling
-- **Securitand headers** middleware
+- **Security headers** middleware
 - **API versioning** ready
 - **Observability** (logs, metrics, traces)
 
@@ -113,4 +113,4 @@ my-service/
 
 - **Documentation**: Check the generated documentation in `docs/`
 - **Issues**: Report problems in the template repository
-- **Slack**: #platform-team channthe for support
+- **Slack**: #platform-team channel for support

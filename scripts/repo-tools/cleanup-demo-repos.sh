@@ -10,16 +10,16 @@
 set -euo pipefail
 
 # Configuration (prefer values from .env via scripts/load-env.sh)
-ORG_NAME="${ORG_NAME:-${GITHUB_ORGANIZATION:-GofiGeeksOrg}}"
+ORG_NAME=""
 GITHUB_TOKEN="${GITHUB_TOKEN:-}"
 DRY_RUN="${DRY_RUN:-true}"
 CONFIRM_DELETE="${CONFIRM_DELETE:-false}"
 ALL_REPOS="${ALL_REPOS:-false}"
 
 # GitHub App configuration for token generation
-APP_ID="${GITHUB_APP_ID:-1094298}"
-INSTALLATION_ID="${GITHUB_APP_INSTALLATION_ID:-58299244}"
-PEM_FILE="${GITHUB_APP_PEM_FILE:-GofiGeeksOrg.pem}"
+APP_ID=""
+INSTALLATION_ID=""
+PEM_FILE=""
 
 # Try to load environment from repo root .env using scripts/load-env.sh
 load_env_if_available() {

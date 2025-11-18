@@ -5,10 +5,10 @@
 resource "null_resource" "github_default_security_config" {
   # This resource will re-run if the script changes, variables change, or on manual trigger
   triggers = {
-    script_hash   = filemd5("${path.module}/scripts/terraform-integration/set_default_security_config.sh")
-    organization  = var.github_organization
-    config_name   = var.default_security_configuration_name
-    config_scope  = var.default_security_configuration_scope
+    script_hash  = filemd5("${path.module}/scripts/terraform-integration/set_default_security_config.sh")
+    organization = var.github_organization
+    config_name  = var.default_security_configuration_name
+    config_scope = var.default_security_configuration_scope
   }
 
   provisioner "local-exec" {

@@ -2,6 +2,8 @@
 
 This repo manages GitHub Enterprise Cloud (GHEC) org teams, template repos, branch protections, and Codespaces access via Terraform. AI agents should use these instructions for all automation and coding tasks.
 
+> IMPORTANT: Do not generate, create, or commit any additional Markdown files (reports, summaries, READMEs, status documents) beyond those explicitly requested. Only modify the specified existing files required for the task—avoid producing extra Markdown artifacts or duplicated documentation.
+
 ## Architecture & Key Patterns
 - **Terraform-centric:** All org, team, repo, and security config is managed via HCL in root `.tf` files (see `main.tf`, `teams.tf`, `repositories.tf`, etc.).
 - **Backstage templates:** Under `software_templates/`, repo skeletons and template files use Backstage and Terraform placeholders. See AGENTS.md for placeholder conventions.

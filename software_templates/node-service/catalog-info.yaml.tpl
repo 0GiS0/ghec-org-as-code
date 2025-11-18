@@ -126,6 +126,10 @@ spec:
       action: roadiehq:utils:fs:replace
       input:
         files:
+          # README.md
+          - file: "./README.md"
+            find: "BACKSTAGE_ENTITY_NAME"
+            replaceWith: $${{ parameters.name }}
           # package.json
           - file: "./package.json"
             find: "BACKSTAGE_ENTITY_NAME"

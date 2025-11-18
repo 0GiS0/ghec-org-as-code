@@ -25,17 +25,17 @@ resource "github_repository" "templates" {
   vulnerability_alerts   = true
 
   # Security settings
-  security_and_analysis {
-    secret_scanning {
-      status = "enabled"
-    }
-    secret_scanning_push_protection {
-      status = "enabled"
-    }
-    advanced_security {
-      status = "enabled"
-    }
-  }
+  # security_and_analysis {
+  #   secret_scanning {
+  #     status = "enabled"
+  #   }
+  #   secret_scanning_push_protection {
+  #     status = "disabled"
+  #   }
+  #   advanced_security {
+  #     status = "disabled"
+  #   }
+  # }
 }
 
 
@@ -61,17 +61,17 @@ resource "github_repository" "reusable_workflows" {
   vulnerability_alerts   = true
 
   # Security settings
-  security_and_analysis {
-    secret_scanning {
-      status = "enabled"
-    }
-    secret_scanning_push_protection {
-      status = "enabled"
-    }
-    advanced_security {
-      status = "enabled"
-    }
-  }
+  # security_and_analysis {
+  #   secret_scanning {
+  #     status = "disabled"
+  #   }
+  #   secret_scanning_push_protection {
+  #     status = "disabled"
+  #   }
+  #   advanced_security {
+  #     status = "disabled"
+  #   }
+  # }
 }
 
 # Enable organization-wide access for reusable workflows
@@ -230,15 +230,37 @@ resource "github_repository" "required_workflows" {
 
 
   # Security settings
-  security_and_analysis {
-    secret_scanning {
-      status = "enabled"
-    }
-    secret_scanning_push_protection {
-      status = "enabled"
-    }
-    advanced_security {
-      status = "enabled"
-    }
-  }
+  # security_and_analysis {
+  #   secret_scanning {
+  #     status = "disabled"
+  #   }
+  #   secret_scanning_push_protection {
+  #     status = "disabled"
+  #   }
+  #   advanced_security {
+  #     status = "disabled"
+  #   }
+  # }
+}
+
+# Organization-wide configuration repository
+resource "github_repository" "github_config" {
+  name        = ".github"
+  description = "Organization-wide GitHub configuration, agents, and shared workflows"
+  visibility  = "private"
+  auto_init   = true
+
+  # Repository topics
+  topics = concat(["ghec", "config", "agents", "terraform"], local.common_topics)
+
+  # Repository settings
+  allow_merge_commit     = false
+  allow_squash_merge     = true
+  allow_rebase_merge     = false
+  delete_branch_on_merge = true
+  has_issues             = true
+  has_projects           = false
+  has_wiki               = false
+  has_downloads          = false
+  vulnerability_alerts   = true
 }

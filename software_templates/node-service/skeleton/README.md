@@ -1,6 +1,6 @@
-# ${{values.name}}
+# BACKSTAGE_ENTITY_NAME
 
-[![ CI 🧹🧪](https://github.com/${{values.destination.owner}}/${{values.name}}/actions/workflows/ci.yml/badge.svg)](https://github.com/${{values.destination.owner}}/${{values.name}}/actions/workflows/ci-template.yml)
+[![ CI 🧹🧪](https://github.com/${{values.destination.owner}}/BACKSTAGE_ENTITY_NAME/actions/workflows/ci.yml/badge.svg)](https://github.com/${{values.destination.owner}}/BACKSTAGE_ENTITY_NAME/actions/workflows/ci.yml)
 
 > Production-ready Node.js template: instant developer environment with Express API, Postgres (Dev Container), tests, linting, docs, CI, and continuous security scanning.
 

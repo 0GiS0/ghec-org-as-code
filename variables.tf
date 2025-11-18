@@ -12,7 +12,7 @@ variable "github_app_id" {
 }
 
 variable "backstage_app_id" {
-  description = "Backstage GitHub App ID for authentication"
+  description = "Backstage GitHub App ID for authentication. This is important because if you don't provide it, Backstage won't be able to push content to the repositories it creates because of the rulesets."
   type        = string
   sensitive   = true
 }
@@ -161,6 +161,11 @@ variable "template_repositories" {
       description = "Backstage template for Astro frontend applications"
       topics      = ["backstage", "template", "astro", "frontend"]
       type        = "website"
+    }
+    "backstage-template-electron-desktop-app" = {
+      description = "Backstage template for Electron desktop applications"
+      topics      = ["backstage", "template", "electron", "desktop", "typescript"]
+      type        = "component"
     }
   }
 }
@@ -368,6 +373,10 @@ variable "template_repository_custom_properties" {
       team_owner   = "platform-team"
     }
     "backstage-template-astro-frontend" = {
+      service_tier = "tier-3"
+      team_owner   = "platform-team"
+    }
+    "backstage-template-electron-desktop-app" = {
       service_tier = "tier-3"
       team_owner   = "platform-team"
     }
