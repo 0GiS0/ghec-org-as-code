@@ -1,6 +1,6 @@
 # ${{values.name}}
 
-Welcome to the ${{values.name}} documentation! This is a FastAPI-based web service that provides a RESTful API for managing excursions.
+Welcome to the ${{values.name}} documentation! This is a FastAPI-based web service that provides a RESTful API for managing memes.
 
 ## 🚀 Overview
 
@@ -42,12 +42,12 @@ The service provides the following main endpoints:
 - `GET /api/status` - Service status and uptime
 - `GET /` - Service information and available endpoints
 
-### Excursions Management
-- `GET /api/excursions/` - List all excursions
-- `GET /api/excursions/{id}` - Get specific excursion
-- `POST /api/excursions/` - Create new excursion
-- `PUT /api/excursions/{id}` - Update existing excursion
-- `DELETE /api/excursions/{id}` - Delete excursion
+### Memes Management
+- `GET /api/memes/` - List all memes
+- `GET /api/memes/{id}` - Get specific meme
+- `POST /api/memes/` - Create new meme
+- `PUT /api/memes/{id}` - Update existing meme
+- `DELETE /api/memes/{id}` - Delete meme
 
 ### Documentation
 - `GET /docs` - Interactive API documentation (Swagger UI)

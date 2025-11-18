@@ -1,15 +1,15 @@
 # BACKSTAGE_ENTITY_NAME
 
-Welcome to the comprehensive documentation for **BACKSTAGE_ENTITY_NAME**, a modern ASP.NET Core Web API template designed for excursions management.
+Welcome to the comprehensive documentation for **BACKSTAGE_ENTITY_NAME**, a modern ASP.NET Core Web API template designed for meme management.
 
 ## 🎯 Overview
 
-BACKSTAGE_ENTITY_NAME is a production-ready ASP.NET Core 9.0 Web API that provides a complete foundation for building scalable web services. It includes comprehensive CRUD operations for excursions management, along with modern development practices and tooling.
+BACKSTAGE_ENTITY_NAME is a production-ready ASP.NET Core 9.0 Web API that provides a complete foundation for building scalable web services. It includes comprehensive CRUD operations for meme management, along with modern development practices and tooling.
 
 ## ✨ Key Features
 
 - **Modern .NET 9.0**: Built with the latest .NET technologies
-- **RESTful API Design**: Complete CRUD operations for excursions
+- **RESTful API Design**: Complete CRUD operations for memes
 - **OpenAPI/Swagger**: Interactive API documentation
 - **Comprehensive Testing**: Full integration test coverage
 - **Health Monitoring**: Built-in health checks

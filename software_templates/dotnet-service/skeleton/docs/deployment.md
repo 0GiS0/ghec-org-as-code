@@ -273,7 +273,7 @@ services:
   # database:
   #   image: postgres:15
   #   environment:
-  #     POSTGRES_DB: excursions
+  #     POSTGRES_DB: memes
   #     POSTGRES_USER: api_user
   #     POSTGRES_PASSWORD: secure_password
   #   volumes:

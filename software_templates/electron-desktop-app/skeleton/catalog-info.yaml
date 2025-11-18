@@ -3,7 +3,8 @@ apiVersion: backstage.io/v1alpha1
 kind: Component
 metadata:
   name: ${{values.name}}
-  description: ${{values.description}}
+  description: |
+    ${{values.description}}
   annotations:
     github.com/project-slug: ${{values.repoOwner}}/${{values.name}}
   links:

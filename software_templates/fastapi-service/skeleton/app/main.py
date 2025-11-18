@@ -6,8 +6,8 @@ from dotenv import load_dotenv
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
-from app.models.excursion import HealthResponse, HelloResponse, StatusResponse
-from app.routers import excursions
+from app.models.meme import HealthResponse, HelloResponse, StatusResponse
+from app.routers import memes
 
 # Load environment variables
 load_dotenv()
@@ -35,7 +35,7 @@ app.add_middleware(
 )
 
 # Include routers
-app.include_router(excursions.router)
+app.include_router(memes.router)
 
 # Store start time for uptime calculation
 start_time = time.time()
@@ -77,22 +77,22 @@ async def root():
     """Root endpoint with service information."""
     return {
         "service": SERVICE_NAME,
-        "message": "Welcome to the Excursions API",
+        "message": "Welcome to the Memes API",
         "version": "1.0.0",
         "endpoints": {
             "health": "/health",
             "hello": "/api/hello",
             "status": "/api/status",
-            "excursions": "/api/excursions",
+            "memes": "/api/memes",
             "docs": "/docs",
             "redoc": "/redoc",
         },
-        "excursion_endpoints": {
-            "get_all_excursions": "GET /api/excursions",
-            "get_excursion_by_id": "GET /api/excursions/{id}",
-            "create_excursion": "POST /api/excursions",
-            "update_excursion": "PUT /api/excursions/{id}",
-            "delete_excursion": "DELETE /api/excursions/{id}",
+        "meme_endpoints": {
+            "get_all_memes": "GET /api/memes",
+            "get_meme_by_id": "GET /api/memes/{id}",
+            "create_meme": "POST /api/memes",
+            "update_meme": "PUT /api/memes/{id}",
+            "delete_meme": "DELETE /api/memes/{id}",
         },
     }
 

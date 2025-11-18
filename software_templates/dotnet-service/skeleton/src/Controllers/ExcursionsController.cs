@@ -5,124 +5,124 @@ namespace BACKSTAGE_ENTITY_NAME.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
-public class ExcursionsController : ControllerBase
+public class MemesController : ControllerBase
 {
-    private readonly ILogger<ExcursionsController> _logger;
-    private static readonly List<Excursion> _excursions = new()
+    private readonly ILogger<MemesController> _logger;
+    private static readonly List<Meme> _memes = new()
     {
-        new Excursion
+        new Meme
         {
             Id = 1,
-            Name = "Mountain Hiking Adventure",
-            Description = "A thrilling hike through the scenic mountain trails with breathtaking views",
-            Location = "Rocky Mountains",
-            Price = 75.00m,
-            Duration = 6,
-            MaxParticipants = 12,
-            CreatedAt = DateTime.UtcNow.AddDays(-10),
-            UpdatedAt = DateTime.UtcNow.AddDays(-10)
+            Name = "Distracted Boyfriend",
+            Description = "A man looking at another woman while his girlfriend looks disapprovingly",
+            Category = "Classic",
+            Rating = 9.5m,
+            Views = 1000000,
+            MaxShares = 500000,
+            CreatedAt = DateTime.UtcNow.AddDays(-365),
+            UpdatedAt = DateTime.UtcNow.AddDays(-365)
         },
-        new Excursion
+        new Meme
         {
             Id = 2,
-            Name = "City Food Tour",
-            Description = "Explore the best local cuisine and hidden food gems in the city",
-            Location = "Downtown",
-            Price = 45.00m,
-            Duration = 3,
-            MaxParticipants = 8,
-            CreatedAt = DateTime.UtcNow.AddDays(-5),
-            UpdatedAt = DateTime.UtcNow.AddDays(-5)
+            Name = "Loss - Four Panels",
+            Description = "The legendary webcomic moment that spawned a thousand memes",
+            Category = "Abstract",
+            Rating = 8.7m,
+            Views = 2000000,
+            MaxShares = 1000000,
+            CreatedAt = DateTime.UtcNow.AddDays(-20),
+            UpdatedAt = DateTime.UtcNow.AddDays(-20)
         }
     };
     private static int _nextId = 3;
 
-    public ExcursionsController(ILogger<ExcursionsController> logger)
+    public MemesController(ILogger<MemesController> logger)
     {
         _logger = logger;
     }
 
     [HttpGet]
-    public ActionResult<IEnumerable<Excursion>> GetAllExcursions()
+    public ActionResult<IEnumerable<Meme>> GetAllMemes()
     {
-        _logger.LogInformation("Getting all excursions");
-        return Ok(_excursions);
+        _logger.LogInformation("Getting all memes");
+        return Ok(_memes);
     }
 
     [HttpGet("{id}")]
-    public ActionResult<Excursion> GetExcursionById(int id)
+    public ActionResult<Meme> GetMemeById(int id)
     {
-        _logger.LogInformation("Getting excursion with id: {Id}", id);
+        _logger.LogInformation("Getting meme with id: {Id}", id);
 
-        var excursion = _excursions.FirstOrDefault(e => e.Id == id);
-        if (excursion == null)
+        var meme = _memes.FirstOrDefault(e => e.Id == id);
+        if (meme == null)
         {
-            _logger.LogWarning("Excursion with id {Id} not found", id);
-            return NotFound($"Excursion with id {id} not found");
+            _logger.LogWarning("Meme with id {Id} not found", id);
+            return NotFound($"Meme with id {id} not found");
         }
 
-        return Ok(excursion);
+        return Ok(meme);
     }
 
     [HttpPost]
-    public ActionResult<Excursion> CreateExcursion([FromBody] CreateExcursionRequest request)
+    public ActionResult<Meme> CreateMeme([FromBody] CreateMemeRequest request)
     {
-        _logger.LogInformation("Creating new excursion: {Name}", request.Name);
+        _logger.LogInformation("Creating new meme: {Name}", request.Name);
 
         if (string.IsNullOrWhiteSpace(request.Name))
         {
             return BadRequest("Name is required");
         }
 
-        if (string.IsNullOrWhiteSpace(request.Location))
+        if (string.IsNullOrWhiteSpace(request.Category))
         {
-            return BadRequest("Location is required");
+            return BadRequest("Category is required");
         }
 
-        if (request.Price <= 0)
+        if (request.Rating < 0 || request.Rating > 10)
         {
-            return BadRequest("Price must be greater than 0");
+            return BadRequest("Rating must be between 0 and 10");
         }
 
-        if (request.Duration <= 0)
+        if (request.Views < 0)
         {
-            return BadRequest("Duration must be greater than 0");
+            return BadRequest("Views must be greater than or equal to 0");
         }
 
-        if (request.MaxParticipants <= 0)
+        if (request.MaxShares < 0)
         {
-            return BadRequest("MaxParticipants must be greater than 0");
+            return BadRequest("MaxShares must be greater than or equal to 0");
         }
 
-        var newExcursion = new Excursion
+        var newMeme = new Meme
         {
             Id = _nextId++,
             Name = request.Name,
             Description = request.Description,
-            Location = request.Location,
-            Price = request.Price,
-            Duration = request.Duration,
-            MaxParticipants = request.MaxParticipants,
+            Category = request.Category,
+            Rating = request.Rating,
+            Views = request.Views,
+            MaxShares = request.MaxShares,
             CreatedAt = DateTime.UtcNow,
             UpdatedAt = DateTime.UtcNow
         };
 
-        _excursions.Add(newExcursion);
+        _memes.Add(newMeme);
 
-        _logger.LogInformation("Created excursion with id: {Id}", newExcursion.Id);
-        return CreatedAtAction(nameof(GetExcursionById), new { id = newExcursion.Id }, newExcursion);
+        _logger.LogInformation("Created meme with id: {Id}", newMeme.Id);
+        return CreatedAtAction(nameof(GetMemeById), new { id = newMeme.Id }, newMeme);
     }
 
     [HttpPut("{id}")]
-    public ActionResult<Excursion> UpdateExcursion(int id, [FromBody] UpdateExcursionRequest request)
+    public ActionResult<Meme> UpdateMeme(int id, [FromBody] UpdateMemeRequest request)
     {
-        _logger.LogInformation("Updating excursion with id: {Id}", id);
+        _logger.LogInformation("Updating meme with id: {Id}", id);
 
-        var excursion = _excursions.FirstOrDefault(e => e.Id == id);
-        if (excursion == null)
+        var meme = _memes.FirstOrDefault(e => e.Id == id);
+        if (meme == null)
         {
-            _logger.LogWarning("Excursion with id {Id} not found for update", id);
-            return NotFound($"Excursion with id {id} not found");
+            _logger.LogWarning("Meme with id {Id} not found for update", id);
+            return NotFound($"Meme with id {id} not found");
         }
 
         if (string.IsNullOrWhiteSpace(request.Name))
@@ -130,53 +130,53 @@ public class ExcursionsController : ControllerBase
             return BadRequest("Name is required");
         }
 
-        if (string.IsNullOrWhiteSpace(request.Location))
+        if (string.IsNullOrWhiteSpace(request.Category))
         {
-            return BadRequest("Location is required");
+            return BadRequest("Category is required");
         }
 
-        if (request.Price <= 0)
+        if (request.Rating < 0 || request.Rating > 10)
         {
-            return BadRequest("Price must be greater than 0");
+            return BadRequest("Rating must be between 0 and 10");
         }
 
-        if (request.Duration <= 0)
+        if (request.Views < 0)
         {
-            return BadRequest("Duration must be greater than 0");
+            return BadRequest("Views must be greater than or equal to 0");
         }
 
-        if (request.MaxParticipants <= 0)
+        if (request.MaxShares < 0)
         {
-            return BadRequest("MaxParticipants must be greater than 0");
+            return BadRequest("MaxShares must be greater than or equal to 0");
         }
 
-        excursion.Name = request.Name;
-        excursion.Description = request.Description;
-        excursion.Location = request.Location;
-        excursion.Price = request.Price;
-        excursion.Duration = request.Duration;
-        excursion.MaxParticipants = request.MaxParticipants;
-        excursion.UpdatedAt = DateTime.UtcNow;
+        meme.Name = request.Name;
+        meme.Description = request.Description;
+        meme.Category = request.Category;
+        meme.Rating = request.Rating;
+        meme.Views = request.Views;
+        meme.MaxShares = request.MaxShares;
+        meme.UpdatedAt = DateTime.UtcNow;
 
-        _logger.LogInformation("Updated excursion with id: {Id}", id);
-        return Ok(excursion);
+        _logger.LogInformation("Updated meme with id: {Id}", id);
+        return Ok(meme);
     }
 
     [HttpDelete("{id}")]
-    public ActionResult DeleteExcursion(int id)
+    public ActionResult DeleteMeme(int id)
     {
-        _logger.LogInformation("Deleting excursion with id: {Id}", id);
+        _logger.LogInformation("Deleting meme with id: {Id}", id);
 
-        var excursion = _excursions.FirstOrDefault(e => e.Id == id);
-        if (excursion == null)
+        var meme = _memes.FirstOrDefault(e => e.Id == id);
+        if (meme == null)
         {
-            _logger.LogWarning("Excursion with id {Id} not found for deletion", id);
-            return NotFound($"Excursion with id {id} not found");
+            _logger.LogWarning("Meme with id {Id} not found for deletion", id);
+            return NotFound($"Meme with id {id} not found");
         }
 
-        _excursions.Remove(excursion);
+        _memes.Remove(meme);
 
-        _logger.LogInformation("Deleted excursion with id: {Id}", id);
+        _logger.LogInformation("Deleted meme with id: {Id}", id);
         return NoContent();
     }
 }

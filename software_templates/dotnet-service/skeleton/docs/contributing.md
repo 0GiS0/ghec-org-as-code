@@ -94,7 +94,7 @@ Create a descriptive branch name using one of these prefixes:
 
 Examples:
 ```bash
-git checkout -b feature/add-excursion-filtering
+git checkout -b feature/add-meme-filtering
 git checkout -b fix/health-check-timeout
 git checkout -b docs/update-api-documentation
 ```
@@ -130,10 +130,10 @@ Types:
 
 Examples:
 ```bash
-feat: add filtering support for excursions endpoint
+feat: add filtering support for memes endpoint
 fix: resolve timeout issue in health check endpoint
 docs: update API documentation with new endpoints
-test: add integration tests for excursion CRUD operations
+test: add integration tests for meme CRUD operations
 ```
 
 ## Testing
@@ -168,21 +168,21 @@ We use xUnit for testing. All tests should be:
 
 ```csharp
 [Fact]
-public async Task GetExcursions_ReturnsAllExcursions()
+public async Task GetMemes_ReturnsAllMemes()
 {
     // Arrange
     using var client = _factory.CreateClient();
     
     // Act
-    var response = await client.GetAsync("/api/excursions");
+    var response = await client.GetAsync("/api/memes");
     
     // Assert
     response.EnsureSuccessStatusCode();
     var content = await response.Content.ReadAsStringAsync();
-    var excursions = JsonSerializer.Deserialize<List<Excursion>>(content, _jsonOptions);
+    var memes = JsonSerializer.Deserialize<List<Meme>>(content, _jsonOptions);
     
-    Assert.NotNull(excursions);
-    Assert.NotEmpty(excursions);
+    Assert.NotNull(memes);
+    Assert.NotEmpty(memes);
 }
 ```
 
@@ -286,19 +286,19 @@ Follow [Microsoft's C# Coding Conventions](https://docs.microsoft.com/en-us/dotn
 #### Example Code Style
 
 ```csharp
-public class ExcursionService
+public class MemeService
 {
-    private readonly ILogger<ExcursionService> _logger;
-    private const int MAX_EXCURSIONS = 100;
+    private readonly ILogger<MemeService> _logger;
+    private const int MAX_MEMES = 10000;
     
-    public ExcursionService(ILogger<ExcursionService> logger)
+    public MemeService(ILogger<MemeService> logger)
     {
         _logger = logger ?? throw new ArgumentNullException(nameof(logger));
     }
     
-    public async Task<List<Excursion>> GetExcursionsAsync(CancellationToken cancellationToken = default)
+    public async Task<List<Meme>> GetMemesAsync(CancellationToken cancellationToken = default)
     {
-        _logger.LogInformation("Retrieving all excursions");
+        _logger.LogInformation("Retrieving all memes");
         
         // Implementation here
         return await SomeAsyncOperation(cancellationToken);
@@ -336,15 +336,15 @@ We use built-in .NET analyzers and Roslyn analyzers to maintain code quality:
 
 ```csharp
 /// <summary>
-/// Gets all excursions from the system.
+/// Gets all memes from the system.
 /// </summary>
-/// <returns>A list of all available excursions.</returns>
-/// <response code="200">Returns the list of excursions</response>
+/// <returns>A list of all available memes.</returns>
+/// <response code="200">Returns the list of memes</response>
 /// <response code="500">If there was an internal server error</response>
 [HttpGet]
-[ProducesResponseType(typeof(IEnumerable<Excursion>), StatusCodes.Status200OK)]
+[ProducesResponseType(typeof(IEnumerable<Meme>), StatusCodes.Status200OK)]
 [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-public async Task<ActionResult<IEnumerable<Excursion>>> GetExcursions()
+public async Task<ActionResult<IEnumerable<Meme>>> GetMemes()
 {
     // Implementation
 }

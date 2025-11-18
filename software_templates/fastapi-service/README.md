@@ -36,7 +36,7 @@ This template allows you to create to new FastAPI microservice with Python, asyn
 - `.devcontainer/` - Configuration for container development
 
 ### Included features
-- **REST API** with CRUD endpoints for trips/excursions
+- **REST API** with CRUD endpoints for memes
 - **OpenAPI/Swagger** automatic documentation
 - **Health checks** with FastAPI
 - **Structured logging** with Loguru
@@ -77,11 +77,11 @@ This template allows you to create to new FastAPI microservice with Python, asyn
 my-service/
 ├── app/
 │   ├── routers/
-│   │   └── excursions.py
+│   │   └── memes.py
 │   ├── models/
-│   │   └── excursion.py
+│   │   └── meme.py
 │   ├── schemas/
-│   │   └── excursion.py
+│   │   └── meme.py
 │   ├── core/
 │   │   ├── config.py
 │   │   └── database.py

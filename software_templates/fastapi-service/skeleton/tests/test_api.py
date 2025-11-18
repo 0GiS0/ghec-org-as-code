@@ -43,10 +43,10 @@ class TestAPI:
         assert response.status_code == 200
         data = response.json()
         assert data["service"] == SERVICE_NAME
-        assert data["message"] == "Welcome to the Excursions API"
+        assert data["message"] == "Welcome to the Memes API"
         assert "endpoints" in data
-        assert "excursion_endpoints" in data
-        assert data["endpoints"]["excursions"] == "/api/excursions"
+        assert "meme_endpoints" in data
+        assert data["endpoints"]["memes"] == "/api/memes"
 
     def test_docs_endpoint(self):
         """Test OpenAPI docs endpoint."""
@@ -61,142 +61,142 @@ class TestAPI:
         assert data["info"]["title"] == SERVICE_NAME
 
 
-class TestExcursionsAPI:
-    def test_get_all_excursions(self):
-        """Test getting all excursions."""
-        response = client.get("/api/excursions/")
+class TestMemesAPI:
+    def test_get_all_memes(self):
+        """Test getting all memes."""
+        response = client.get("/api/memes/")
         assert response.status_code == 200
         data = response.json()
         assert isinstance(data, list)
-        assert len(data) >= 2  # Should have at least 2 default excursions
+        assert len(data) >= 2  # Should have at least 2 default memes
 
-        # Check structure of first excursion
-        first_excursion = data[0]
-        assert "id" in first_excursion
-        assert "name" in first_excursion
-        assert "description" in first_excursion
-        assert "location" in first_excursion
-        assert "price" in first_excursion
-        assert "duration" in first_excursion
-        assert "max_participants" in first_excursion
-        assert "created_at" in first_excursion
-        assert "updated_at" in first_excursion
+        # Check structure of first meme
+        first_meme = data[0]
+        assert "id" in first_meme
+        assert "name" in first_meme
+        assert "description" in first_meme
+        assert "category" in first_meme
+        assert "rating" in first_meme
+        assert "views" in first_meme
+        assert "max_shares" in first_meme
+        assert "created_at" in first_meme
+        assert "updated_at" in first_meme
 
-    def test_get_excursion_by_id(self):
-        """Test getting a specific excursion by ID."""
-        response = client.get("/api/excursions/1")
+    def test_get_meme_by_id(self):
+        """Test getting a specific meme by ID."""
+        response = client.get("/api/memes/1")
         assert response.status_code == 200
         data = response.json()
         assert data["id"] == 1
         assert "name" in data
-        assert "location" in data
+        assert "category" in data
 
-    def test_get_excursion_by_invalid_id(self):
-        """Test getting an excursion with invalid ID."""
-        response = client.get("/api/excursions/999")
+    def test_get_meme_by_invalid_id(self):
+        """Test getting a meme with invalid ID."""
+        response = client.get("/api/memes/999")
         assert response.status_code == 404
         data = response.json()
         assert "detail" in data
 
-    def test_create_excursion(self):
-        """Test creating a new excursion."""
-        new_excursion = {
-            "name": "Beach Walking Tour",
-            "description": "A relaxing walk along beautiful beaches",
-            "location": "Coastal Area",
-            "price": 35.00,
-            "duration": 2,
-            "max_participants": 15,
+    def test_create_meme(self):
+        """Test creating a new meme."""
+        new_meme = {
+            "name": "Laughing Tom Cruise",
+            "description": "Tom Cruise laughing uncontrollably",
+            "category": "Celebrity",
+            "rating": 8.0,
+            "views": 500000,
+            "max_shares": 250000,
         }
 
-        response = client.post("/api/excursions/", json=new_excursion)
+        response = client.post("/api/memes/", json=new_meme)
         assert response.status_code == 201
         data = response.json()
         assert "id" in data
-        assert data["name"] == "Beach Walking Tour"
-        assert data["location"] == "Coastal Area"
-        assert data["price"] == 35.00
+        assert data["name"] == "Laughing Tom Cruise"
+        assert data["category"] == "Celebrity"
+        assert data["rating"] == 8.0
         assert "created_at" in data
         assert "updated_at" in data
 
-    def test_create_excursion_validation_error(self):
-        """Test creating an excursion with invalid data."""
-        invalid_excursion = {
+    def test_create_meme_validation_error(self):
+        """Test creating a meme with invalid data."""
+        invalid_meme = {
             "name": "",  # Empty name should fail validation
             "description": "Test description",
-            "location": "",  # Empty location should fail validation
-            "price": -10.00,  # Negative price should fail validation
-            "duration": 0,  # Zero duration should fail validation
-            "max_participants": 0,  # Zero participants should fail validation
+            "category": "",  # Empty category should fail validation
+            "rating": 15.0,  # Rating > 10 should fail validation
+            "views": -100,  # Negative views should fail validation
+            "max_shares": -50,  # Negative max_shares should fail validation
         }
 
-        response = client.post("/api/excursions/", json=invalid_excursion)
+        response = client.post("/api/memes/", json=invalid_meme)
         assert response.status_code == 422  # Validation error
         data = response.json()
         assert "detail" in data
 
-    def test_update_excursion(self):
-        """Test updating an existing excursion."""
+    def test_update_meme(self):
+        """Test updating an existing meme."""
         updated_data = {
-            "name": "Updated Mountain Adventure",
-            "description": "Updated description for mountain hiking",
-            "location": "Updated Rocky Mountains",
-            "price": 85.00,
-            "duration": 7,
-            "max_participants": 10,
+            "name": "Updated Distracted Boyfriend",
+            "description": "Updated description with epic vibes",
+            "category": "Iconic",
+            "rating": 9.8,
+            "views": 2000000,
+            "max_shares": 1500000,
         }
 
-        response = client.put("/api/excursions/1", json=updated_data)
+        response = client.put("/api/memes/1", json=updated_data)
         assert response.status_code == 200
         data = response.json()
         assert data["id"] == 1
-        assert data["name"] == "Updated Mountain Adventure"
-        assert data["price"] == 85.00
+        assert data["name"] == "Updated Distracted Boyfriend"
+        assert data["rating"] == 9.8
         assert "updated_at" in data
 
-    def test_update_nonexistent_excursion(self):
-        """Test updating a non-existent excursion."""
+    def test_update_nonexistent_meme(self):
+        """Test updating a non-existent meme."""
         updated_data = {
             "name": "Updated Name",
             "description": "Updated description",
-            "location": "Updated location",
-            "price": 50.00,
-            "duration": 3,
-            "max_participants": 8,
+            "category": "Updated",
+            "rating": 5.0,
+            "views": 100000,
+            "max_shares": 50000,
         }
 
-        response = client.put("/api/excursions/999", json=updated_data)
+        response = client.put("/api/memes/999", json=updated_data)
         assert response.status_code == 404
         data = response.json()
         assert "detail" in data
 
-    def test_delete_excursion(self):
-        """Test deleting an excursion."""
-        # First create an excursion to delete
-        new_excursion = {
-            "name": "Test Excursion for Deletion",
+    def test_delete_meme(self):
+        """Test deleting a meme."""
+        # First create a meme to delete
+        new_meme = {
+            "name": "Test Meme for Deletion",
             "description": "This will be deleted",
-            "location": "Test Location",
-            "price": 25.00,
-            "duration": 1,
-            "max_participants": 5,
+            "category": "Test",
+            "rating": 5.0,
+            "views": 1000,
+            "max_shares": 500,
         }
 
-        create_response = client.post("/api/excursions/", json=new_excursion)
+        create_response = client.post("/api/memes/", json=new_meme)
         assert create_response.status_code == 201
-        excursion_id = create_response.json()["id"]
+        meme_id = create_response.json()["id"]
 
         # Now delete it
-        delete_response = client.delete(f"/api/excursions/{excursion_id}")
+        delete_response = client.delete(f"/api/memes/{meme_id}")
         assert delete_response.status_code == 204
 
         # Verify it's gone
-        get_response = client.get(f"/api/excursions/{excursion_id}")
+        get_response = client.get(f"/api/memes/{meme_id}")
         assert get_response.status_code == 404
 
-    def test_delete_nonexistent_excursion(self):
-        """Test deleting a non-existent excursion."""
-        response = client.delete("/api/excursions/999")
+    def test_delete_nonexistent_meme(self):
+        """Test deleting a non-existent meme."""
+        response = client.delete("/api/memes/999")
         assert response.status_code == 404
         data = response.json()
         assert "detail" in data

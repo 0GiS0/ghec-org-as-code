@@ -14,37 +14,37 @@ GET {{baseUrl}}/api/hello
 ### Status endpoint
 GET {{baseUrl}}/api/status
 
-### Get all excursions
-GET {{baseUrl}}/api/excursions
+### Get all memes
+GET {{baseUrl}}/api/memes
 
-### Get excursion by ID
-GET {{baseUrl}}/api/excursions/1
+### Get meme by ID
+GET {{baseUrl}}/api/memes/1
 
-### Create new excursion
-POST {{baseUrl}}/api/excursions
+### Create new meme
+POST {{baseUrl}}/api/memes
 Content-Type: application/json
 
 {
-  "name": "Test Adventure",
-  "description": "A test excursion for API validation",
-  "location": "Test Location",
-  "price": 50.0,
-  "duration": 3,
-  "maxParticipants": 10
+  "name": "Chad Energy",
+  "description": "A test meme for API validation",
+  "category": "Energetic",
+  "rating": 8.5,
+  "views": 5000,
+  "max_shares": 2500
 }
 
-### Update excursion
-PUT {{baseUrl}}/api/excursions/1
+### Update meme
+PUT {{baseUrl}}/api/memes/1
 Content-Type: application/json
 
 {
-  "name": "Updated Test Adventure",
-  "description": "An updated test excursion",
-  "location": "Updated Location",
-  "price": 75.0,
-  "duration": 4,
-  "maxParticipants": 12
+  "name": "Ultimate Chad Energy",
+  "description": "An updated test meme with maximum epicness",
+  "category": "Energetic",
+  "rating": 9.2,
+  "views": 10000,
+  "max_shares": 5000
 }
 
-### Delete excursion
-DELETE {{baseUrl}}/api/excursions/1
+### Delete meme
+DELETE {{baseUrl}}/api/memes/1

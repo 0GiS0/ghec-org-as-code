@@ -116,8 +116,8 @@ Expected response:
 Test the main API endpoints:
 
 ```bash
-# Get all excursions
-curl http://localhost:8000/api/excursions/
+# Get all memes
+curl http://localhost:8000/api/memes/
 
 # Get service status
 curl http://localhost:8000/api/status
@@ -142,23 +142,23 @@ If you have the REST Client extension installed in VS Code:
 Basic API test examples:
 
 ```bash
-# Get all excursions
-curl -X GET http://localhost:8000/api/excursions/
+# Get all memes
+curl -X GET http://localhost:8000/api/memes/
 
-# Create a new excursion
-curl -X POST http://localhost:8000/api/excursions/ \
+# Create a new meme
+curl -X POST http://localhost:8000/api/memes/ \
   -H "Content-Type: application/json" \
   -d '{
-    "name": "Test Excursion",
-    "description": "A test excursion",
-    "location": "Test Location",
-    "price": 50.00,
-    "duration": 3,
-    "max_participants": 10
+    "name": "Chad Energy",
+    "description": "Peak confidence and dominance",
+    "category": "Attitude",
+    "rating": 8.9,
+    "views": 2100000,
+    "max_shares": 750000
   }'
 
-# Get excursion by ID
-curl -X GET http://localhost:8000/api/excursions/1
+# Get meme by ID
+curl -X GET http://localhost:8000/api/memes/1
 ```
 
 ## Running Tests

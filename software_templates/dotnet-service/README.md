@@ -25,7 +25,7 @@ This template allows you to create a new .NET microservice with ASP.NET Core, C#
 - `.devcontainer/` - Configuration for container development
 
 ### Included features
-- **REST API** with CRUD endpoints for trips/excursions
+- **REST API** with CRUD endpoints for memes
 - **Health checks** integrated with ASP.NET Core
 - **Structured logging** with Serilog
 - **Model validation** with Data Annotations
@@ -62,15 +62,14 @@ This template allows you to create a new .NET microservice with ASP.NET Core, C#
 
 ```
 my-service/
-├── src/
-│   ├── Controllers/
-│   │   ├── ExcursionsController.cs
-│   │   ├── HealthController.cs
-│   │   └── StatusController.cs
-│   ├── Models/
-│   │   └── Excursion.cs
-│   ├── Services/
-│   │   └── IExcursionService.cs
+	│	├── Controllers/
+	│	│	├── MemesController.cs
+	│	│	├── HealthController.cs
+	│	│	└── StatusController.cs
+	│	├── Models/
+	│	│	└── Meme.cs
+	│	├── Services/
+	│	│	└── IMemeService.cs
 │   ├── Program.cs
 │   └── Service.csproj
 ├── tests/

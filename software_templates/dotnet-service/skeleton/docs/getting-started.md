@@ -97,9 +97,9 @@ curl http://localhost:8080/health
 }
 ```
 
-### Get All Excursions
+### Get All Memes
 ```bash
-curl http://localhost:8080/api/excursions
+curl http://localhost:8080/api/memes
 ```
 
 **Response:**

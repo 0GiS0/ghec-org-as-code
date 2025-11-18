@@ -3,7 +3,7 @@
 [![🚀 CI](https://github.com/${{values.destination.owner}}/${{values.destination.repo}}/actions/workflows/ci.yml/badge.svg)](https://github.com/${{values.destination.owner}}/${{values.destination.repo}}/actions/workflows/ci.yml)
 [![🔎 Docker Image Analysis](https://github.com/${{values.destination.owner}}/${{values.destination.repo}}/actions/workflows/docker-analyze.yml/badge.svg)](https://github.com/${{values.destination.owner}}/${{values.destination.repo}}/actions/workflows/docker-analyze.yml)
 
-A modern ASP.NET Core Web API template featuring excursions management, built with .NET 9.0 and comprehensive testing.
+A modern ASP.NET Core Web API template featuring meme management, built with .NET 9.0 and comprehensive testing.
 
 > ℹ️ Security Learning Aid: This template intentionally includes an insecure `Dockerfile` (single-stage, root user, hard‑coded secret, latest tags, no healthcheck) so the automated Docker Image Analysis workflow can surface findings. Treat it as a training artifact—do **not** deploy it to production. See “Hardening the Docker Image” below for remediation guidance.
 
@@ -88,34 +88,34 @@ To harden, create a new `Dockerfile.secure` (multi-stage) and update the workflo
 | `GET` | `/api/hello` | Hello world endpoint |
 | `GET` | `/api/status` | Detailed service status |
 
-### Excursions Management
+### Memes Management
 
 | Method | Endpoint | Description |
 |--------|----------|-------------|
-| `GET` | `/api/excursions` | Get all excursions |
-| `GET` | `/api/excursions/{id}` | Get excursion by ID |
-| `POST` | `/api/excursions` | Create new excursion |
-| `DELETE` | `/api/excursions/{id}` | Delete excursion |
+| `GET` | `/api/memes` | Get all memes |
+| `GET` | `/api/memes/{id}` | Get meme by ID |
+| `POST` | `/api/memes` | Create new meme |
+| `DELETE` | `/api/memes/{id}` | Delete meme |
 
 ### Example API Usage
 
 ```bash
-# Get all excursions
-curl -X GET http://localhost:8080/api/excursions
+# Get all memes
+curl -X GET http://localhost:8080/api/memes
 
-# Get specific excursion
-curl -X GET http://localhost:8080/api/excursions/1
+# Get specific meme
+curl -X GET http://localhost:8080/api/memes/1
 
-# Create new excursion
-curl -X POST http://localhost:8080/api/excursions \
+# Create new meme
+curl -X POST http://localhost:8080/api/memes \
   -H "Content-Type: application/json" \
   -d '{
-    "name": "Beach Adventure",
-    "description": "Relaxing day at the beach",
-    "location": "Pacific Coast",
-    "price": 45.00,
-    "duration": 4,
-    "maxParticipants": 20
+    "name": "Chad Energy",
+    "description": "Peak confidence and dominance",
+    "category": "Attitude",
+    "rating": 8.9,
+    "views": 2100000,
+    "maxShares": 750000
   }'
 ```
 
@@ -127,7 +127,7 @@ curl -X POST http://localhost:8080/api/excursions \
 BACKSTAGE_ENTITY_NAME/
 ├── src/                          # Main application code
 │   ├── Controllers/              # API controllers
-│   │   ├── ExcursionsController.cs
+│   │   ├── MemesController.cs
 │   │   ├── HealthController.cs
 │   │   ├── HelloController.cs
 │   │   └── StatusController.cs
@@ -155,7 +155,7 @@ BACKSTAGE_ENTITY_NAME/
 
 ### Key Features
 
-- **RESTful API**: Full CRUD operations for excursions
+- **RESTful API**: Full CRUD operations for memes
 - **OpenAPI/Swagger**: Interactive API documentation
 - **Health Checks**: Built-in health monitoring
 - **CORS Support**: Cross-origin resource sharing
@@ -177,7 +177,7 @@ dotnet test
 dotnet test --verbosity detailed
 
 # Run specific test
-dotnet test --filter "Get_ApiExcursions_ReturnsExcursionsList"
+dotnet test --filter "Get_ApiMemes_ReturnsMemesList"
 
 # Run tests with coverage
 dotnet test --collect:"XPlat Code Coverage"

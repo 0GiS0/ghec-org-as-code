@@ -102,85 +102,85 @@ Get detailed service status information.
 **Status Codes:**
 - `200 OK`: Status information retrieved successfully
 
-## Excursions API
+## Memes API
 
-Complete CRUD operations for managing excursions.
+Complete CRUD operations for managing memes.
 
-### Get All Excursions
+### Get All Memes
 
-Retrieve a list of all available excursions.
+Retrieve a list of all available memes.
 
-**Endpoint:** `GET /api/excursions`
+**Endpoint:** `GET /api/memes`
 
 **Response:**
 ```json
 [
   {
     "id": 1,
-    "name": "Mountain Hiking Adventure",
-    "description": "A thrilling hike through the scenic mountain trails with breathtaking views",
-    "location": "Rocky Mountains",
-    "price": 75.00,
-    "duration": 6,
-    "maxParticipants": 12
+    "name": "Distracted Boyfriend",
+    "description": "Classic meme of a man looking at another woman while his girlfriend looks on disapprovingly",
+    "category": "Classic",
+    "rating": 9.5,
+    "views": 5000000,
+    "maxShares": 1500000
   },
   {
     "id": 2,
-    "name": "City Food Tour",
-    "description": "Explore the city's best culinary spots and hidden gems",
-    "location": "Downtown",
-    "price": 45.00,
-    "duration": 3,
-    "maxParticipants": 8
+    "name": "Laughing Tom Cruise",
+    "description": "Tom Cruise laughing uncontrollably at something",
+    "category": "Celebrity",
+    "rating": 8.7,
+    "views": 3200000,
+    "maxShares": 890000
   }
 ]
 ```
 
 **Status Codes:**
-- `200 OK`: Excursions retrieved successfully
+- `200 OK`: Memes retrieved successfully
 
 ---
 
-### Get Excursion by ID
+### Get Meme by ID
 
-Retrieve details of a specific excursion.
+Retrieve details of a specific meme.
 
-**Endpoint:** `GET /api/excursions/{id}`
+**Endpoint:** `GET /api/memes/{id}`
 
 **Path Parameters:**
-- `id` (integer, required): The unique identifier of the excursion
+- `id` (integer, required): The unique identifier of the meme
 
 **Response:**
 ```json
 {
   "id": 1,
-  "name": "Mountain Hiking Adventure",
-  "description": "A thrilling hike through the scenic mountain trails with breathtaking views",
-  "location": "Rocky Mountains",
-  "price": 75.00,
-  "duration": 6,
-  "maxParticipants": 12
+  "name": "Distracted Boyfriend",
+  "description": "Classic meme of a man looking at another woman while his girlfriend looks on disapprovingly",
+  "category": "Classic",
+  "rating": 9.5,
+  "views": 5000000,
+  "maxShares": 1500000
 }
 ```
 
 **Status Codes:**
-- `200 OK`: Excursion found and retrieved successfully
-- `404 Not Found`: Excursion with specified ID does not exist
+- `200 OK`: Meme found and retrieved successfully
+- `404 Not Found`: Meme with specified ID does not exist
 
 **Example Error Response:**
 ```json
 {
-  "error": "Excursion with id 999 not found"
+  "error": "Meme with id 999 not found"
 }
 ```
 
 ---
 
-### Create New Excursion
+### Create New Meme
 
-Create a new excursion.
+Create a new meme.
 
-**Endpoint:** `POST /api/excursions`
+**Endpoint:** `POST /api/memes`
 
 **Request Headers:**
 - `Content-Type: application/json`
@@ -188,12 +188,12 @@ Create a new excursion.
 **Request Body:**
 ```json
 {
-  "name": "Beach Adventure",
-  "description": "Relaxing day at the beautiful coastline",
-  "location": "Pacific Coast",
-  "price": 45.00,
-  "duration": 4,
-  "maxParticipants": 20
+  "name": "Chad Energy",
+  "description": "A meme expressing confidence and dominance",
+  "category": "Attitude",
+  "rating": 8.9,
+  "views": 2100000,
+  "maxShares": 750000
 }
 ```
 
@@ -201,53 +201,53 @@ Create a new excursion.
 
 | Field | Type | Required | Description |
 |-------|------|----------|-------------|
-| `name` | string | Yes | Name of the excursion (max 100 characters) |
+| `name` | string | Yes | Name of the meme (max 100 characters) |
 | `description` | string | Yes | Detailed description (max 500 characters) |
-| `location` | string | Yes | Location where excursion takes place |
-| `price` | decimal | Yes | Price per participant (must be > 0) |
-| `duration` | integer | Yes | Duration in hours (must be > 0) |
-| `maxParticipants` | integer | Yes | Maximum number of participants (must be > 0) |
+| `category` | string | Yes | Category/genre of the meme |
+| `rating` | decimal | Yes | Rating from 0 to 10 |
+| `views` | integer | Yes | Number of views (must be >= 0) |
+| `maxShares` | integer | Yes | Maximum shares (must be >= 0) |
 
 **Response:**
 ```json
 {
   "id": 3,
-  "name": "Beach Adventure",
-  "description": "Relaxing day at the beautiful coastline",
-  "location": "Pacific Coast",
-  "price": 45.00,
-  "duration": 4,
-  "maxParticipants": 20
+  "name": "Chad Energy",
+  "description": "A meme expressing confidence and dominance",
+  "category": "Attitude",
+  "rating": 8.9,
+  "views": 2100000,
+  "maxShares": 750000
 }
 ```
 
 **Status Codes:**
-- `201 Created`: Excursion created successfully
+- `201 Created`: Meme created successfully
 - `400 Bad Request`: Invalid input data
 
 **Example Error Response:**
 ```json
 {
-  "error": "Invalid excursion data: Name is required"
+  "error": "Invalid meme data: Name is required"
 }
 ```
 
 ---
 
-### Delete Excursion
+### Delete Meme
 
-Delete an existing excursion.
+Delete an existing meme.
 
-**Endpoint:** `DELETE /api/excursions/{id}`
+**Endpoint:** `DELETE /api/memes/{id}`
 
 **Path Parameters:**
-- `id` (integer, required): The unique identifier of the excursion to delete
+- `id` (integer, required): The unique identifier of the meme to delete
 
 **Response:** No content body
 
 **Status Codes:**
-- `204 No Content`: Excursion deleted successfully
-- `404 Not Found`: Excursion with specified ID does not exist
+- `204 No Content`: Meme deleted successfully
+- `404 Not Found`: Meme with specified ID does not exist
 
 ## Error Handling
 
@@ -280,33 +280,33 @@ Currently, no rate limiting is implemented. This may be added in future versions
 
 ### cURL Examples
 
-**Get all excursions:**
+**Get all memes:**
 ```bash
-curl -X GET http://localhost:8080/api/excursions
+curl -X GET http://localhost:8080/api/memes
 ```
 
-**Get specific excursion:**
+**Get specific meme:**
 ```bash
-curl -X GET http://localhost:8080/api/excursions/1
+curl -X GET http://localhost:8080/api/memes/1
 ```
 
-**Create new excursion:**
+**Create new meme:**
 ```bash
-curl -X POST http://localhost:8080/api/excursions \
+curl -X POST http://localhost:8080/api/memes \
   -H "Content-Type: application/json" \
   -d '{
-    "name": "Sunset Photography Tour",
-    "description": "Capture stunning sunset photos",
-    "location": "Scenic Overlook",
-    "price": 65.00,
-    "duration": 3,
-    "maxParticipants": 6
+    "name": "Ultimate Chad Energy",
+    "description": "The peak of confidence and dominance",
+    "category": "Attitude",
+    "rating": 9.5,
+    "views": 4500000,
+    "maxShares": 1200000
   }'
 ```
 
-**Delete excursion:**
+**Delete meme:**
 ```bash
-curl -X DELETE http://localhost:8080/api/excursions/3
+curl -X DELETE http://localhost:8080/api/memes/3
 ```
 
 ### JavaScript Examples
@@ -314,23 +314,23 @@ curl -X DELETE http://localhost:8080/api/excursions/3
 **Using fetch API:**
 
 ```javascript
-// Get all excursions
-const excursions = await fetch('http://localhost:8080/api/excursions')
+// Get all memes
+const memes = await fetch('http://localhost:8080/api/memes')
   .then(response => response.json());
 
-// Create new excursion
-const newExcursion = await fetch('http://localhost:8080/api/excursions', {
+// Create new meme
+const newMeme = await fetch('http://localhost:8080/api/memes', {
   method: 'POST',
   headers: {
     'Content-Type': 'application/json',
   },
   body: JSON.stringify({
-    name: 'Wine Tasting Tour',
-    description: 'Sample local wines and learn about viticulture',
-    location: 'Wine Valley',
-    price: 85.00,
-    duration: 5,
-    maxParticipants: 10
+    name: 'Laughing Tom Cruise',
+    description: 'Tom Cruise laughing uncontrollably',
+    category: 'Celebrity',
+    rating: 8.7,
+    views: 3200000,
+    maxShares: 890000
   })
 }).then(response => response.json());
 ```

@@ -61,17 +61,17 @@ locals {
       source_file    = "${path.module}/software_templates/fastapi-service/skeleton/app/models/__init__.py"
       commit_message = "Add FastAPI service skeleton models __init__.py"
     }
-    "skeleton/app/models/excursion.py" = {
-      source_file    = "${path.module}/software_templates/fastapi-service/skeleton/app/models/excursion.py"
-      commit_message = "Add FastAPI service skeleton excursion model"
+    "skeleton/app/models/meme.py" = {
+      source_file    = "${path.module}/software_templates/fastapi-service/skeleton/app/models/meme.py"
+      commit_message = "Add FastAPI service skeleton meme model"
     }
     "skeleton/app/routers/__init__.py" = {
       source_file    = "${path.module}/software_templates/fastapi-service/skeleton/app/routers/__init__.py"
       commit_message = "Add FastAPI service skeleton routers __init__.py"
     }
-    "skeleton/app/routers/excursions.py" = {
-      source_file    = "${path.module}/software_templates/fastapi-service/skeleton/app/routers/excursions.py"
-      commit_message = "Add FastAPI service skeleton excursions router"
+    "skeleton/app/routers/memes.py" = {
+      source_file    = "${path.module}/software_templates/fastapi-service/skeleton/app/routers/memes.py"
+      commit_message = "Add FastAPI service skeleton memes router"
     }
     "skeleton/tests/test_api.py" = {
       source_file    = "${path.module}/software_templates/fastapi-service/skeleton/tests/test_api.py"

@@ -25,7 +25,7 @@ This template allows you to create a new Node.js microservice with TypeScript, E
 - `.github/workflows/` - CI/CD pipelines
 
 ### Included features
-- **REST API** with CRUD endpoints for trips/excursions
+- **REST API** with CRUD endpoints for memes
 - **Health checks** for monitoring
 - **Structured logging** with Winston
 - **Data validation** with Joi
@@ -63,11 +63,11 @@ This template allows you to create a new Node.js microservice with TypeScript, E
 my-service/
 ├── src/
 │   ├── controllers/
-│   │   └── ExcursionController.js
+│   │   └── MemeController.js
 │   ├── models/
-│   │   └── Excursion.js
+│   │   └── Meme.js
 │   ├── routes/
-│   │   └── excursions.js
+│   │   └── memes.js
 │   └── index.js
 ├── tests/
 │   └── api.test.js

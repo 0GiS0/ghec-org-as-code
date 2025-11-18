@@ -31,7 +31,7 @@ graph TB
 ```text
 src/
 ├── Controllers/          # API Controllers
-│   ├── ExcursionsController.cs
+│   ├── MemesController.cs
 │   ├── HealthController.cs
 │   ├── HelloController.cs
 │   └── StatusController.cs
@@ -45,8 +45,8 @@ src/
 
 The controllers layer handles HTTP requests and responses, implementing the RESTful API endpoints.
 
-#### ExcursionsController
-- **Purpose**: Manages CRUD operations for excursions
+#### MemesController
+- **Purpose**: Manages CRUD operations for memes
 - **Endpoints**: GET, POST, DELETE operations
 - **Responsibilities**:
   - Request validation
@@ -75,32 +75,33 @@ The models layer defines data structures and transfer objects.
 
 #### Core Models
 
-**Excursion**
+**Meme**
 ```csharp
-public class Excursion
+public class Meme
 {
     public int Id { get; set; }
     public string Name { get; set; }
     public string Description { get; set; }
-    public string Location { get; set; }
-    public decimal Price { get; set; }
-    public int Duration { get; set; }
-    public int MaxParticipants { get; set; }
+    public string Category { get; set; }
+    public decimal Rating { get; set; }      // Rating from 0 to 10
+    public int Views { get; set; }
+    public int MaxShares { get; set; }
+    public DateTime CreatedAt { get; set; }
+    public DateTime UpdatedAt { get; set; }
 }
 ```
 
-**CreateExcursionRequest**
+**CreateMemeRequest**
 ```csharp
-public class CreateExcursionRequest
+public class CreateMemeRequest
 {
     public string Name { get; set; }
     public string Description { get; set; }
-    public string Location { get; set; }
-    public decimal Price { get; set; }
-    public int Duration { get; set; }
-    public int MaxParticipants { get; set; }
+    public string Category { get; set; }
+    public decimal Rating { get; set; }
+    public int Views { get; set; }
+    public int MaxShares { get; set; }
 }
-```
 
 ## Design Patterns
 
@@ -109,7 +110,7 @@ public class CreateExcursionRequest
 The service uses a simplified in-memory data storage pattern for demonstration purposes:
 
 ```csharp
-private static readonly List<Excursion> _excursions = new()
+private static readonly List<Meme> _memes = new()
 {
     // Seed data
 };
@@ -137,7 +138,7 @@ builder.Services.AddHealthChecks();
 builder.Services.AddSwaggerGen();
 
 // Custom services would be registered here
-// builder.Services.AddScoped<IExcursionService, ExcursionService>();
+// builder.Services.AddScoped<IMemeService, MemeService>();
 ```
 
 ### Async/Await Pattern
@@ -146,7 +147,7 @@ All controller actions use async/await for non-blocking operations:
 
 ```csharp
 [HttpGet]
-public async Task<ActionResult<IEnumerable<Excursion>>> GetAllExcursions()
+public async Task<ActionResult<IEnumerable<Meme>>> GetAllMemes()
 {
     // Async implementation
 }
@@ -213,20 +214,20 @@ builder.Services.AddCors(options =>
 5. **Response Formation** → Result is serialized to JSON
 6. **HTTP Response** → Response is sent back to client
 
-### Example: Create Excursion Flow
+### Example: Create Meme Flow
 
 ```mermaid
 sequenceDiagram
     participant C as Client
     participant API as ASP.NET Core
-    participant Ctrl as ExcursionsController
+    participant Ctrl as MemesController
     participant Data as In-Memory Store
     
-    C->>API: POST /api/excursions
-    API->>Ctrl: Route to CreateExcursion
+    C->>API: POST /api/memes
+    API->>Ctrl: Route to CreateMeme
     Ctrl->>Ctrl: Validate request
-    Ctrl->>Data: Add excursion
-    Data->>Ctrl: Return new excursion
+    Ctrl->>Data: Add meme
+    Data->>Ctrl: Return new meme
     Ctrl->>API: Return 201 Created
     API->>C: JSON response
 ```
@@ -245,9 +246,9 @@ The application uses ASP.NET Core's built-in error handling:
 Controllers return structured error responses:
 
 ```csharp
-if (excursion == null)
+if (meme == null)
 {
-    return NotFound($"Excursion with id {id} not found");
+    return NotFound($"Meme with id {id} not found");
 }
 ```
 
@@ -299,8 +300,8 @@ Built-in health checks provide service status:
 Structured logging using ASP.NET Core's ILogger:
 
 ```csharp
-_logger.LogInformation("Getting excursion with id: {Id}", id);
-_logger.LogWarning("Excursion with id {Id} not found", id);
+_logger.LogInformation("Getting meme with id: {Id}", id);
+_logger.LogWarning("Meme with id {Id} not found", id);
 ```
 
 **Log Levels**:

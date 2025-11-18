@@ -14,45 +14,45 @@ GET {{baseUrl}}/api/hello
 ### Status endpoint
 GET {{baseUrl}}/api/status
 
-### Get all excursions
-GET {{baseUrl}}/api/excursions
+### Get all memes
+GET {{baseUrl}}/api/memes
 
-### Get excursion by ID
-GET {{baseUrl}}/api/excursions/1
+### Get meme by ID
+GET {{baseUrl}}/api/memes/1
 
-### Create new excursion
-# @name createExcursion
-POST {{baseUrl}}/api/excursions
+### Create new meme
+# @name createMeme
+POST {{baseUrl}}/api/memes
 Content-Type: application/json
 
 {
-  "name": "Observación de estrellas en el Teide",
-  "description": "Excursión nocturna al Parque Nacional del Teide para observar el cielo estrellado con telescopios profesionales y guía astronómico.",
-  "location": "Carretera del Teide, km 37, San Cristóbal de La Laguna",
-  "price": 40.0,
-  "duration": 1,
-  "maxParticipants": 25
+  "name": "Distracted Boyfriend",
+  "description": "A man looking at another woman while his girlfriend looks disapprovingly",
+  "category": "Classic",
+  "rating": 9.5,
+  "views": 1000000,
+  "maxShares": 500000
 }
 
 ###
 
-@excursionId = {{ createExcursion.response.body.id }}
+@memeId = {{ createMeme.response.body.id }}
 
-### Update excursion
-PUT {{baseUrl}}/api/excursions/{{excursionId}}
+### Update meme
+PUT {{baseUrl}}/api/memes/{{memeId}}
 Content-Type: application/json
 
 {
-  "name": "Updated Test Adventure",
-  "description": "An updated test excursion",
-  "location": "Updated Location",
-  "price": 75.0,
-  "duration": 4,
-  "maxParticipants": 12
+  "name": "Updated Meme",
+  "description": "An updated meme with more epicness",
+  "category": "Classic",
+  "rating": 9.8,
+  "views": 2000000,
+  "maxShares": 1000000
 }
 
-### Delete excursion
-DELETE {{baseUrl}}/api/excursions/{{excursionId}}
+### Delete meme
+DELETE {{baseUrl}}/api/memes/{{memeId}}
 
 ### Test 404 endpoint
 GET {{baseUrl}}/api/nonexistent

@@ -97,17 +97,17 @@ public async Task Get_ApiStatus_ReturnsStatus()
 - Complete status information
 - Service status is "running"
 
-### 2. Excursions API Tests
+### 2. Memes API Tests
 
-#### Get All Excursions
+#### Get All Memes
 ```csharp
 [Fact]
-public async Task Get_ApiExcursions_ReturnsExcursionsList()
+public async Task Get_ApiMemes_ReturnsMemesList()
 ```
 **Validates:**
 - HTTP 200 OK response
 - JSON array response
-- Minimum number of default excursions
+- Minimum number of default memes
 - Array structure validation
 
 #### Get Excursion by ID
