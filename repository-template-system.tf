@@ -11,9 +11,12 @@ resource "github_repository_file" "system_template_catalog" {
   repository = github_repository.templates[each.key].name
   branch     = "main"
   file       = "catalog-info.yaml"
-  content = templatefile("${path.module}/software_templates/system/catalog-info.yaml.tpl", {
-    github_organization = var.github_organization
-  })
+  content = templatefile(
+    "${path.module}/software_templates/system/catalog-info.yaml.tpl",
+    {
+      github_organization = var.github_organization
+    }
+  )
   commit_message      = "Add System template catalog-info.yaml for Backstage"
   commit_author       = local.template_commit_config.commit_author
   commit_email        = local.template_commit_config.commit_email

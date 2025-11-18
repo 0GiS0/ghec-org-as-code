@@ -2,7 +2,8 @@ apiVersion: backstage.io/v1alpha1
 kind: Domain
 metadata:
   name: ${{values.name}}
-  description: ${{values.description}}
+  description: |
+    ${{values.description}}
   annotations:
     github.com/project-slug: ${{values.destination.owner}}/${{values.destination.repo}}
     backstage.io/techdocs-ref: dir:.
