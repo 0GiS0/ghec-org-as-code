@@ -12,14 +12,11 @@ describe("BACKSTAGE_ENTITY_NAME API", () => {
       expect(response.body).toHaveProperty("service", "BACKSTAGE_ENTITY_NAME");
       expect(response.body).toHaveProperty(
         "message",
-        "Welcome to the Excursions API"
+        "Welcome to the Memes API"
       );
       expect(response.body).toHaveProperty("endpoints");
-      expect(response.body).toHaveProperty("excursionEndpoints");
-      expect(response.body.endpoints).toHaveProperty(
-        "excursions",
-        "/api/excursions"
-      );
+      expect(response.body).toHaveProperty("memeEndpoints");
+      expect(response.body.endpoints).toHaveProperty("memes", "/api/memes");
     });
   });
 
@@ -67,43 +64,43 @@ describe("BACKSTAGE_ENTITY_NAME API", () => {
     });
   });
 
-  describe("Excursions API", () => {
-    describe("GET /api/excursions", () => {
-      test("should return list of excursions", async () => {
+  describe("Memes API", () => {
+    describe("GET /api/memes", () => {
+      test("should return list of memes", async () => {
         const response = await request(app)
-          .get("/api/excursions")
+          .get("/api/memes")
           .expect("Content-Type", /json/)
           .expect(200);
 
         expect(Array.isArray(response.body)).toBe(true);
-        expect(response.body.length).toBeGreaterThanOrEqual(2); // Default excursions
+        expect(response.body.length).toBeGreaterThanOrEqual(2); // Default memes
 
-        const firstExcursion = response.body[0];
-        expect(firstExcursion).toHaveProperty("id");
-        expect(firstExcursion).toHaveProperty("name");
-        expect(firstExcursion).toHaveProperty("description");
-        expect(firstExcursion).toHaveProperty("location");
-        expect(firstExcursion).toHaveProperty("price");
-        expect(firstExcursion).toHaveProperty("duration");
-        expect(firstExcursion).toHaveProperty("maxParticipants");
+        const firstMeme = response.body[0];
+        expect(firstMeme).toHaveProperty("id");
+        expect(firstMeme).toHaveProperty("title");
+        expect(firstMeme).toHaveProperty("description");
+        expect(firstMeme).toHaveProperty("imageUrl");
+        expect(firstMeme).toHaveProperty("category");
+        expect(firstMeme).toHaveProperty("likes");
+        expect(firstMeme).toHaveProperty("views");
       });
     });
 
-    describe("GET /api/excursions/:id", () => {
-      test("should return specific excursion by id", async () => {
+    describe("GET /api/memes/:id", () => {
+      test("should return specific meme by id", async () => {
         const response = await request(app)
-          .get("/api/excursions/1")
+          .get("/api/memes/1")
           .expect("Content-Type", /json/)
           .expect(200);
 
         expect(response.body).toHaveProperty("id", 1);
-        expect(response.body).toHaveProperty("name");
-        expect(response.body).toHaveProperty("location");
+        expect(response.body).toHaveProperty("title");
+        expect(response.body).toHaveProperty("imageUrl");
       });
 
-      test("should return 404 for non-existent excursion", async () => {
+      test("should return 404 for non-existent meme", async () => {
         const response = await request(app)
-          .get("/api/excursions/999")
+          .get("/api/memes/999")
           .expect("Content-Type", /json/)
           .expect(404);
 
@@ -111,44 +108,45 @@ describe("BACKSTAGE_ENTITY_NAME API", () => {
       });
     });
 
-    describe("POST /api/excursions", () => {
-      test("should create new excursion", async () => {
-        const newExcursion = {
-          name: "Beach Walking Tour",
-          description: "A relaxing walk along beautiful beaches",
-          location: "Coastal Area",
-          price: 35.0,
-          duration: 2,
-          maxParticipants: 15,
+    describe("POST /api/memes", () => {
+      test("should create new meme", async () => {
+        const newMeme = {
+          title: "Funny Cat Meme",
+          description: "A hilarious cat reaction meme",
+          imageUrl: "https://example.com/cat-meme.jpg",
+          category: "cats",
+          tags: ["funny", "cats", "reaction"],
+          likes: 0,
+          views: 0,
         };
 
         const response = await request(app)
-          .post("/api/excursions")
-          .send(newExcursion)
+          .post("/api/memes")
+          .send(newMeme)
           .expect("Content-Type", /json/)
           .expect(201);
 
         expect(response.body).toHaveProperty("id");
-        expect(response.body).toHaveProperty("name", "Beach Walking Tour");
-        expect(response.body).toHaveProperty("location", "Coastal Area");
-        expect(response.body).toHaveProperty("price", 35.0);
+        expect(response.body).toHaveProperty("title", "Funny Cat Meme");
+        expect(response.body).toHaveProperty("category", "cats");
+        expect(response.body).toHaveProperty("likes", 0);
         expect(response.body).toHaveProperty("createdAt");
         expect(response.body).toHaveProperty("updatedAt");
       });
 
       test("should return validation error for missing required fields", async () => {
-        const invalidExcursion = {
-          name: "", // Empty name
+        const invalidMeme = {
+          title: "", // Empty title
           description: "Test description",
-          location: "", // Empty location
-          price: -10, // Invalid price
-          duration: 0, // Invalid duration
-          maxParticipants: 0, // Invalid maxParticipants
+          imageUrl: "", // Empty imageUrl
+          category: "test",
+          likes: -10, // Invalid likes
+          views: -5, // Invalid views
         };
 
         const response = await request(app)
-          .post("/api/excursions")
-          .send(invalidExcursion)
+          .post("/api/memes")
+          .send(invalidMeme)
           .expect("Content-Type", /json/)
           .expect(400);
 
@@ -158,44 +156,43 @@ describe("BACKSTAGE_ENTITY_NAME API", () => {
       });
     });
 
-    describe("PUT /api/excursions/:id", () => {
-      test("should update existing excursion", async () => {
+    describe("PUT /api/memes/:id", () => {
+      test("should update existing meme", async () => {
         const updatedData = {
-          name: "Updated Mountain Adventure",
-          description: "Updated description for mountain hiking",
-          location: "Updated Rocky Mountains",
-          price: 85.0,
-          duration: 7,
-          maxParticipants: 10,
+          title: "Updated Funny Meme",
+          description: "Updated description for meme",
+          imageUrl: "https://example.com/updated-meme.jpg",
+          category: "Updated",
+          tags: ["updated", "funny"],
+          likes: 500,
+          views: 2000,
         };
 
         const response = await request(app)
-          .put("/api/excursions/1")
+          .put("/api/memes/1")
           .send(updatedData)
           .expect("Content-Type", /json/)
           .expect(200);
 
         expect(response.body).toHaveProperty("id", 1);
-        expect(response.body).toHaveProperty(
-          "name",
-          "Updated Mountain Adventure"
-        );
-        expect(response.body).toHaveProperty("price", 85.0);
+        expect(response.body).toHaveProperty("title", "Updated Funny Meme");
+        expect(response.body).toHaveProperty("likes", 500);
         expect(response.body).toHaveProperty("updatedAt");
       });
 
-      test("should return 404 for non-existent excursion", async () => {
+      test("should return 404 for non-existent meme", async () => {
         const updatedData = {
-          name: "Updated Name",
+          title: "Updated Name",
           description: "Updated description",
-          location: "Updated location",
-          price: 50.0,
-          duration: 3,
-          maxParticipants: 8,
+          imageUrl: "https://example.com/meme.jpg",
+          category: "updated",
+          tags: ["updated"],
+          likes: 10,
+          views: 100,
         };
 
         const response = await request(app)
-          .put("/api/excursions/999")
+          .put("/api/memes/999")
           .send(updatedData)
           .expect("Content-Type", /json/)
           .expect(404);
@@ -204,35 +201,36 @@ describe("BACKSTAGE_ENTITY_NAME API", () => {
       });
     });
 
-    describe("DELETE /api/excursions/:id", () => {
-      test("should delete excursion", async () => {
-        // First create an excursion to delete
-        const newExcursion = {
-          name: "Test Excursion for Deletion",
+    describe("DELETE /api/memes/:id", () => {
+      test("should delete meme", async () => {
+        // First create a meme to delete
+        const newMeme = {
+          title: "Test Meme for Deletion",
           description: "This will be deleted",
-          location: "Test Location",
-          price: 25.0,
-          duration: 1,
-          maxParticipants: 5,
+          imageUrl: "https://example.com/delete-test.jpg",
+          category: "test",
+          tags: ["test", "delete"],
+          likes: 0,
+          views: 0,
         };
 
         const createResponse = await request(app)
-          .post("/api/excursions")
-          .send(newExcursion)
+          .post("/api/memes")
+          .send(newMeme)
           .expect(201);
 
-        const excursionId = createResponse.body.id;
+        const memeId = createResponse.body.id;
 
         // Now delete it
-        await request(app).delete(`/api/excursions/${excursionId}`).expect(204);
+        await request(app).delete(`/api/memes/${memeId}`).expect(204);
 
         // Verify it's gone
-        await request(app).get(`/api/excursions/${excursionId}`).expect(404);
+        await request(app).get(`/api/memes/${memeId}`).expect(404);
       });
 
-      test("should return 404 for non-existent excursion", async () => {
+      test("should return 404 for non-existent meme", async () => {
         const response = await request(app)
-          .delete("/api/excursions/999")
+          .delete("/api/memes/999")
           .expect("Content-Type", /json/)
           .expect(404);
 

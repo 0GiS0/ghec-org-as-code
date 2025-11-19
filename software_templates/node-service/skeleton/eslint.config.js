@@ -28,7 +28,7 @@ export default [
       eqeqeq: ["error", "always"],
       curly: ["error", "all"],
       semi: ["error", "always"],
-      quotes: ["error", "single", { avoidEscape: true }],
+      quotes: ["error", "double", { avoidEscape: true }],
     },
   },
   {

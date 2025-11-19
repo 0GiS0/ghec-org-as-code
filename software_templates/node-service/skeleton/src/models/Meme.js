@@ -1,12 +1,13 @@
 class Meme {
-  constructor(id, name, description, category, rating, views, maxShares) {
+  constructor(id, title, description, imageUrl, category, tags, likes, views) {
     this.id = id;
-    this.name = name;
+    this.title = title;
     this.description = description;
+    this.imageUrl = imageUrl;
     this.category = category;
-    this.rating = rating; // Rating from 0 to 10
-    this.views = views;
-    this.maxShares = maxShares;
+    this.tags = tags || [];
+    this.likes = likes || 0;
+    this.views = views || 0;
     this.createdAt = new Date();
     this.updatedAt = new Date();
   }
@@ -14,46 +15,48 @@ class Meme {
   static fromRequest(data) {
     return new Meme(
       null, // ID will be assigned by the repository
-      data.name,
+      data.title,
       data.description,
+      data.imageUrl,
       data.category,
-      data.rating,
-      data.views,
-      data.maxShares
+      data.tags,
+      data.likes,
+      data.views
     );
   }
 
   updateFromRequest(data) {
-    this.name = data.name;
+    this.title = data.title;
     this.description = data.description;
+    this.imageUrl = data.imageUrl;
     this.category = data.category;
-    this.rating = data.rating;
+    this.tags = data.tags;
+    this.likes = data.likes;
     this.views = data.views;
-    this.maxShares = data.maxShares;
     this.updatedAt = new Date();
   }
 
   static validateCreateRequest(data) {
     const errors = [];
 
-    if (!data.name || data.name.trim().length === 0) {
-      errors.push('Name is required');
+    if (!data.title || data.title.trim().length === 0) {
+      errors.push("Title is required");
+    }
+
+    if (!data.imageUrl || data.imageUrl.trim().length === 0) {
+      errors.push("Image URL is required");
     }
 
     if (!data.category || data.category.trim().length === 0) {
-      errors.push('Category is required');
+      errors.push("Category is required");
     }
 
-    if (typeof data.rating !== 'number' || data.rating < 0 || data.rating > 10) {
-      errors.push('Rating must be a number between 0 and 10');
+    if (typeof data.likes !== "number" || data.likes < 0) {
+      errors.push("Likes must be a non-negative number");
     }
 
-    if (typeof data.views !== 'number' || data.views < 0) {
-      errors.push('Views must be a non-negative number');
-    }
-
-    if (typeof data.maxShares !== 'number' || data.maxShares < 0) {
-      errors.push('MaxShares must be a non-negative number');
+    if (typeof data.views !== "number" || data.views < 0) {
+      errors.push("Views must be a non-negative number");
     }
 
     return errors;

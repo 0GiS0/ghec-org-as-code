@@ -48,8 +48,8 @@ else
 fi
 
 # Seed only if target table exists and is empty
-if psql -h "$DB_HOST" -p "$DB_PORT" -U "$DB_USER" -d "$DB_NAME" -tAc "SELECT to_regclass('public.excursions')" | grep -q excursions; then
-  COUNT=$(psql -h "$DB_HOST" -p "$DB_PORT" -U "$DB_USER" -d "$DB_NAME" -tAc "SELECT COUNT(*) FROM excursions" || echo 0)
+if psql -h "$DB_HOST" -p "$DB_PORT" -U "$DB_USER" -d "$DB_NAME" -tAc "SELECT to_regclass('public.memes')" | grep -q memes; then
+  COUNT=$(psql -h "$DB_HOST" -p "$DB_PORT" -U "$DB_USER" -d "$DB_NAME" -tAc "SELECT COUNT(*) FROM memes" || echo 0)
   if [ "${COUNT}" = "0" ]; then
     if [ -f .devcontainer/db/seed.sql ]; then
       echo "[init] Seeding data"
@@ -62,7 +62,7 @@ if psql -h "$DB_HOST" -p "$DB_PORT" -U "$DB_USER" -d "$DB_NAME" -tAc "SELECT to_
     echo "[init] Skipping seed, table already has data (${COUNT} rows)"
   fi
 else
-  echo "[init] WARNING: excursions table not present after schema. Skipping seed."
+  echo "[init] WARNING: memes table not present after schema. Skipping seed."
 fi
 
 echo "[init] Done"

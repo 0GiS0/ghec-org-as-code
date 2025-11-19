@@ -1,5 +1,6 @@
 {
   "name": "BACKSTAGE_ENTITY_NAME",
+  "author": "BACKSTAGE_AUTHOR",
   "version": "1.0.0",
   "description": "BACKSTAGE_ENTITY_DESCRIPTION",
   "main": "src/index.js",
@@ -16,21 +17,20 @@
   },
   "dependencies": {
     "cors": "^2.8.5",
-    "dotenv": "^17.2.1",
     "express": "^5.1.0",
     "helmet": "^8.1.0",
     "pg": "^8.12.0"
   },
   "devDependencies": {
     "@testcontainers/postgresql": "^10.10.4",
+    "eslint": "^9.34.0",
     "jest": "^30.1.2",
     "nodemon": "^3.1.10",
     "supertest": "^7.1.4",
-    "testcontainers": "^10.10.4",
-    "eslint": "^9.34.0"
+    "testcontainers": "^10.10.4"
   },
   "engines": {
-    "node": ">=18.0.0"
+    "node": ">=24.10.0"
   },
   "jest": {
     "testEnvironment": "node",
@@ -44,6 +44,5 @@
     "type": "git",
     "url": "BACKSTAGE_REPO_URL"
   },
-  "author": "BACKSTAGE_AUTHOR",
   "license": "MIT"
 }

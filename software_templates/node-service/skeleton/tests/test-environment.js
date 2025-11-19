@@ -40,20 +40,21 @@ class PostgresTestEnvironment extends NodeEnvironment {
       // Initialize schema + seed
       const { getPool } = require("../src/db");
       const pool = getPool();
-      await pool.query(`CREATE TABLE IF NOT EXISTS excursions (
+      await pool.query(`CREATE TABLE IF NOT EXISTS memes (
         id SERIAL PRIMARY KEY,
-        name TEXT NOT NULL,
+        title TEXT NOT NULL,
         description TEXT,
-        location TEXT NOT NULL,
-        price NUMERIC(10,2) NOT NULL DEFAULT 0,
-        duration NUMERIC(5,2) NOT NULL DEFAULT 1,
-        max_participants INT NOT NULL DEFAULT 1,
+        image_url TEXT NOT NULL,
+        category TEXT,
+        tags TEXT[],
+        likes INT NOT NULL DEFAULT 0,
+        views INT NOT NULL DEFAULT 0,
         created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
         updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
       );`);
-      await pool.query(`INSERT INTO excursions (name, description, location, price, duration, max_participants)
-        VALUES ('Sample Excursion A','Test A','Test Location A',10,2,10),
-               ('Sample Excursion B','Test B','Test Location B',20,3,12)
+      await pool.query(`INSERT INTO memes (title, description, image_url, category, tags, likes, views)
+        VALUES ('Meme Template A','Great template for reactions','https://example.com/meme-a.jpg','reaction',ARRAY['funny','reaction'],100,500),
+               ('Meme Template B','Classic format meme','https://example.com/meme-b.jpg','format',ARRAY['classic','popular'],250,1200)
         ON CONFLICT DO NOTHING;`);
     } catch (err) {
       console.warn(

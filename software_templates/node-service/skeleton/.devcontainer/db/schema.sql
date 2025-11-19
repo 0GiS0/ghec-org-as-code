@@ -1,12 +1,13 @@
--- Schema for excursions table
-CREATE TABLE IF NOT EXISTS excursions (
+-- Schema for memes table
+CREATE TABLE IF NOT EXISTS memes (
   id SERIAL PRIMARY KEY,
-  name TEXT NOT NULL,
+  title TEXT NOT NULL,
   description TEXT,
-  location TEXT NOT NULL,
-  price NUMERIC(10,2) NOT NULL,
-  duration NUMERIC(5,2) NOT NULL,
-  max_participants INT NOT NULL,
+  image_url TEXT NOT NULL,
+  category TEXT,
+  tags TEXT[],
+  likes INT NOT NULL DEFAULT 0,
+  views INT NOT NULL DEFAULT 0,
   created_at TIMESTAMPTZ DEFAULT now(),
   updated_at TIMESTAMPTZ DEFAULT now()
 );
