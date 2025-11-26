@@ -167,6 +167,11 @@ variable "template_repositories" {
       topics      = ["backstage", "template", "electron", "desktop", "typescript"]
       type        = "component"
     }
+    "backstage-template-springboot-service" = {
+      description = "Backstage template for Spring Boot services"
+      topics      = ["backstage", "template", "java", "spring-boot", "service"]
+      type        = "service"
+    }
   }
 }
 

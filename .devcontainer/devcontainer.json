@@ -24,7 +24,8 @@
         "redhat.vscode-yaml",
         "github.vscode-pull-request-github",
         "ms-vscode.vscode-github-issue-notebooks",
-        "ms-azuretools.vscode-docker"
+        "ms-azuretools.vscode-docker",
+        "vscjava.vscode-java-pack"
       ],
       "settings": {
         "editor.formatOnSave": true,
