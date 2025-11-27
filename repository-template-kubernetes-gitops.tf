@@ -40,7 +40,8 @@ resource "github_repository_file" "kubernetes_gitops_files" {
   branch     = "main"
   file       = each.key
   content = try(each.value.use_templatefile, false) ? templatefile(each.value.source_file, {
-    template_owner = "platform-team"
+    template_owner      = "platform-team"
+    github_organization = var.github_organization
   }) : file(each.value.source_file)
   commit_message      = each.value.commit_message
   commit_author       = local.template_commit_config.commit_author
