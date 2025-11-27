@@ -46,9 +46,9 @@ spec:
               placeholder: "Enter a clear, concise description of this AI Assistant service..."
           ui:widget: textarea
         owner:
-          title: 👥 Select in which group the component will be created
+          title: 👥 Component Owner Group
           type: string
-          description: The group the component belongs to
+          description: The group that will own this component in the Backstage catalog
           ui:field: MyGroupsPicker
         system:
           title: 🏗️ System
@@ -90,20 +90,15 @@ spec:
           enumNames:
             - "🎪 Yes - Demo/Test"
             - "🏭 No - Production"
-    - title: 🎯 Choose a destination
+    - title: 🎯 Repository Location
       required:
         - repoUrl
       properties:
         repoUrl:
-          title: 🔗 Repository URL
+          title: 🔗 GitHub Repository URL
           type: string
-          description: The URL of the repository
+          description: Select the organization and repository name that will be created
           ui:field: RepoUrlPicker
-          ui:options:
-            allowedOwners:
-              - ${github_organization}
-            allowedHosts:
-              - github.com
   steps:
     - id: fetch-base
       name: 📥 Fetch Template

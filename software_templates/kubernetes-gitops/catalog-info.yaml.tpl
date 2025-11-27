@@ -4,35 +4,40 @@ kind: Template
 metadata:
   name: kubernetes-gitops
   title: ☸️ Kubernetes GitOps Repository
-  description: >-
+  description: >
     Create a repository to manage Kubernetes manifests following
     GitOps best practices
+  annotations:
+    backstage.io/techdocs-ref: dir:.
   tags:
     - kubernetes
     - gitops
     - infrastructure
     - kustomize
     - helm
+    - argocd
 spec:
   owner: ${template_owner}
   type: infrastructure
   parameters:
-    - title: Project Information
+    - title: ☸️ Complete the form to create a Kubernetes GitOps Repository
       required:
         - name
         - description
         - owner
+        - clusterName
+        - environment
       properties:
         name:
           type: string
           title: 📦 Repository Name
-          description: Unique name for the GitOps repository
+          description: Unique name for the GitOps repository (kebab-case)
+          ui:autofocus: true
           ui:field: ValidateKebabCase
         description:
           type: string
           title: 📝 Description
-          description: >-
-            Short description of the cluster or environment being managed
+          description: Short description of the cluster or environment being managed
           ui:widget: textarea
         owner:
           type: string
@@ -42,18 +47,10 @@ spec:
           ui:options:
             catalogFilter:
               kind: Group
-
-    - title: Cluster Configuration
-      required:
-        - clusterName
-        - environment
-      properties:
         clusterName:
           type: string
           title: 🌐 Cluster Name
-          description: >-
-            Name of the Kubernetes cluster
-            (e.g., production-us-east)
+          description: Name of the Kubernetes cluster (e.g., production-us-east)
           ui:field: ValidateKebabCase
         environment:
           type: string
@@ -82,12 +79,18 @@ spec:
       name: 🚀 Publish Repository
       action: publish:github
       input:
-        allowedHosts: ['github.com']
         description: $${{ parameters.description }}
-        repoUrl: $${{ parameters.owner }}/$${{ parameters.name }}
+        repoUrl: github.com?owner=${github_organization}&repo=$${{ parameters.name }}
+        topics:
+          - backstage-include
+          - ${github_organization}
+          - kubernetes
+          - gitops
+          - $${{ parameters.environment }}
         defaultBranch: main
         protectDefaultBranch: true
         repoVisibility: private
+        gitCommitMessage: Create Kubernetes GitOps repository from template
 
     - id: register
       name: 📝 Register in Catalog
