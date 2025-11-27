@@ -164,13 +164,13 @@ variable "template_repositories" {
     }
     "backstage-template-electron-desktop-app" = {
       description = "Backstage template for Electron desktop applications"
-      topics      = ["backstage", "template", "electron", "desktop", "typescript"]
-      type        = "component"
+      topics      = ["backstage", "template", "electron", "desktop", "app"]
+      type        = "app"
     }
-    "backstage-template-springboot-service" = {
-      description = "Backstage template for Spring Boot services"
-      topics      = ["backstage", "template", "java", "spring-boot", "service"]
-      type        = "service"
+    "backstage-template-kubernetes-gitops" = {
+      description = "Backstage template for Kubernetes GitOps repositories"
+      topics      = ["backstage", "template", "kubernetes", "gitops", "infrastructure"]
+      type        = "infrastructure"
     }
   }
 }
@@ -383,6 +383,10 @@ variable "template_repository_custom_properties" {
     }
     "backstage-template-electron-desktop-app" = {
       service_tier = "tier-3"
+      team_owner   = "platform-team"
+    }
+    "backstage-template-kubernetes-gitops" = {
+      service_tier = "tier-2"
       team_owner   = "platform-team"
     }
   }
