@@ -172,6 +172,11 @@ variable "template_repositories" {
       topics      = ["backstage", "template", "kubernetes", "gitops", "infrastructure"]
       type        = "infrastructure"
     }
+    "backstage-template-vue-frontend" = {
+      description = "Backstage template for Vue.js frontend applications"
+      topics      = ["backstage", "template", "vue", "vuejs", "frontend"]
+      type        = "website"
+    }
   }
 }
 
@@ -387,6 +392,10 @@ variable "template_repository_custom_properties" {
     }
     "backstage-template-kubernetes-gitops" = {
       service_tier = "tier-2"
+      team_owner   = "platform-team"
+    }
+    "backstage-template-vue-frontend" = {
+      service_tier = "tier-3"
       team_owner   = "platform-team"
     }
   }
