@@ -2,19 +2,18 @@ apiVersion: backstage.io/v1alpha1
 kind: Component
 metadata:
   name: ${{values.name}}
-  title: ${{values.name}}
   description: |
     ${{values.description}}
   annotations:
-    backstage.io/techdocs-ref: dir:.
     github.com/project-slug: ${{values.destination.owner}}/${{values.destination.repo}}
+    backstage.io/techdocs-ref: dir:.
   tags:
-    - vue
-    - frontend
-    - typescript
-    - vite
+    - dotnet
+    - csharp
+    - library
+    - nuget
 spec:
-  type: website
-  lifecycle: experimental
-  owner: ${{values.owner}}
+  type: library
+  lifecycle: production
+  owner: ${{values.teamOwner}}
   system: ${{values.system}}

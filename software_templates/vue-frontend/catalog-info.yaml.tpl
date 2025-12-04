@@ -24,6 +24,7 @@ spec:
         - name
         - description
         - owner
+        - system
       properties:
         name:
           type: string
@@ -35,44 +36,37 @@ spec:
           type: string
           title: 📝 Description
           description: Short description of the application
+          minLength: 1
+          maxLength: 340
+          pattern: "^.*\\S.*$"
           ui:widget: textarea
         owner:
           type: string
           title: 👥 Team Owner
           description: Team responsible for this application
+          ui:field: MyGroupsPicker
+        system:
+          type: string
+          title: 🏗️ System
+          description: The system this application belongs to
           ui:field: EntityPicker
           ui:options:
             catalogFilter:
-              kind: Group
-
-    - title: ⚙️ Configuration Options
+              kind: System
+    - title: 🎯 Choose a destination
+      required:
+        - repoUrl
       properties:
-        useTypeScript:
-          type: boolean
-          title: Use TypeScript
-          description: Enable TypeScript support
-          default: true
-        usePinia:
-          type: boolean
-          title: Use Pinia
-          description: Include Pinia for state management
-          default: true
-        useRouter:
-          type: boolean
-          title: Use Vue Router
-          description: Include Vue Router for navigation
-          default: true
-        cssFramework:
+        repoUrl:
+          title: 🔗 Repository URL
           type: string
-          title: 🎨 CSS Framework
-          description: Select a CSS framework
-          enum:
-            - tailwind
-            - none
-          enumNames:
-            - Tailwind CSS
-            - None (Plain CSS)
-          default: tailwind
+          description: The URL of the repository
+          ui:field: RepoUrlPicker
+          ui:options:
+            allowedOwners:
+              - ${github_organization}
+            allowedHosts:
+              - github.com
 
   steps:
     - id: fetch-base
@@ -80,21 +74,36 @@ spec:
       action: fetch:template
       input:
         url: ./skeleton
+        copyWithoutTemplating:
+          - .github/workflows/*
+          - node_modules/**
         values:
           name: $${{ parameters.name }}
           description: $${{ parameters.description }}
           owner: $${{ parameters.owner }}
-          useTypeScript: $${{ parameters.useTypeScript }}
-          usePinia: $${{ parameters.usePinia }}
-          useRouter: $${{ parameters.useRouter }}
-          cssFramework: $${{ parameters.cssFramework }}
+          system: $${{ parameters.system }}
+          destination: $${{ parameters.repoUrl | parseRepoUrl }}
+
+    - id: replace-placeholders
+      name: 🔄 Replace placeholders
+      action: roadiehq:utils:fs:replace
+      input:
+        files:
+          # package.json
+          - file: "./package.json"
+            find: "BACKSTAGE_ENTITY_NAME"
+            replaceWith: $${{ parameters.name }}
+          # package-lock.json
+          - file: "./package-lock.json"
+            find: "BACKSTAGE_ENTITY_NAME"
+            replaceWith: $${{ parameters.name }}
 
     - id: publish
       name: 🚀 Publish Repository
       action: publish:github
       input:
+        repoUrl: $${{ parameters.repoUrl }}
         description: $${{ parameters.description }}
-        repoUrl: github.com?owner=${github_organization}&repo=$${{ parameters.name }}
         topics:
           - backstage-include
           - ${github_organization}
@@ -102,8 +111,6 @@ spec:
           - frontend
           - typescript
         defaultBranch: main
-        protectDefaultBranch: true
-        repoVisibility: private
         gitCommitMessage: Create Vue.js frontend from template
 
     - id: register

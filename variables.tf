@@ -147,6 +147,11 @@ variable "template_repositories" {
       topics      = ["backstage", "template", "dotnet", "csharp", "service"]
       type        = "service"
     }
+    "backstage-template-dotnet-library" = {
+      description = "Backstage template for .NET reusable libraries"
+      topics      = ["backstage", "template", "dotnet", "csharp", "library", "nuget"]
+      type        = "library"
+    }
     "backstage-template-ai-assistant" = {
       description = "Backstage template for AI Assistant services"
       topics      = ["backstage", "template", "ai", "assistant", "service"]
@@ -371,6 +376,10 @@ variable "template_repository_custom_properties" {
       team_owner   = "platform-team"
     }
     "backstage-template-dotnet-service" = {
+      service_tier = "tier-3"
+      team_owner   = "platform-team"
+    }
+    "backstage-template-dotnet-library" = {
       service_tier = "tier-3"
       team_owner   = "platform-team"
     }
